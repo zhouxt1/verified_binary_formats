@@ -1,0 +1,4 @@
+#!/bin/bash
+# Verify vsimd: tools/simd/vv [extra verus args]
+cd "$(dirname "$0")/../.." || exit 1
+bash -c "cargo clean -p vsimd >/dev/null 2>&1; export PATH=$PWD/tools/verus-x86-linux:\$PATH; cargo verus verify -p vsimd -- --triggers-mode silent $*"

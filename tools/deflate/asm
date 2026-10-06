@@ -1,0 +1,9 @@
+#!/bin/bash
+# Per-instruction instruction counts (callgrind) of the functions matching
+# PATTERN while vdeflate-tool decodes FILE (raw DEFLATE):
+#   tools/deflate/asm PATTERN [MIN] [FILE]   -> target/asm.txt
+cd "$(dirname "$0")/../.." || exit 1
+pat=$1; min=${2:-100000}; f=${3:-target/pngdef/kodim01.deflate}
+bash -c "CARGO_PROFILE_RELEASE_DEBUG=true cargo build -q --release -p vdeflate-tool 2>&1 | grep -E '^error' -A5;
+  valgrind --tool=callgrind --dump-instr=yes --callgrind-out-file=target/cgd.out target/release/vdeflate-tool $f 2>&1 >/dev/null | grep refs;
+  python3 tools/brotli/cgasm.py target/cgd.out target/release/vdeflate-tool '$pat' $min --all > target/asm.txt"

@@ -1,0 +1,19 @@
+[package]
+name = "vwebp-vbatch"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[workspace]
+
+[dependencies]
+vwebp = { path = "../../../vwebp" }
+
+[[bin]]
+name = "vbatch"
+path = "src/main.rs"
+
+[profile.release]
+opt-level = 3
+codegen-units = 1
+lto = "fat"

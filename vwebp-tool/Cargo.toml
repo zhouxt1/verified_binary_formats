@@ -1,0 +1,15 @@
+[package]
+name = "vwebp-tool"
+description = "Command-line driver for vwebp's tests and benchmarks"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+publish = false
+
+[dependencies]
+vwebp = { path = "../vwebp" }
+
+[lints]
+workspace = true

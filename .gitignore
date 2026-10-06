@@ -1,0 +1,19 @@
+# Verus toolchain (prebuilt, fetched by tools/get-verus.sh)
+tools/verus-x86-linux/
+tools/*.zip
+
+# build outputs
+target/
+build/
+*.rlib
+*.rmeta
+*.vir
+__pycache__/
+
+# Verus dumps these next to the crate when a type name gets long
+*.long-type-*.txt
+.verus-solver-log/
+
+# standards fetched by docs/spec/get.sh (not ours to redistribute)
+docs/spec/*.pdf
+docs/spec/*.txt

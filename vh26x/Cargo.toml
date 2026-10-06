@@ -1,0 +1,24 @@
+[package]
+name = "vh26x"
+description = "Verified H.264/H.265 header parsers and encoders: syntax tables run by a verified interpreter"
+keywords = ["h264", "h265", "hevc", "verus", "verified"]
+categories = ["encoding", "parser-implementations", "multimedia::video"]
+readme = "README.md"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+
+[dependencies]
+vbits.workspace = true
+vsyn.workspace = true
+vstd.workspace = true
+verus_builtin.workspace = true
+verus_builtin_macros.workspace = true
+
+[package.metadata.verus]
+verify = true
+
+[lints]
+workspace = true

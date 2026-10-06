@@ -1,0 +1,8 @@
+#!/bin/bash
+# Instructions (callgrind) to decode a fixed stream with vbrotli-tool dec:
+# a deterministic speed measure. Usage: tools/brotli/icount [FILE.br] [--annotate]
+cd "$(dirname "$0")/../.." || exit 1
+f=${1:-/tmp/d3m.br}
+bash -c "CARGO_PROFILE_RELEASE_DEBUG=true cargo build -q --release -p vbrotli-tool 2>&1 | grep -E '^error' -A5;
+  valgrind --tool=callgrind --callgrind-out-file=target/cg.out target/release/vbrotli-tool dec $f 2>&1 >/dev/null | grep refs;
+  [ \"$2\" = --annotate ] && callgrind_annotate --auto=yes --show-percs=no target/cg.out > target/ann.txt; true"

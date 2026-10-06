@@ -1,0 +1,14 @@
+#!/bin/bash
+# Instructions (callgrind) to decode each FILE.br with vbrotli-tool dec and
+# with Google's decoder (difftest/brotli/build/gdec): tools/brotli/icmp [FILE.br...]
+# Default files: /tmp/d3m.br and /tmp/bb/*.br.
+cd "$(dirname "$0")/../.." || exit 1
+bash -c "cargo build -q --release -p vbrotli-tool 2>&1 | grep -E '^error' -A5
+  files=\"$*\"; [ -z \"\$files\" ] && files=\"/tmp/d3m.br \$(ls /tmp/bb/*.br)\"
+  printf '%-22s %12s %12s %6s\n' file vbrotli google ratio
+  for f in \$files; do
+    python3 -c \"import struct,sys; d=open('\$f','rb').read(); sys.stdout.buffer.write(struct.pack('<I',len(d))+d)\" > target/rec.bin
+    v=\$(valgrind --tool=callgrind --callgrind-out-file=/dev/null target/release/vbrotli-tool dec \$f 2>&1 >/dev/null | grep refs | tr -d , | awk '{print \$NF}')
+    g=\$(valgrind --tool=callgrind --callgrind-out-file=/dev/null difftest/brotli/build/gdec < target/rec.bin 2>&1 >/dev/null | grep refs | tr -d , | awk '{print \$NF}')
+    printf '%-22s %12d %12d %6.2f\n' \$(basename \$f) \$v \$g \$(awk \"BEGIN{print \$v/\$g}\")
+  done"

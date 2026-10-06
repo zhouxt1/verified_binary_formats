@@ -1,0 +1,5 @@
+#!/bin/bash
+# Verify a crate: tools/brotli/vv <crate> [extra verus args]
+cd "$(dirname "$0")/../.." || exit 1
+c=$1; shift
+bash -c "export PATH=$PWD/tools/verus-x86-linux:\$PATH; cargo verus verify -p $c -- --triggers-mode silent $*"

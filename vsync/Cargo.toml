@@ -1,0 +1,13 @@
+[package]
+name = "vsync"
+description = "Compiles transcribed bitstream syntax tables (.syn) to the programs vsyn's verified interpreter runs"
+keywords = ["h264", "h265", "av1", "codegen"]
+categories = ["multimedia::video", "development-tools"]
+readme = "../README.md"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+
+[dependencies]

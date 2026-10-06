@@ -1,0 +1,373 @@
+kodak      kodim01.webp             vwebp verified, SSE2 (this work)       7.59 ms 
+kodak      kodim01.webp             vwebp verified, scalar (d73a2f5)      11.81 ms 
+kodak      kodim01.webp             libwebp 1.6.0, SSE2                    5.43 ms 
+kodak      kodim01.webp             libwebp 1.6.0, C only                  8.67 ms 
+kodak      kodim01.webp             FFmpeg n9.0.2 vp8, x86 asm             4.64 ms 
+kodak      kodim01.webp             FFmpeg n9.0.2 vp8, no asm              9.23 ms 
+kodak      kodim01.webp             Wuffs std/vp8 f31d952                 13.30 ms 
+kodak      kodim01.webp             image-webp f4d80bd (Rust)             12.15 ms 
+kodak      kodim01.webp             Go x/image v0.46.0                    21.48 ms 
+kodak      kodim02.webp             vwebp verified, SSE2 (this work)       4.65 ms 
+kodak      kodim02.webp             vwebp verified, scalar (d73a2f5)      12.23 ms 
+kodak      kodim02.webp             libwebp 1.6.0, SSE2                    2.86 ms 
+kodak      kodim02.webp             libwebp 1.6.0, C only                  5.76 ms 
+kodak      kodim02.webp             FFmpeg n9.0.2 vp8, x86 asm             3.68 ms 
+kodak      kodim02.webp             FFmpeg n9.0.2 vp8, no asm              6.07 ms 
+kodak      kodim02.webp             Wuffs std/vp8 f31d952                  7.59 ms 
+kodak      kodim02.webp             image-webp f4d80bd (Rust)              5.06 ms 
+kodak      kodim02.webp             Go x/image v0.46.0                     0.13 ms 
+kodak      kodim03.webp             vwebp verified, SSE2 (this work)       2.89 ms 
+kodak      kodim03.webp             vwebp verified, scalar (d73a2f5)      14.50 ms 
+kodak      kodim03.webp             libwebp 1.6.0, SSE2                    2.56 ms 
+kodak      kodim03.webp             libwebp 1.6.0, C only                  4.99 ms 
+kodak      kodim03.webp             FFmpeg n9.0.2 vp8, x86 asm             2.82 ms 
+kodak      kodim03.webp             FFmpeg n9.0.2 vp8, no asm              5.73 ms 
+kodak      kodim03.webp             Wuffs std/vp8 f31d952                  9.47 ms 
+kodak      kodim03.webp             image-webp f4d80bd (Rust)              5.31 ms 
+kodak      kodim03.webp             Go x/image v0.46.0                    13.49 ms 
+kodak      kodim04.webp             vwebp verified, SSE2 (this work)       5.53 ms 
+kodak      kodim04.webp             vwebp verified, scalar (d73a2f5)      14.22 ms 
+kodak      kodim04.webp             libwebp 1.6.0, SSE2                    2.37 ms 
+kodak      kodim04.webp             libwebp 1.6.0, C only                  3.49 ms 
+kodak      kodim04.webp             FFmpeg n9.0.2 vp8, x86 asm             2.76 ms 
+kodak      kodim04.webp             FFmpeg n9.0.2 vp8, no asm              4.00 ms 
+kodak      kodim04.webp             Wuffs std/vp8 f31d952                 11.01 ms 
+kodak      kodim04.webp             image-webp f4d80bd (Rust)              4.67 ms 
+kodak      kodim04.webp             Go x/image v0.46.0                    16.50 ms 
+kodak      kodim05.webp             vwebp verified, SSE2 (this work)       7.98 ms 
+kodak      kodim05.webp             vwebp verified, scalar (d73a2f5)      12.81 ms 
+kodak      kodim05.webp             libwebp 1.6.0, SSE2                    5.92 ms 
+kodak      kodim05.webp             libwebp 1.6.0, C only                  9.10 ms 
+kodak      kodim05.webp             FFmpeg n9.0.2 vp8, x86 asm             7.28 ms 
+kodak      kodim05.webp             FFmpeg n9.0.2 vp8, no asm              8.25 ms 
+kodak      kodim05.webp             Wuffs std/vp8 f31d952                 10.66 ms 
+kodak      kodim05.webp             image-webp f4d80bd (Rust)             12.90 ms 
+kodak      kodim05.webp             Go x/image v0.46.0                    19.31 ms 
+kodak      kodim06.webp             vwebp verified, SSE2 (this work)       7.39 ms 
+kodak      kodim06.webp             vwebp verified, scalar (d73a2f5)      11.56 ms 
+kodak      kodim06.webp             libwebp 1.6.0, SSE2                    3.11 ms 
+kodak      kodim06.webp             libwebp 1.6.0, C only                  4.79 ms 
+kodak      kodim06.webp             FFmpeg n9.0.2 vp8, x86 asm             4.32 ms 
+kodak      kodim06.webp             FFmpeg n9.0.2 vp8, no asm              5.78 ms 
+kodak      kodim06.webp             Wuffs std/vp8 f31d952                 10.26 ms 
+kodak      kodim06.webp             image-webp f4d80bd (Rust)              9.50 ms 
+kodak      kodim06.webp             Go x/image v0.46.0                    20.17 ms 
+kodak      kodim07.webp             vwebp verified, SSE2 (this work)       3.09 ms 
+kodak      kodim07.webp             vwebp verified, scalar (d73a2f5)       9.02 ms 
+kodak      kodim07.webp             libwebp 1.6.0, SSE2                    3.07 ms 
+kodak      kodim07.webp             libwebp 1.6.0, C only                  5.00 ms 
+kodak      kodim07.webp             FFmpeg n9.0.2 vp8, x86 asm             3.43 ms 
+kodak      kodim07.webp             FFmpeg n9.0.2 vp8, no asm              6.25 ms 
+kodak      kodim07.webp             Wuffs std/vp8 f31d952                 10.31 ms 
+kodak      kodim07.webp             image-webp f4d80bd (Rust)              5.60 ms 
+kodak      kodim07.webp             Go x/image v0.46.0                     9.83 ms 
+kodak      kodim08.webp             vwebp verified, SSE2 (this work)       8.34 ms 
+kodak      kodim08.webp             vwebp verified, scalar (d73a2f5)      17.88 ms 
+kodak      kodim08.webp             libwebp 1.6.0, SSE2                    3.88 ms 
+kodak      kodim08.webp             libwebp 1.6.0, C only                  8.87 ms 
+kodak      kodim08.webp             FFmpeg n9.0.2 vp8, x86 asm             7.13 ms 
+kodak      kodim08.webp             FFmpeg n9.0.2 vp8, no asm             10.36 ms 
+kodak      kodim08.webp             Wuffs std/vp8 f31d952                  9.22 ms 
+kodak      kodim08.webp             image-webp f4d80bd (Rust)              8.55 ms 
+kodak      kodim08.webp             Go x/image v0.46.0                    25.74 ms 
+kodak      kodim09.webp             vwebp verified, SSE2 (this work)       2.47 ms 
+kodak      kodim09.webp             vwebp verified, scalar (d73a2f5)       7.52 ms 
+kodak      kodim09.webp             libwebp 1.6.0, SSE2                    1.95 ms 
+kodak      kodim09.webp             libwebp 1.6.0, C only                  4.82 ms 
+kodak      kodim09.webp             FFmpeg n9.0.2 vp8, x86 asm             2.17 ms 
+kodak      kodim09.webp             FFmpeg n9.0.2 vp8, no asm              3.77 ms 
+kodak      kodim09.webp             Wuffs std/vp8 f31d952                  9.72 ms 
+kodak      kodim09.webp             image-webp f4d80bd (Rust)              7.43 ms 
+kodak      kodim09.webp             Go x/image v0.46.0                    14.54 ms 
+kodak      kodim10.webp             vwebp verified, SSE2 (this work)       4.07 ms 
+kodak      kodim10.webp             vwebp verified, scalar (d73a2f5)       8.81 ms 
+kodak      kodim10.webp             libwebp 1.6.0, SSE2                    2.61 ms 
+kodak      kodim10.webp             libwebp 1.6.0, C only                  3.72 ms 
+kodak      kodim10.webp             FFmpeg n9.0.2 vp8, x86 asm             2.34 ms 
+kodak      kodim10.webp             FFmpeg n9.0.2 vp8, no asm              4.49 ms 
+kodak      kodim10.webp             Wuffs std/vp8 f31d952                 10.35 ms 
+kodak      kodim10.webp             image-webp f4d80bd (Rust)              5.36 ms 
+kodak      kodim10.webp             Go x/image v0.46.0                    16.32 ms 
+kodak      kodim11.webp             vwebp verified, SSE2 (this work)       3.83 ms 
+kodak      kodim11.webp             vwebp verified, scalar (d73a2f5)       6.10 ms 
+kodak      kodim11.webp             libwebp 1.6.0, SSE2                    2.94 ms 
+kodak      kodim11.webp             libwebp 1.6.0, C only                  4.60 ms 
+kodak      kodim11.webp             FFmpeg n9.0.2 vp8, x86 asm             4.33 ms 
+kodak      kodim11.webp             FFmpeg n9.0.2 vp8, no asm              6.15 ms 
+kodak      kodim11.webp             Wuffs std/vp8 f31d952                 10.88 ms 
+kodak      kodim11.webp             image-webp f4d80bd (Rust)              9.94 ms 
+kodak      kodim11.webp             Go x/image v0.46.0                    17.51 ms 
+kodak      kodim12.webp             vwebp verified, SSE2 (this work)       3.32 ms 
+kodak      kodim12.webp             vwebp verified, scalar (d73a2f5)      13.13 ms 
+kodak      kodim12.webp             libwebp 1.6.0, SSE2                    2.32 ms 
+kodak      kodim12.webp             libwebp 1.6.0, C only                  5.16 ms 
+kodak      kodim12.webp             FFmpeg n9.0.2 vp8, x86 asm             2.41 ms 
+kodak      kodim12.webp             FFmpeg n9.0.2 vp8, no asm              4.08 ms 
+kodak      kodim12.webp             Wuffs std/vp8 f31d952                  6.50 ms 
+kodak      kodim12.webp             image-webp f4d80bd (Rust)              6.57 ms 
+kodak      kodim12.webp             Go x/image v0.46.0                    13.07 ms 
+kodak      kodim13.webp             vwebp verified, SSE2 (this work)       8.97 ms 
+kodak      kodim13.webp             vwebp verified, scalar (d73a2f5)      13.72 ms 
+kodak      kodim13.webp             libwebp 1.6.0, SSE2                    6.66 ms 
+kodak      kodim13.webp             libwebp 1.6.0, C only                  7.06 ms 
+kodak      kodim13.webp             FFmpeg n9.0.2 vp8, x86 asm             8.92 ms 
+kodak      kodim13.webp             FFmpeg n9.0.2 vp8, no asm             11.90 ms 
+kodak      kodim13.webp             Wuffs std/vp8 f31d952                  8.76 ms 
+kodak      kodim13.webp             image-webp f4d80bd (Rust)             10.96 ms 
+kodak      kodim13.webp             Go x/image v0.46.0                    26.19 ms 
+kodak      kodim14.webp             vwebp verified, SSE2 (this work)       7.19 ms 
+kodak      kodim14.webp             vwebp verified, scalar (d73a2f5)      16.67 ms 
+kodak      kodim14.webp             libwebp 1.6.0, SSE2                    5.13 ms 
+kodak      kodim14.webp             libwebp 1.6.0, C only                  7.18 ms 
+kodak      kodim14.webp             FFmpeg n9.0.2 vp8, x86 asm             4.26 ms 
+kodak      kodim14.webp             FFmpeg n9.0.2 vp8, no asm              6.87 ms 
+kodak      kodim14.webp             Wuffs std/vp8 f31d952                 10.87 ms 
+kodak      kodim14.webp             image-webp f4d80bd (Rust)              7.99 ms 
+kodak      kodim14.webp             Go x/image v0.46.0                    16.80 ms 
+kodak      kodim15.webp             vwebp verified, SSE2 (this work)       2.57 ms 
+kodak      kodim15.webp             vwebp verified, scalar (d73a2f5)      12.72 ms 
+kodak      kodim15.webp             libwebp 1.6.0, SSE2                    2.87 ms 
+kodak      kodim15.webp             libwebp 1.6.0, C only                  5.29 ms 
+kodak      kodim15.webp             FFmpeg n9.0.2 vp8, x86 asm             2.49 ms 
+kodak      kodim15.webp             FFmpeg n9.0.2 vp8, no asm              4.30 ms 
+kodak      kodim15.webp             Wuffs std/vp8 f31d952                 10.50 ms 
+kodak      kodim15.webp             image-webp f4d80bd (Rust)              7.64 ms 
+kodak      kodim15.webp             Go x/image v0.46.0                     8.21 ms 
+kodak      kodim16.webp             vwebp verified, SSE2 (this work)       3.86 ms 
+kodak      kodim16.webp             vwebp verified, scalar (d73a2f5)      12.39 ms 
+kodak      kodim16.webp             libwebp 1.6.0, SSE2                    3.09 ms 
+kodak      kodim16.webp             libwebp 1.6.0, C only                  5.80 ms 
+kodak      kodim16.webp             FFmpeg n9.0.2 vp8, x86 asm             2.66 ms 
+kodak      kodim16.webp             FFmpeg n9.0.2 vp8, no asm              7.12 ms 
+kodak      kodim16.webp             Wuffs std/vp8 f31d952                  7.59 ms 
+kodak      kodim16.webp             image-webp f4d80bd (Rust)              5.88 ms 
+kodak      kodim16.webp             Go x/image v0.46.0                    17.02 ms 
+kodak      kodim17.webp             vwebp verified, SSE2 (this work)       2.88 ms 
+kodak      kodim17.webp             vwebp verified, scalar (d73a2f5)      10.38 ms 
+kodak      kodim17.webp             libwebp 1.6.0, SSE2                    3.13 ms 
+kodak      kodim17.webp             libwebp 1.6.0, C only                  4.75 ms 
+kodak      kodim17.webp             FFmpeg n9.0.2 vp8, x86 asm             3.72 ms 
+kodak      kodim17.webp             FFmpeg n9.0.2 vp8, no asm              6.73 ms 
+kodak      kodim17.webp             Wuffs std/vp8 f31d952                 10.71 ms 
+kodak      kodim17.webp             image-webp f4d80bd (Rust)              6.41 ms 
+kodak      kodim17.webp             Go x/image v0.46.0                    13.03 ms 
+kodak      kodim18.webp             vwebp verified, SSE2 (this work)       6.24 ms 
+kodak      kodim18.webp             vwebp verified, scalar (d73a2f5)      14.98 ms 
+kodak      kodim18.webp             libwebp 1.6.0, SSE2                    3.42 ms 
+kodak      kodim18.webp             libwebp 1.6.0, C only                  5.49 ms 
+kodak      kodim18.webp             FFmpeg n9.0.2 vp8, x86 asm             6.26 ms 
+kodak      kodim18.webp             FFmpeg n9.0.2 vp8, no asm              6.03 ms 
+kodak      kodim18.webp             Wuffs std/vp8 f31d952                  9.95 ms 
+kodak      kodim18.webp             image-webp f4d80bd (Rust)              7.25 ms 
+kodak      kodim18.webp             Go x/image v0.46.0                    14.46 ms 
+kodak      kodim19.webp             vwebp verified, SSE2 (this work)       5.31 ms 
+kodak      kodim19.webp             vwebp verified, scalar (d73a2f5)      16.48 ms 
+kodak      kodim19.webp             libwebp 1.6.0, SSE2                    3.77 ms 
+kodak      kodim19.webp             libwebp 1.6.0, C only                  6.16 ms 
+kodak      kodim19.webp             FFmpeg n9.0.2 vp8, x86 asm             4.64 ms 
+kodak      kodim19.webp             FFmpeg n9.0.2 vp8, no asm              7.77 ms 
+kodak      kodim19.webp             Wuffs std/vp8 f31d952                  7.23 ms 
+kodak      kodim19.webp             image-webp f4d80bd (Rust)              5.90 ms 
+kodak      kodim19.webp             Go x/image v0.46.0                    18.59 ms 
+kodak      kodim20.webp             vwebp verified, SSE2 (this work)       3.48 ms 
+kodak      kodim20.webp             vwebp verified, scalar (d73a2f5)      12.43 ms 
+kodak      kodim20.webp             libwebp 1.6.0, SSE2                    2.57 ms 
+kodak      kodim20.webp             libwebp 1.6.0, C only                  4.63 ms 
+kodak      kodim20.webp             FFmpeg n9.0.2 vp8, x86 asm             2.11 ms 
+kodak      kodim20.webp             FFmpeg n9.0.2 vp8, no asm              5.29 ms 
+kodak      kodim20.webp             Wuffs std/vp8 f31d952                  6.68 ms PLANES DIFFER
+kodak      kodim20.webp             image-webp f4d80bd (Rust)              7.49 ms 
+kodak      kodim20.webp             Go x/image v0.46.0                    14.84 ms 
+kodak      kodim21.webp             vwebp verified, SSE2 (this work)       3.58 ms 
+kodak      kodim21.webp             vwebp verified, scalar (d73a2f5)      14.64 ms 
+kodak      kodim21.webp             libwebp 1.6.0, SSE2                    3.88 ms 
+kodak      kodim21.webp             libwebp 1.6.0, C only                  6.41 ms 
+kodak      kodim21.webp             FFmpeg n9.0.2 vp8, x86 asm             4.20 ms 
+kodak      kodim21.webp             FFmpeg n9.0.2 vp8, no asm              9.62 ms 
+kodak      kodim21.webp             Wuffs std/vp8 f31d952                  9.67 ms 
+kodak      kodim21.webp             image-webp f4d80bd (Rust)              7.25 ms 
+kodak      kodim21.webp             Go x/image v0.46.0                    20.11 ms 
+kodak      kodim22.webp             vwebp verified, SSE2 (this work)       6.68 ms 
+kodak      kodim22.webp             vwebp verified, scalar (d73a2f5)      16.75 ms 
+kodak      kodim22.webp             libwebp 1.6.0, SSE2                    3.16 ms 
+kodak      kodim22.webp             libwebp 1.6.0, C only                  4.25 ms 
+kodak      kodim22.webp             FFmpeg n9.0.2 vp8, x86 asm             3.75 ms 
+kodak      kodim22.webp             FFmpeg n9.0.2 vp8, no asm             10.87 ms 
+kodak      kodim22.webp             Wuffs std/vp8 f31d952                 12.04 ms 
+kodak      kodim22.webp             image-webp f4d80bd (Rust)              6.82 ms 
+kodak      kodim22.webp             Go x/image v0.46.0                    21.29 ms 
+kodak      kodim23.webp             vwebp verified, SSE2 (this work)       2.46 ms 
+kodak      kodim23.webp             vwebp verified, scalar (d73a2f5)      12.88 ms 
+kodak      kodim23.webp             libwebp 1.6.0, SSE2                    3.50 ms 
+kodak      kodim23.webp             libwebp 1.6.0, C only                  3.22 ms 
+kodak      kodim23.webp             FFmpeg n9.0.2 vp8, x86 asm             2.42 ms 
+kodak      kodim23.webp             FFmpeg n9.0.2 vp8, no asm              3.83 ms 
+kodak      kodim23.webp             Wuffs std/vp8 f31d952                  3.74 ms 
+kodak      kodim23.webp             image-webp f4d80bd (Rust)              5.11 ms 
+kodak      kodim23.webp             Go x/image v0.46.0                    14.27 ms 
+kodak      kodim24.webp             vwebp verified, SSE2 (this work)       4.46 ms 
+kodak      kodim24.webp             vwebp verified, scalar (d73a2f5)      17.75 ms 
+kodak      kodim24.webp             libwebp 1.6.0, SSE2                    3.04 ms 
+kodak      kodim24.webp             libwebp 1.6.0, C only                  4.86 ms 
+kodak      kodim24.webp             FFmpeg n9.0.2 vp8, x86 asm             5.61 ms 
+kodak      kodim24.webp             FFmpeg n9.0.2 vp8, no asm              6.04 ms 
+kodak      kodim24.webp             Wuffs std/vp8 f31d952                 13.20 ms 
+kodak      kodim24.webp             image-webp f4d80bd (Rust)              7.71 ms 
+kodak      kodim24.webp             Go x/image v0.46.0                    18.43 ms 
+photos     big_building.webp        vwebp verified, SSE2 (this work)     484.05 ms 
+photos     big_building.webp        vwebp verified, scalar (d73a2f5)     933.87 ms 
+photos     big_building.webp        libwebp 1.6.0, SSE2                  237.22 ms 
+photos     big_building.webp        libwebp 1.6.0, C only                762.20 ms 
+photos     big_building.webp        FFmpeg n9.0.2 vp8, x86 asm           248.22 ms 
+photos     big_building.webp        FFmpeg n9.0.2 vp8, no asm            439.27 ms 
+photos     big_building.webp        Wuffs std/vp8 f31d952                768.51 ms PLANES DIFFER
+photos     big_building.webp        image-webp f4d80bd (Rust)            617.99 ms 
+photos     big_building.webp        Go x/image v0.46.0                   906.91 ms 
+photos     big_tree.webp            vwebp verified, SSE2 (this work)     289.79 ms 
+photos     big_tree.webp            vwebp verified, scalar (d73a2f5)     705.86 ms 
+photos     big_tree.webp            libwebp 1.6.0, SSE2                  171.77 ms 
+photos     big_tree.webp            libwebp 1.6.0, C only                547.73 ms 
+photos     big_tree.webp            FFmpeg n9.0.2 vp8, x86 asm           186.04 ms 
+photos     big_tree.webp            FFmpeg n9.0.2 vp8, no asm            302.28 ms 
+photos     big_tree.webp            Wuffs std/vp8 f31d952                535.77 ms 
+photos     big_tree.webp            image-webp f4d80bd (Rust)            411.37 ms 
+photos     big_tree.webp            Go x/image v0.46.0                   744.93 ms 
+photos     bridge.webp              vwebp verified, SSE2 (this work)      76.58 ms 
+photos     bridge.webp              vwebp verified, scalar (d73a2f5)     399.17 ms 
+photos     bridge.webp              libwebp 1.6.0, SSE2                  107.15 ms 
+photos     bridge.webp              libwebp 1.6.0, C only                197.92 ms 
+photos     bridge.webp              FFmpeg n9.0.2 vp8, x86 asm            81.09 ms 
+photos     bridge.webp              FFmpeg n9.0.2 vp8, no asm            220.94 ms 
+photos     bridge.webp              Wuffs std/vp8 f31d952                195.30 ms 
+photos     bridge.webp              image-webp f4d80bd (Rust)            277.35 ms 
+photos     bridge.webp              Go x/image v0.46.0                   296.47 ms 
+photos     cathedral.webp           vwebp verified, SSE2 (this work)      61.91 ms 
+photos     cathedral.webp           vwebp verified, scalar (d73a2f5)     172.16 ms 
+photos     cathedral.webp           libwebp 1.6.0, SSE2                   43.42 ms 
+photos     cathedral.webp           libwebp 1.6.0, C only                 76.50 ms 
+photos     cathedral.webp           FFmpeg n9.0.2 vp8, x86 asm            40.99 ms 
+photos     cathedral.webp           FFmpeg n9.0.2 vp8, no asm             87.73 ms 
+photos     cathedral.webp           Wuffs std/vp8 f31d952                116.74 ms 
+photos     cathedral.webp           image-webp f4d80bd (Rust)             98.30 ms 
+photos     cathedral.webp           Go x/image v0.46.0                   190.43 ms 
+photos     deer.webp                vwebp verified, SSE2 (this work)     127.21 ms 
+photos     deer.webp                vwebp verified, scalar (d73a2f5)     378.00 ms 
+photos     deer.webp                libwebp 1.6.0, SSE2                   91.54 ms 
+photos     deer.webp                libwebp 1.6.0, C only                111.76 ms 
+photos     deer.webp                FFmpeg n9.0.2 vp8, x86 asm           151.22 ms 
+photos     deer.webp                FFmpeg n9.0.2 vp8, no asm            126.51 ms 
+photos     deer.webp                Wuffs std/vp8 f31d952                230.34 ms 
+photos     deer.webp                image-webp f4d80bd (Rust)            261.12 ms 
+photos     deer.webp                Go x/image v0.46.0                   185.71 ms 
+photos     fireworks.webp           vwebp verified, SSE2 (this work)      36.31 ms 
+photos     fireworks.webp           vwebp verified, scalar (d73a2f5)     130.65 ms 
+photos     fireworks.webp           libwebp 1.6.0, SSE2                   19.46 ms 
+photos     fireworks.webp           libwebp 1.6.0, C only                 56.94 ms 
+photos     fireworks.webp           FFmpeg n9.0.2 vp8, x86 asm            31.61 ms 
+photos     fireworks.webp           FFmpeg n9.0.2 vp8, no asm             57.60 ms 
+photos     fireworks.webp           Wuffs std/vp8 f31d952                161.98 ms PLANES DIFFER
+photos     fireworks.webp           image-webp f4d80bd (Rust)             99.11 ms 
+photos     fireworks.webp           Go x/image v0.46.0                   125.28 ms 
+photos     flower_foveon.webp       vwebp verified, SSE2 (this work)      20.80 ms 
+photos     flower_foveon.webp       vwebp verified, scalar (d73a2f5)      65.71 ms 
+photos     flower_foveon.webp       libwebp 1.6.0, SSE2                   14.44 ms 
+photos     flower_foveon.webp       libwebp 1.6.0, C only                 33.54 ms 
+photos     flower_foveon.webp       FFmpeg n9.0.2 vp8, x86 asm            12.76 ms 
+photos     flower_foveon.webp       FFmpeg n9.0.2 vp8, no asm             27.87 ms 
+photos     flower_foveon.webp       Wuffs std/vp8 f31d952                 69.08 ms 
+photos     flower_foveon.webp       image-webp f4d80bd (Rust)             53.19 ms 
+photos     flower_foveon.webp       Go x/image v0.46.0                    42.02 ms 
+photos     hdr.webp                 vwebp verified, SSE2 (this work)      33.26 ms 
+photos     hdr.webp                 vwebp verified, scalar (d73a2f5)     160.04 ms 
+photos     hdr.webp                 libwebp 1.6.0, SSE2                   29.71 ms 
+photos     hdr.webp                 libwebp 1.6.0, C only                 54.36 ms 
+photos     hdr.webp                 FFmpeg n9.0.2 vp8, x86 asm            29.61 ms 
+photos     hdr.webp                 FFmpeg n9.0.2 vp8, no asm             56.07 ms 
+photos     hdr.webp                 Wuffs std/vp8 f31d952                136.75 ms 
+photos     hdr.webp                 image-webp f4d80bd (Rust)            111.94 ms 
+photos     hdr.webp                 Go x/image v0.46.0                    39.70 ms 
+photos     leaves_iso_1600.webp     vwebp verified, SSE2 (this work)      93.73 ms 
+photos     leaves_iso_1600.webp     vwebp verified, scalar (d73a2f5)     278.31 ms 
+photos     leaves_iso_1600.webp     libwebp 1.6.0, SSE2                   70.77 ms 
+photos     leaves_iso_1600.webp     libwebp 1.6.0, C only                123.35 ms 
+photos     leaves_iso_1600.webp     FFmpeg n9.0.2 vp8, x86 asm            87.41 ms 
+photos     leaves_iso_1600.webp     FFmpeg n9.0.2 vp8, no asm            125.91 ms 
+photos     leaves_iso_1600.webp     Wuffs std/vp8 f31d952                236.72 ms 
+photos     leaves_iso_1600.webp     image-webp f4d80bd (Rust)            193.93 ms 
+photos     leaves_iso_1600.webp     Go x/image v0.46.0                   281.34 ms 
+photos     leaves_iso_200.webp      vwebp verified, SSE2 (this work)      79.74 ms 
+photos     leaves_iso_200.webp      vwebp verified, scalar (d73a2f5)     203.05 ms 
+photos     leaves_iso_200.webp      libwebp 1.6.0, SSE2                   69.05 ms 
+photos     leaves_iso_200.webp      libwebp 1.6.0, C only                106.40 ms 
+photos     leaves_iso_200.webp      FFmpeg n9.0.2 vp8, x86 asm            83.50 ms 
+photos     leaves_iso_200.webp      FFmpeg n9.0.2 vp8, no asm            115.90 ms 
+photos     leaves_iso_200.webp      Wuffs std/vp8 f31d952                179.04 ms 
+photos     leaves_iso_200.webp      image-webp f4d80bd (Rust)            177.28 ms 
+photos     leaves_iso_200.webp      Go x/image v0.46.0                   148.30 ms 
+photos     nightshot_iso_100.webp   vwebp verified, SSE2 (this work)      56.29 ms 
+photos     nightshot_iso_100.webp   vwebp verified, scalar (d73a2f5)     227.53 ms 
+photos     nightshot_iso_100.webp   libwebp 1.6.0, SSE2                   38.20 ms 
+photos     nightshot_iso_100.webp   libwebp 1.6.0, C only                 56.22 ms 
+photos     nightshot_iso_100.webp   FFmpeg n9.0.2 vp8, x86 asm            36.45 ms 
+photos     nightshot_iso_100.webp   FFmpeg n9.0.2 vp8, no asm             73.02 ms 
+photos     nightshot_iso_100.webp   Wuffs std/vp8 f31d952                141.39 ms 
+photos     nightshot_iso_100.webp   image-webp f4d80bd (Rust)            100.58 ms 
+photos     nightshot_iso_100.webp   Go x/image v0.46.0                    55.23 ms 
+photos     nightshot_iso_1600.webp  vwebp verified, SSE2 (this work)      89.52 ms 
+photos     nightshot_iso_1600.webp  vwebp verified, scalar (d73a2f5)     270.64 ms 
+photos     nightshot_iso_1600.webp  libwebp 1.6.0, SSE2                   63.03 ms 
+photos     nightshot_iso_1600.webp  libwebp 1.6.0, C only                114.61 ms 
+photos     nightshot_iso_1600.webp  FFmpeg n9.0.2 vp8, x86 asm            74.52 ms 
+photos     nightshot_iso_1600.webp  FFmpeg n9.0.2 vp8, no asm            124.01 ms 
+photos     nightshot_iso_1600.webp  Wuffs std/vp8 f31d952                224.77 ms PLANES DIFFER
+photos     nightshot_iso_1600.webp  image-webp f4d80bd (Rust)            194.34 ms 
+photos     nightshot_iso_1600.webp  Go x/image v0.46.0                   150.91 ms 
+photos     spider_web.webp          vwebp verified, SSE2 (this work)      71.48 ms 
+photos     spider_web.webp          vwebp verified, scalar (d73a2f5)     302.23 ms 
+photos     spider_web.webp          libwebp 1.6.0, SSE2                   41.86 ms 
+photos     spider_web.webp          libwebp 1.6.0, C only                 95.82 ms 
+photos     spider_web.webp          FFmpeg n9.0.2 vp8, x86 asm            38.01 ms 
+photos     spider_web.webp          FFmpeg n9.0.2 vp8, no asm             80.56 ms 
+photos     spider_web.webp          Wuffs std/vp8 f31d952                322.31 ms 
+photos     spider_web.webp          image-webp f4d80bd (Rust)            211.15 ms 
+photos     spider_web.webp          Go x/image v0.46.0                   193.55 ms 
+synthetic  big80.webp               vwebp verified, SSE2 (this work)     367.19 ms 
+synthetic  big80.webp               vwebp verified, scalar (d73a2f5)    1102.34 ms 
+synthetic  big80.webp               libwebp 1.6.0, SSE2                  288.93 ms 
+synthetic  big80.webp               libwebp 1.6.0, C only                495.26 ms 
+synthetic  big80.webp               FFmpeg n9.0.2 vp8, x86 asm           328.09 ms 
+synthetic  big80.webp               FFmpeg n9.0.2 vp8, no asm            494.87 ms 
+synthetic  big80.webp               Wuffs std/vp8 f31d952                764.25 ms PLANES DIFFER
+synthetic  big80.webp               image-webp f4d80bd (Rust)            741.59 ms 
+synthetic  big80.webp               Go x/image v0.46.0                   691.15 ms 
+
+== kodak
+vwebp verified, SSE2 (this work)         79.4 MP/s    1.00x vwebp-SSE2 time  all identical
+vwebp verified, scalar (d73a2f5)         30.3 MP/s    2.62x vwebp-SSE2 time  all identical
+libwebp 1.6.0, SSE2                     113.3 MP/s    0.70x vwebp-SSE2 time  all identical
+libwebp 1.6.0, C only                    70.4 MP/s    1.13x vwebp-SSE2 time  all identical
+FFmpeg n9.0.2 vp8, x86 asm               96.0 MP/s    0.83x vwebp-SSE2 time  all identical
+FFmpeg n9.0.2 vp8, no asm                58.8 MP/s    1.35x vwebp-SSE2 time  all identical
+Wuffs std/vp8 f31d952                    41.0 MP/s    1.94x vwebp-SSE2 time  DIFFERENCES
+image-webp f4d80bd (Rust)                52.6 MP/s    1.51x vwebp-SSE2 time  all identical
+Go x/image v0.46.0                       24.1 MP/s    3.29x vwebp-SSE2 time  all identical
+== photos
+vwebp verified, SSE2 (this work)         99.0 MP/s    1.00x vwebp-SSE2 time  all identical
+vwebp verified, scalar (d73a2f5)         35.6 MP/s    2.78x vwebp-SSE2 time  all identical
+libwebp 1.6.0, SSE2                     150.9 MP/s    0.66x vwebp-SSE2 time  all identical
+libwebp 1.6.0, C only                    64.4 MP/s    1.54x vwebp-SSE2 time  all identical
+FFmpeg n9.0.2 vp8, x86 asm              136.7 MP/s    0.72x vwebp-SSE2 time  all identical
+FFmpeg n9.0.2 vp8, no asm                81.9 MP/s    1.21x vwebp-SSE2 time  all identical
+Wuffs std/vp8 f31d952                    45.4 MP/s    2.18x vwebp-SSE2 time  DIFFERENCES
+image-webp f4d80bd (Rust)                53.6 MP/s    1.85x vwebp-SSE2 time  all identical
+Go x/image v0.46.0                       44.8 MP/s    2.21x vwebp-SSE2 time  all identical
+== synthetic
+vwebp verified, SSE2 (this work)         65.4 MP/s    1.00x vwebp-SSE2 time  all identical
+vwebp verified, scalar (d73a2f5)         21.8 MP/s    3.00x vwebp-SSE2 time  all identical
+libwebp 1.6.0, SSE2                      83.1 MP/s    0.79x vwebp-SSE2 time  all identical
+libwebp 1.6.0, C only                    48.5 MP/s    1.35x vwebp-SSE2 time  all identical
+FFmpeg n9.0.2 vp8, x86 asm               73.2 MP/s    0.89x vwebp-SSE2 time  all identical
+FFmpeg n9.0.2 vp8, no asm                48.5 MP/s    1.35x vwebp-SSE2 time  all identical
+Wuffs std/vp8 f31d952                    31.4 MP/s    2.08x vwebp-SSE2 time  DIFFERENCES
+image-webp f4d80bd (Rust)                32.4 MP/s    2.02x vwebp-SSE2 time  all identical
+Go x/image v0.46.0                       34.7 MP/s    1.88x vwebp-SSE2 time  all identical

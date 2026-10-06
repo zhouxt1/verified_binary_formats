@@ -1,0 +1,13 @@
+#!/bin/bash
+# Paired timing of vdeflate-tool: the build in target/dbase (main, from the
+# worktree .wt/dbase) against the current one, alternating, ROUNDS times:
+#   tools/deflate/ab [ROUNDS] [FILES...]   (default: 3, target/pngdef/*)
+cd "$(dirname "$0")/../.." || exit 1
+r=${1:-3}; shift
+fs=${*:-target/pngdef/kodim01.deflate target/pngdef/kodim04.deflate target/pngdef/0801.deflate target/pngdef/0803.deflate}
+bash -c "cargo build -q --release -p vdeflate-tool 2>&1 | grep -E '^error' -A5;
+for f in $fs; do b=0; n=0; for i in \$(seq $r); do
+  x=\$(target/dbase/release/vdeflate-tool --time 10 \$f | sed 's/.*, \(.*\) MB.*/\1/');
+  y=\$(target/release/vdeflate-tool --time 10 \$f | sed 's/.*, \(.*\) MB.*/\1/');
+  b=\$(python3 -c \"print(\$b + \$x)\"); n=\$(python3 -c \"print(\$n + \$y)\"); done;
+  python3 -c \"print('%-20s base %6.1f  new %6.1f  ratio %.3f' % ('\$(basename \$f)', \$b/$r, \$n/$r, \$n/\$b))\"; done"

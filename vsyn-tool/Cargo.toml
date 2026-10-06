@@ -1,0 +1,12 @@
+[package]
+name = "vsyn-tool"
+description = "Unverified helpers over vsyn programs: naming a trace's values, explaining a rejection, drawing random well-formed traces"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+publish = false
+
+[dependencies]
+vsyn = { path = "../vsyn" }

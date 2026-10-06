@@ -1,0 +1,14 @@
+[package]
+name = "vh26x-tool"
+description = "Driver for vh26x's verified H.264 / H.265 header codecs: parse, print, re-encode, for testing"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+publish = false
+
+[dependencies]
+vh26x = { path = "../vh26x" }
+vsyn = { path = "../vsyn" }
+vsyn-tool = { path = "../vsyn-tool" }

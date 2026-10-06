@@ -1,0 +1,1289 @@
+# H.265 (V11, 01/2026) syntax tables, as vh26xc reads them.
+#
+# Each structure follows its table in clause 7.3 (or Annex E) line for line.
+# After a descriptor, `range`/`eq` are the decoder-checked constraints of the
+# semantics (7.4, E.3); `confeq`/`conf` are the ones a decoder must not
+# reject on ("reserved ... decoders shall ignore"). Assignments after an
+# `else` are the semantics' inferences, and lines marked (7-n) are the
+# derived variables of equation 7-n.
+#
+# Scope: the single-layer syntax (nuh_layer_id 0) of versions 1 and 2 (range
+# extensions), SCC, and the multilayer and 3D SPS extensions, which are
+# short. A PPS multilayer or 3D extension is kept as bits, and so is the
+# rest of the RBSP after it.
+#
+# Departures from the text, all syntactic:
+# * `slice_type == B` is written `slice_type == 0` (Table 7-7: B 0, P 1, I 2).
+# * u(v) is written u( width ), the width being the one the semantics give.
+# * hrd_parameters( ) and sub_layer_hrd_parameters( ) index their arrays
+#   with the sub-layer, and with k = 0 (NAL) or 1 (VCL): one environment
+#   holds both. Of the VPS's hrd_parameters( ), the environment keeps the
+#   last (its cprms_present_flag semantics, "the same as the ( i − 1 )-th",
+#   is the environment keeping its values).
+# * An SEI message's payloadType and payloadSize are each one 0xFF-byte
+#   coded value, and its payload is bytes.
+# * pred_weight_table( )'s conditions on RefPicList0[ i ] (a reference
+#   picture other than the current one) are true for every reference picture
+#   unless pps_curr_pic_ref_enabled_flag, which is rejected in a slice with
+#   weighted prediction: that syntax depends on the decoded reference lists.
+
+array general_profile_compatibility_flag[32]
+array sub_layer_profile_present_flag[8]
+array sub_layer_level_present_flag[8]
+array reserved_zero_2bits[8]
+array sub_layer_profile_space[8]
+array sub_layer_tier_flag[8]
+array sub_layer_profile_idc[8]
+array sub_layer_profile_compatibility_flag[8][32]
+array sub_layer_progressive_source_flag[8]
+array sub_layer_interlaced_source_flag[8]
+array sub_layer_non_packed_constraint_flag[8]
+array sub_layer_frame_only_constraint_flag[8]
+array sub_layer_max_12bit_constraint_flag[8]
+array sub_layer_max_10bit_constraint_flag[8]
+array sub_layer_max_8bit_constraint_flag[8]
+array sub_layer_max_422chroma_constraint_flag[8]
+array sub_layer_max_420chroma_constraint_flag[8]
+array sub_layer_max_monochrome_constraint_flag[8]
+array sub_layer_intra_constraint_flag[8]
+array sub_layer_one_picture_only_constraint_flag[8]
+array sub_layer_lower_bit_rate_constraint_flag[8]
+array sub_layer_max_14bit_constraint_flag[8]
+array sub_layer_reserved_zero_33bits[8]
+array sub_layer_reserved_zero_34bits[8]
+array sub_layer_reserved_zero_7bits[8]
+array sub_layer_reserved_zero_35bits[8]
+array sub_layer_reserved_zero_43bits[8]
+array sub_layer_inbld_flag[8]
+array sub_layer_reserved_zero_bit[8]
+array sub_layer_level_idc[8]
+array vps_max_dec_pic_buffering_minus1[8]
+array vps_max_num_reorder_pics[8]
+array vps_max_latency_increase_plus1[8]
+array sps_max_dec_pic_buffering_minus1[8]
+array sps_max_num_reorder_pics[8]
+array sps_max_latency_increase_plus1[8]
+array fixed_pic_rate_general_flag[8]
+array fixed_pic_rate_within_cvs_flag[8]
+array elemental_duration_in_tc_minus1[8]
+array low_delay_hrd_flag[8]
+array cpb_cnt_minus1[8]
+array bit_rate_value_minus1[2][8][32]
+array cpb_size_value_minus1[2][8][32]
+array cpb_size_du_value_minus1[2][8][32]
+array bit_rate_du_value_minus1[2][8][32]
+array cbr_flag[2][8][32]
+array scaling_list_pred_mode_flag[4][6]
+array scaling_list_pred_matrix_id_delta[4][6]
+array scaling_list_dc_coef_minus8[2][6]
+array ScalingList[4][6][64]
+array lt_ref_pic_poc_lsb_sps[33]
+array used_by_curr_pic_lt_sps_flag[33]
+array used_by_curr_pic_flag[80]
+array use_delta_flag[80]
+array delta_poc_s0_minus1[16]
+array used_by_curr_pic_s0_flag[16]
+array delta_poc_s1_minus1[16]
+array used_by_curr_pic_s1_flag[16]
+array NumNegativePics[65]
+array NumPositivePics[65]
+array NumDeltaPocs[65]
+array DeltaPocS0[65][80]
+array UsedByCurrPicS0[65][80]
+array DeltaPocS1[65][80]
+array UsedByCurrPicS1[65][80]
+array column_width_minus1[64]
+array row_height_minus1[64]
+array cb_qp_offset_list[6]
+array cr_qp_offset_list[6]
+array slice_reserved_flag[8]
+array lt_idx_sps[33]
+array poc_lsb_lt[33]
+array used_by_curr_pic_lt_flag[33]
+array delta_poc_msb_present_flag[33]
+array delta_poc_msb_cycle_lt[33]
+array PocLsbLt[33]
+array UsedByCurrPicLt[33]
+array list_entry_l0[16]
+array list_entry_l1[16]
+array luma_weight_l0_flag[16]
+array chroma_weight_l0_flag[16]
+array delta_luma_weight_l0[16]
+array luma_offset_l0[16]
+array delta_chroma_weight_l0[16][2]
+array delta_chroma_offset_l0[16][2]
+array luma_weight_l1_flag[16]
+array chroma_weight_l1_flag[16]
+array delta_luma_weight_l1[16]
+array luma_offset_l1[16]
+array delta_chroma_weight_l1[16][2]
+array delta_chroma_offset_l1[16][2]
+array iv_di_mc_enabled_flag[2]
+array iv_mv_scal_enabled_flag[2]
+array log2_ivmc_sub_pb_size_minus3[2]
+array iv_res_pred_enabled_flag[2]
+array depth_ref_enabled_flag[2]
+array vsp_mc_enabled_flag[2]
+array dbbp_enabled_flag[2]
+array tex_mc_enabled_flag[2]
+array log2_texmc_sub_pb_size_minus3[2]
+array intra_contour_enabled_flag[2]
+array intra_dc_only_wedge_enabled_flag[2]
+array cqt_cu_part_pred_enabled_flag[2]
+array inter_dc_only_enabled_flag[2]
+array skip_intra_enabled_flag[2]
+array hrd_layer_set_idx[1024]
+scalar layer_id_included_flag, cprms_present_flag
+scalar sps_palette_predictor_initializer, pps_palette_predictor_initializer
+discard payload_byte, vps_extension_data_flag, sps_extension_data_flag, pps_extension_data_flag
+discard entry_point_offset_minus1, slice_segment_header_extension_data_byte
+discard pps_multilayer_extension_bit, pps_3d_extension_bit
+
+# Table 7-6, ScalingList[ 1..3 ][ 0..2 ] and [ 1..3 ][ 3..5 ].
+table Default_8x8_Intra = {
+    16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 17, 16, 17, 16, 17, 18,
+    17, 18, 18, 17, 18, 21, 19, 20, 21, 20, 19, 21, 24, 22, 22, 24,
+    24, 22, 22, 24, 25, 25, 27, 30, 27, 25, 25, 29, 31, 35, 35, 31,
+    29, 36, 41, 44, 41, 36, 47, 54, 54, 47, 65, 70, 65, 88, 88, 115 }
+table Default_8x8_Inter = {
+    16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 17, 17, 17, 17, 17, 18,
+    18, 18, 18, 18, 18, 20, 20, 20, 20, 20, 20, 20, 24, 24, 24, 24,
+    24, 24, 24, 24, 25, 25, 25, 25, 25, 25, 25, 28, 28, 28, 28, 28,
+    28, 33, 33, 33, 33, 33, 41, 41, 41, 41, 54, 54, 54, 71, 71, 91 }
+
+# -------------------------------------------------------------- 7.3.1.2
+
+nal_unit_header() {
+    forbidden_zero_bit                                  f(1)  eq(0)
+    nal_unit_type                                       u(6)
+    nuh_layer_id                                        u(6)
+    conf(nuh_layer_id <= 62)                            # 7.4.2.2
+    nuh_temporal_id_plus1                               u(3)  range(1, 7)
+    TemporalId = nuh_temporal_id_plus1 - 1              # (7-1)
+}
+
+# -------------------------------------------------------------- 7.3.2.1
+
+video_parameter_set_rbsp() {
+    vps_video_parameter_set_id                          u(4)
+    vps_base_layer_internal_flag                        u(1)
+    vps_base_layer_available_flag                       u(1)
+    vps_max_layers_minus1                               u(6)
+    conf(vps_max_layers_minus1 < 63)
+    assert(vps_base_layer_internal_flag || vps_max_layers_minus1 > 0)       # 7.4.3.1
+    vps_max_sub_layers_minus1                           u(3)  range(0, 6)
+    vps_temporal_id_nesting_flag                        u(1)
+    assert(vps_max_sub_layers_minus1 > 0 || vps_temporal_id_nesting_flag)   # 7.4.3.1
+    vps_reserved_0xffff_16bits                          u(16) confeq(65535)
+    profile_tier_level(1, vps_max_sub_layers_minus1)
+    vps_sub_layer_ordering_info_present_flag            u(1)
+    for (i = (vps_sub_layer_ordering_info_present_flag ? 0 : vps_max_sub_layers_minus1);
+         i <= vps_max_sub_layers_minus1; i++) {
+        # 7.4.3.1: with an external base layer these are 0, and ignored
+        vps_max_dec_pic_buffering_minus1[i]             ue(v)
+        assert(!vps_base_layer_internal_flag || vps_max_dec_pic_buffering_minus1[i] <= 15)   # MaxDpbSize - 1 (A.4.2)
+        conf(vps_base_layer_internal_flag || vps_max_dec_pic_buffering_minus1[i] == 0)
+        vps_max_num_reorder_pics[i]                     ue(v)
+        assert(!vps_base_layer_internal_flag || vps_max_num_reorder_pics[i] <= vps_max_dec_pic_buffering_minus1[i])
+        conf(vps_base_layer_internal_flag || vps_max_num_reorder_pics[i] == 0)
+        vps_max_latency_increase_plus1[i]               ue(v) range(0, 4294967294)
+        # 7.4.3.1: neither decreases from one sub-layer to the next
+        assert(!vps_base_layer_internal_flag || i == 0 || !vps_sub_layer_ordering_info_present_flag ||
+               (vps_max_dec_pic_buffering_minus1[i] >= vps_max_dec_pic_buffering_minus1[i - 1] &&
+                vps_max_num_reorder_pics[i] >= vps_max_num_reorder_pics[i - 1]))
+    }
+    vps_max_layer_id                                    u(6)
+    conf(vps_max_layer_id < 63)
+    vps_num_layer_sets_minus1                           ue(v) range(0, 1023)
+    for (i = 1; i <= vps_num_layer_sets_minus1; i++)
+        for (j = 0; j <= vps_max_layer_id; j++)
+            layer_id_included_flag[i][j]                u(1)
+    vps_timing_info_present_flag                        u(1)
+    if (vps_timing_info_present_flag) {
+        vps_num_units_in_tick                           u(32) conf(vps_num_units_in_tick > 0)
+        vps_time_scale                                  u(32) conf(vps_time_scale > 0)
+        vps_poc_proportional_to_timing_flag             u(1)
+        if (vps_poc_proportional_to_timing_flag)
+            vps_num_ticks_poc_diff_one_minus1           ue(v) range(0, 4294967294)
+        vps_num_hrd_parameters                          ue(v) range(0, vps_num_layer_sets_minus1 + 1)
+        for (i = 0; i < vps_num_hrd_parameters; i++) {
+            hrd_layer_set_idx[i]                        ue(v) range(vps_base_layer_internal_flag ? 0 : 1, vps_num_layer_sets_minus1)
+            for (j = 0; j < i; j++)
+                assert(hrd_layer_set_idx[j] != hrd_layer_set_idx[i])   # 7.4.3.1
+            cprms_present_flag[i] = 1                   # 7.4.3.1: cprms_present_flag[ 0 ] is 1
+            if (i > 0)
+                cprms_present_flag[i]                   u(1)
+            hrd_parameters(cprms_present_flag[i], vps_max_sub_layers_minus1)
+        }
+    }
+    vps_extension_flag                                  u(1)
+    if (vps_extension_flag)
+        while (more_rbsp_data())
+            vps_extension_data_flag                     u(1)
+}
+
+# ---------------------------------------------------------------- 7.3.3
+
+profile_tier_level(profilePresentFlag, maxNumSubLayersMinus1) {
+    if (profilePresentFlag) {
+        general_profile_space                           u(2)  confeq(0)       # 7.4.4
+        general_tier_flag                               u(1)
+        general_profile_idc                             u(5)
+        for (j = 0; j < 32; j++)
+            general_profile_compatibility_flag[j]       u(1)
+        conf(general_profile_space != 0 || general_profile_compatibility_flag[general_profile_idc])   # 7.4.4
+        general_progressive_source_flag                 u(1)
+        general_interlaced_source_flag                  u(1)
+        general_non_packed_constraint_flag              u(1)
+        general_frame_only_constraint_flag              u(1)
+        if (general_profile_idc == 4 || general_profile_compatibility_flag[4] ||
+            general_profile_idc == 5 || general_profile_compatibility_flag[5] ||
+            general_profile_idc == 6 || general_profile_compatibility_flag[6] ||
+            general_profile_idc == 7 || general_profile_compatibility_flag[7] ||
+            general_profile_idc == 8 || general_profile_compatibility_flag[8] ||
+            general_profile_idc == 9 || general_profile_compatibility_flag[9] ||
+            general_profile_idc == 10 || general_profile_compatibility_flag[10] ||
+            general_profile_idc == 11 || general_profile_compatibility_flag[11]) {
+            general_max_12bit_constraint_flag           u(1)
+            general_max_10bit_constraint_flag           u(1)
+            general_max_8bit_constraint_flag            u(1)
+            general_max_422chroma_constraint_flag       u(1)
+            general_max_420chroma_constraint_flag       u(1)
+            general_max_monochrome_constraint_flag      u(1)
+            general_intra_constraint_flag               u(1)
+            general_one_picture_only_constraint_flag    u(1)
+            general_lower_bit_rate_constraint_flag      u(1)
+            if (general_profile_idc == 5 || general_profile_compatibility_flag[5] ||
+                general_profile_idc == 9 || general_profile_compatibility_flag[9] ||
+                general_profile_idc == 10 || general_profile_compatibility_flag[10] ||
+                general_profile_idc == 11 || general_profile_compatibility_flag[11]) {
+                general_max_14bit_constraint_flag       u(1)
+                general_reserved_zero_33bits            u(33) confeq(0)
+            } else
+                general_reserved_zero_34bits            u(34) confeq(0)
+        } else if (general_profile_idc == 2 || general_profile_compatibility_flag[2]) {
+            general_reserved_zero_7bits                 u(7)  confeq(0)
+            general_one_picture_only_constraint_flag    u(1)
+            general_reserved_zero_35bits                u(35) confeq(0)
+        } else
+            general_reserved_zero_43bits                u(43) confeq(0)
+        if (general_profile_idc == 1 || general_profile_compatibility_flag[1] ||
+            general_profile_idc == 2 || general_profile_compatibility_flag[2] ||
+            general_profile_idc == 3 || general_profile_compatibility_flag[3] ||
+            general_profile_idc == 4 || general_profile_compatibility_flag[4] ||
+            general_profile_idc == 5 || general_profile_compatibility_flag[5] ||
+            general_profile_idc == 9 || general_profile_compatibility_flag[9] ||
+            general_profile_idc == 11 || general_profile_compatibility_flag[11])
+            general_inbld_flag                          u(1)
+        else
+            general_reserved_zero_bit                   u(1)  confeq(0)
+    }
+    general_level_idc                                   u(8)
+    for (i = 0; i < maxNumSubLayersMinus1; i++) {
+        sub_layer_profile_present_flag[i]               u(1)
+        sub_layer_level_present_flag[i]                 u(1)
+    }
+    if (maxNumSubLayersMinus1 > 0)
+        for (i = maxNumSubLayersMinus1; i < 8; i++)
+            reserved_zero_2bits[i]                      u(2)  confeq(0)
+    for (i = 0; i < maxNumSubLayersMinus1; i++) {
+        if (sub_layer_profile_present_flag[i]) {
+            sub_layer_profile_space[i]                  u(2)  confeq(0)
+            sub_layer_tier_flag[i]                      u(1)
+            sub_layer_profile_idc[i]                    u(5)
+            for (j = 0; j < 32; j++)
+                sub_layer_profile_compatibility_flag[i][j]  u(1)
+            sub_layer_progressive_source_flag[i]        u(1)
+            sub_layer_interlaced_source_flag[i]         u(1)
+            sub_layer_non_packed_constraint_flag[i]     u(1)
+            sub_layer_frame_only_constraint_flag[i]     u(1)
+            if (sub_layer_profile_idc[i] == 4 || sub_layer_profile_compatibility_flag[i][4] ||
+                sub_layer_profile_idc[i] == 5 || sub_layer_profile_compatibility_flag[i][5] ||
+                sub_layer_profile_idc[i] == 6 || sub_layer_profile_compatibility_flag[i][6] ||
+                sub_layer_profile_idc[i] == 7 || sub_layer_profile_compatibility_flag[i][7] ||
+                sub_layer_profile_idc[i] == 8 || sub_layer_profile_compatibility_flag[i][8] ||
+                sub_layer_profile_idc[i] == 9 || sub_layer_profile_compatibility_flag[i][9] ||
+                sub_layer_profile_idc[i] == 10 || sub_layer_profile_compatibility_flag[i][10] ||
+                sub_layer_profile_idc[i] == 11 || sub_layer_profile_compatibility_flag[i][11]) {
+                sub_layer_max_12bit_constraint_flag[i]  u(1)
+                sub_layer_max_10bit_constraint_flag[i]  u(1)
+                sub_layer_max_8bit_constraint_flag[i]   u(1)
+                sub_layer_max_422chroma_constraint_flag[i]  u(1)
+                sub_layer_max_420chroma_constraint_flag[i]  u(1)
+                sub_layer_max_monochrome_constraint_flag[i] u(1)
+                sub_layer_intra_constraint_flag[i]      u(1)
+                sub_layer_one_picture_only_constraint_flag[i] u(1)
+                sub_layer_lower_bit_rate_constraint_flag[i] u(1)
+                if (sub_layer_profile_idc[i] == 5 || sub_layer_profile_compatibility_flag[i][5] ||
+                    sub_layer_profile_idc[i] == 9 || sub_layer_profile_compatibility_flag[i][9] ||
+                    sub_layer_profile_idc[i] == 10 || sub_layer_profile_compatibility_flag[i][10] ||
+                    sub_layer_profile_idc[i] == 11 || sub_layer_profile_compatibility_flag[i][11]) {
+                    sub_layer_max_14bit_constraint_flag[i]  u(1)
+                    sub_layer_reserved_zero_33bits[i]   u(33) confeq(0)
+                } else
+                    sub_layer_reserved_zero_34bits[i]   u(34) confeq(0)
+            } else if (sub_layer_profile_idc[i] == 2 || sub_layer_profile_compatibility_flag[i][2]) {
+                sub_layer_reserved_zero_7bits[i]        u(7)  confeq(0)
+                sub_layer_one_picture_only_constraint_flag[i] u(1)
+                sub_layer_reserved_zero_35bits[i]       u(35) confeq(0)
+            } else
+                sub_layer_reserved_zero_43bits[i]       u(43) confeq(0)
+            if (sub_layer_profile_idc[i] == 1 || sub_layer_profile_compatibility_flag[i][1] ||
+                sub_layer_profile_idc[i] == 2 || sub_layer_profile_compatibility_flag[i][2] ||
+                sub_layer_profile_idc[i] == 3 || sub_layer_profile_compatibility_flag[i][3] ||
+                sub_layer_profile_idc[i] == 4 || sub_layer_profile_compatibility_flag[i][4] ||
+                sub_layer_profile_idc[i] == 5 || sub_layer_profile_compatibility_flag[i][5] ||
+                sub_layer_profile_idc[i] == 9 || sub_layer_profile_compatibility_flag[i][9] ||
+                sub_layer_profile_idc[i] == 11 || sub_layer_profile_compatibility_flag[i][11])
+                sub_layer_inbld_flag[i]                 u(1)
+            else
+                sub_layer_reserved_zero_bit[i]          u(1)  confeq(0)
+        }
+        if (sub_layer_level_present_flag[i])
+            sub_layer_level_idc[i]                      u(8)
+    }
+}
+
+# ------------------------------------------------------------ 7.3.2.2.1
+
+seq_parameter_set_rbsp() {
+    sps_video_parameter_set_id                          u(4)
+    sps_max_sub_layers_minus1                           u(3)  range(0, 6)
+    sps_temporal_id_nesting_flag                        u(1)
+    assert(sps_max_sub_layers_minus1 > 0 || sps_temporal_id_nesting_flag)   # 7.4.3.2.1
+    profile_tier_level(1, sps_max_sub_layers_minus1)
+    sps_seq_parameter_set_id                            ue(v) range(0, 15)
+    chroma_format_idc                                   ue(v) range(0, 3)
+    if (chroma_format_idc == 3)
+        separate_colour_plane_flag                      u(1)
+    ChromaArrayType = separate_colour_plane_flag == 0 ? chroma_format_idc : 0   # 7.4.3.2.1
+    SubWidthC = (chroma_format_idc == 1 || chroma_format_idc == 2) && separate_colour_plane_flag == 0 ? 2 : 1   # Table 6-1
+    SubHeightC = chroma_format_idc == 1 && separate_colour_plane_flag == 0 ? 2 : 1
+    pic_width_in_luma_samples                           ue(v)
+    pic_height_in_luma_samples                          ue(v)
+    conformance_window_flag                             u(1)
+    if (conformance_window_flag) {
+        conf_win_left_offset                            ue(v)
+        conf_win_right_offset                           ue(v)
+        conf_win_top_offset                             ue(v)
+        conf_win_bottom_offset                          ue(v)
+    }
+    # 7.4.3.2.1: the conformance window is inside the picture
+    assert(SubWidthC * (conf_win_left_offset + conf_win_right_offset) < pic_width_in_luma_samples)
+    assert(SubHeightC * (conf_win_top_offset + conf_win_bottom_offset) < pic_height_in_luma_samples)
+    bit_depth_luma_minus8                               ue(v) range(0, 8)
+    bit_depth_chroma_minus8                             ue(v) range(0, 8)
+    BitDepthY = 8 + bit_depth_luma_minus8               # (7-4)
+    QpBdOffsetY = 6 * bit_depth_luma_minus8             # (7-5)
+    BitDepthC = 8 + bit_depth_chroma_minus8             # (7-6)
+    QpBdOffsetC = 6 * bit_depth_chroma_minus8           # (7-7)
+    log2_max_pic_order_cnt_lsb_minus4                   ue(v) range(0, 12)
+    MaxPicOrderCntLsb = 1 << (log2_max_pic_order_cnt_lsb_minus4 + 4)   # (7-8)
+    sps_sub_layer_ordering_info_present_flag            u(1)
+    for (i = (sps_sub_layer_ordering_info_present_flag ? 0 : sps_max_sub_layers_minus1);
+         i <= sps_max_sub_layers_minus1; i++) {
+        sps_max_dec_pic_buffering_minus1[i]             ue(v) range(0, 15)   # MaxDpbSize - 1 <= 15 (A.4.2)
+        sps_max_num_reorder_pics[i]                     ue(v) range(0, sps_max_dec_pic_buffering_minus1[i])
+        sps_max_latency_increase_plus1[i]               ue(v) range(0, 4294967294)
+        # 7.4.3.2.1: neither decreases from one sub-layer to the next
+        assert(i == 0 || !sps_sub_layer_ordering_info_present_flag ||
+               (sps_max_dec_pic_buffering_minus1[i] >= sps_max_dec_pic_buffering_minus1[i - 1] &&
+                sps_max_num_reorder_pics[i] >= sps_max_num_reorder_pics[i - 1]))
+    }
+    # 7.4.3.2.1: absent lower sub-layers take the highest's values
+    if (!sps_sub_layer_ordering_info_present_flag)
+        for (i = 0; i < sps_max_sub_layers_minus1; i++) {
+            sps_max_dec_pic_buffering_minus1[i] = sps_max_dec_pic_buffering_minus1[sps_max_sub_layers_minus1]
+            sps_max_num_reorder_pics[i] = sps_max_num_reorder_pics[sps_max_sub_layers_minus1]
+            sps_max_latency_increase_plus1[i] = sps_max_latency_increase_plus1[sps_max_sub_layers_minus1]
+        }
+    log2_min_luma_coding_block_size_minus3              ue(v)
+    log2_diff_max_min_luma_coding_block_size            ue(v)
+    MinCbLog2SizeY = log2_min_luma_coding_block_size_minus3 + 3          # (7-10)
+    CtbLog2SizeY = MinCbLog2SizeY + log2_diff_max_min_luma_coding_block_size   # (7-11)
+    assert(CtbLog2SizeY <= 6)                           # A.3: CtbLog2SizeY in 4..6 in every profile
+    MinCbSizeY = 1 << MinCbLog2SizeY                    # (7-12)
+    CtbSizeY = 1 << CtbLog2SizeY                        # (7-13)
+    # 7.4.3.2.1: nonzero multiples of MinCbSizeY
+    assert(pic_width_in_luma_samples != 0 && pic_width_in_luma_samples % MinCbSizeY == 0)
+    assert(pic_height_in_luma_samples != 0 && pic_height_in_luma_samples % MinCbSizeY == 0)
+    PicWidthInMinCbsY = pic_width_in_luma_samples / MinCbSizeY           # (7-14)
+    PicWidthInCtbsY = (pic_width_in_luma_samples + CtbSizeY - 1) / CtbSizeY   # (7-15)
+    PicHeightInMinCbsY = pic_height_in_luma_samples / MinCbSizeY         # (7-16)
+    PicHeightInCtbsY = (pic_height_in_luma_samples + CtbSizeY - 1) / CtbSizeY # (7-17)
+    PicSizeInMinCbsY = PicWidthInMinCbsY * PicHeightInMinCbsY            # (7-18)
+    PicSizeInCtbsY = PicWidthInCtbsY * PicHeightInCtbsY                  # (7-19)
+    PicSizeInSamplesY = pic_width_in_luma_samples * pic_height_in_luma_samples   # (7-20)
+    # A.4.1 a) to c) for the largest MaxLumaPs of Table A.8 (142 606 336,
+    # levels 7 to 7.2); level 8.5 (general_level_idc 255) has no limit
+    assert(general_level_idc == 255 || (pic_width_in_luma_samples <= 33776 &&
+           pic_height_in_luma_samples <= 33776 && PicSizeInSamplesY <= 142606336))
+    PicWidthInSamplesC = pic_width_in_luma_samples / SubWidthC           # (7-21)
+    PicHeightInSamplesC = pic_height_in_luma_samples / SubHeightC        # (7-22)
+    log2_min_luma_transform_block_size_minus2           ue(v)
+    log2_diff_max_min_luma_transform_block_size         ue(v)
+    MinTbLog2SizeY = log2_min_luma_transform_block_size_minus2 + 2
+    MaxTbLog2SizeY = log2_min_luma_transform_block_size_minus2 + 2 + log2_diff_max_min_luma_transform_block_size
+    assert(MinTbLog2SizeY < MinCbLog2SizeY)             # 7.4.3.2.1
+    assert(MaxTbLog2SizeY <= Min(CtbLog2SizeY, 5))
+    max_transform_hierarchy_depth_inter                 ue(v) range(0, CtbLog2SizeY - MinTbLog2SizeY)
+    max_transform_hierarchy_depth_intra                 ue(v) range(0, CtbLog2SizeY - MinTbLog2SizeY)
+    scaling_list_enabled_flag                           u(1)
+    if (scaling_list_enabled_flag) {
+        sps_scaling_list_data_present_flag              u(1)
+        if (sps_scaling_list_data_present_flag)
+            scaling_list_data()
+        else
+            default_scaling_lists()                     # 7.4.3.2.1: "inferred ... default"
+    }
+    amp_enabled_flag                                    u(1)
+    sample_adaptive_offset_enabled_flag                 u(1)
+    pcm_enabled_flag                                    u(1)
+    if (pcm_enabled_flag) {
+        pcm_sample_bit_depth_luma_minus1                u(4)
+        assert(pcm_sample_bit_depth_luma_minus1 + 1 <= BitDepthY)            # (7-25)
+        pcm_sample_bit_depth_chroma_minus1              u(4)
+        assert(pcm_sample_bit_depth_chroma_minus1 + 1 <= BitDepthC)          # (7-26)
+        log2_min_pcm_luma_coding_block_size_minus3      ue(v)
+        Log2MinIpcmCbSizeY = log2_min_pcm_luma_coding_block_size_minus3 + 3
+        assert(Min(MinCbLog2SizeY, 5) <= Log2MinIpcmCbSizeY && Log2MinIpcmCbSizeY <= Min(CtbLog2SizeY, 5))
+        log2_diff_max_min_pcm_luma_coding_block_size    ue(v)
+        Log2MaxIpcmCbSizeY = log2_diff_max_min_pcm_luma_coding_block_size + Log2MinIpcmCbSizeY
+        assert(Log2MaxIpcmCbSizeY <= Min(CtbLog2SizeY, 5))
+        pcm_loop_filter_disabled_flag                   u(1)
+    }
+    num_short_term_ref_pic_sets                         ue(v) range(0, 64)
+    for (i = 0; i < num_short_term_ref_pic_sets; i++)
+        st_ref_pic_set(i)
+    long_term_ref_pics_present_flag                     u(1)
+    if (long_term_ref_pics_present_flag) {
+        num_long_term_ref_pics_sps                      ue(v) range(0, 32)
+        for (i = 0; i < num_long_term_ref_pics_sps; i++) {
+            lt_ref_pic_poc_lsb_sps[i]                   u(log2_max_pic_order_cnt_lsb_minus4 + 4)
+            used_by_curr_pic_lt_sps_flag[i]             u(1)
+        }
+    }
+    sps_temporal_mvp_enabled_flag                       u(1)
+    strong_intra_smoothing_enabled_flag                 u(1)
+    vui_parameters_present_flag                         u(1)
+    if (vui_parameters_present_flag)
+        vui_parameters()
+    sps_extension_present_flag                          u(1)
+    if (sps_extension_present_flag) {
+        sps_range_extension_flag                        u(1)
+        sps_multilayer_extension_flag                   u(1)
+        sps_3d_extension_flag                           u(1)
+        sps_scc_extension_flag                          u(1)
+        sps_extension_4bits                             u(4)  confeq(0)
+    }
+    if (sps_range_extension_flag)
+        sps_range_extension()
+    if (sps_multilayer_extension_flag)
+        sps_multilayer_extension()                      # F.7.3.2.2.4
+    if (sps_3d_extension_flag)
+        sps_3d_extension()                              # I.7.3.2.2.5
+    if (sps_scc_extension_flag)
+        sps_scc_extension()
+    if (sps_extension_4bits)
+        while (more_rbsp_data())
+            sps_extension_data_flag                     u(1)
+    # (7-31) .. (7-34), with the range extension's flags (0 when absent)
+    WpOffsetBdShiftY = high_precision_offsets_enabled_flag ? 0 : BitDepthY - 8
+    WpOffsetBdShiftC = high_precision_offsets_enabled_flag ? 0 : BitDepthC - 8
+    WpOffsetHalfRangeY = 1 << (high_precision_offsets_enabled_flag ? BitDepthY - 1 : 7)
+    WpOffsetHalfRangeC = 1 << (high_precision_offsets_enabled_flag ? BitDepthC - 1 : 7)
+}
+
+sps_range_extension() {
+    transform_skip_rotation_enabled_flag                u(1)
+    transform_skip_context_enabled_flag                 u(1)
+    implicit_rdpcm_enabled_flag                         u(1)
+    explicit_rdpcm_enabled_flag                         u(1)
+    extended_precision_processing_flag                  u(1)
+    intra_smoothing_disabled_flag                       u(1)
+    high_precision_offsets_enabled_flag                 u(1)
+    persistent_rice_adaptation_enabled_flag             u(1)
+    cabac_bypass_alignment_enabled_flag                 u(1)
+}
+
+sps_multilayer_extension() {
+    inter_view_mv_vert_constraint_flag                  u(1)
+}
+
+sps_3d_extension() {
+    for (d = 0; d <= 1; d++) {
+        iv_di_mc_enabled_flag[d]                        u(1)
+        iv_mv_scal_enabled_flag[d]                      u(1)
+        if (d == 0) {
+            log2_ivmc_sub_pb_size_minus3[d]             ue(v)
+            iv_res_pred_enabled_flag[d]                 u(1)
+            depth_ref_enabled_flag[d]                   u(1)
+            vsp_mc_enabled_flag[d]                      u(1)
+            dbbp_enabled_flag[d]                        u(1)
+        } else {
+            tex_mc_enabled_flag[d]                      u(1)
+            log2_texmc_sub_pb_size_minus3[d]            ue(v)
+            intra_contour_enabled_flag[d]               u(1)
+            intra_dc_only_wedge_enabled_flag[d]         u(1)
+            cqt_cu_part_pred_enabled_flag[d]            u(1)
+            inter_dc_only_enabled_flag[d]               u(1)
+            skip_intra_enabled_flag[d]                  u(1)
+        }
+    }
+}
+
+sps_scc_extension() {
+    sps_curr_pic_ref_enabled_flag                       u(1)
+    palette_mode_enabled_flag                           u(1)
+    if (palette_mode_enabled_flag) {
+        # A.3.7, A.3.8 (the SCC profiles, the only ones with palettes):
+        # palette_max_size <= 64, PaletteMaxPredictorSize <= 128 (7-35)
+        palette_max_size                                ue(v) range(0, 64)
+        delta_palette_max_predictor_size                ue(v) range(0, 128 - palette_max_size)
+        conf(palette_max_size != 0 || delta_palette_max_predictor_size == 0)
+        sps_palette_predictor_initializers_present_flag u(1)
+        conf(palette_max_size != 0 || sps_palette_predictor_initializers_present_flag == 0)
+        if (sps_palette_predictor_initializers_present_flag) {
+            sps_num_palette_predictor_initializers_minus1   ue(v) range(0, palette_max_size + delta_palette_max_predictor_size - 1)
+            numComps = (chroma_format_idc == 0) ? 1 : 3
+            for (comp = 0; comp < numComps; comp++)
+                for (i = 0; i <= sps_num_palette_predictor_initializers_minus1; i++)
+                    sps_palette_predictor_initializer[comp][i]  u(comp == 0 ? BitDepthY : BitDepthC)
+        }
+    }
+    motion_vector_resolution_control_idc                u(2)  range(0, 2)
+    intra_boundary_filtering_disabled_flag              u(1)
+}
+
+# ---------------------------------------------------------------- 7.3.4
+
+scaling_list_data() {
+    for (sizeId = 0; sizeId < 4; sizeId++)
+        for (matrixId = 0; matrixId < 6; matrixId += (sizeId == 3) ? 3 : 1) {
+            scaling_list_pred_mode_flag[sizeId][matrixId]   u(1)
+            coefNum = Min(64, (1 << (4 + (sizeId << 1))))
+            if (!scaling_list_pred_mode_flag[sizeId][matrixId]) {
+                scaling_list_pred_matrix_id_delta[sizeId][matrixId]  ue(v) range(0, sizeId == 3 ? matrixId / 3 : matrixId)
+                # 7.4.5: the default list, or a copy of the reference list (7-42), (7-43)
+                refMatrixId = matrixId - scaling_list_pred_matrix_id_delta[sizeId][matrixId] * (sizeId == 3 ? 3 : 1)
+                for (i = 0; i < coefNum; i++)
+                    ScalingList[sizeId][matrixId][i] = scaling_list_pred_matrix_id_delta[sizeId][matrixId] == 0
+                        ? (sizeId == 0 ? 16 : (matrixId < 3 ? Default_8x8_Intra[i] : Default_8x8_Inter[i]))
+                        : ScalingList[sizeId][refMatrixId][i]
+                if (sizeId > 1)
+                    scaling_list_dc_coef_minus8[sizeId - 2][matrixId] = scaling_list_pred_matrix_id_delta[sizeId][matrixId] == 0
+                        ? 8 : scaling_list_dc_coef_minus8[sizeId - 2][refMatrixId]
+            } else {
+                nextCoef = 8
+                if (sizeId > 1) {
+                    scaling_list_dc_coef_minus8[sizeId - 2][matrixId]   se(v) range(-7, 247)
+                    nextCoef = scaling_list_dc_coef_minus8[sizeId - 2][matrixId] + 8
+                }
+                for (i = 0; i < coefNum; i++) {
+                    scaling_list_delta_coef                 se(v) range(-128, 127)
+                    nextCoef = (nextCoef + scaling_list_delta_coef + 256) % 256
+                    ScalingList[sizeId][matrixId][i] = nextCoef
+                    assert(nextCoef > 0)                    # 7.4.5
+                }
+            }
+        }
+}
+
+# The default lists (Tables 7-5 and 7-6), when scaling lists are enabled
+# and no data is sent.
+default_scaling_lists() {
+    for (sizeId = 0; sizeId < 4; sizeId++)
+        for (matrixId = 0; matrixId < 6; matrixId++) {
+            for (i = 0; i < 64; i++)
+                ScalingList[sizeId][matrixId][i] = sizeId == 0 ? (i < 16 ? 16 : 0)
+                    : (matrixId < 3 ? Default_8x8_Intra[i] : Default_8x8_Inter[i])
+            if (sizeId > 1)
+                scaling_list_dc_coef_minus8[sizeId - 2][matrixId] = 8
+        }
+}
+
+# ---------------------------------------------------------------- 7.3.7
+
+st_ref_pic_set(stRpsIdx) {
+    inter_ref_pic_set_prediction_flag = 0
+    if (stRpsIdx != 0)
+        inter_ref_pic_set_prediction_flag               u(1)
+    if (inter_ref_pic_set_prediction_flag) {
+        delta_idx_minus1 = 0
+        if (stRpsIdx == num_short_term_ref_pic_sets)
+            delta_idx_minus1                            ue(v) range(0, stRpsIdx - 1)
+        RefRpsIdx = stRpsIdx - (delta_idx_minus1 + 1)   # (7-59)
+        delta_rps_sign                                  u(1)
+        abs_delta_rps_minus1                            ue(v) range(0, 32767)
+        deltaRps = (1 - 2 * delta_rps_sign) * (abs_delta_rps_minus1 + 1)   # (7-60)
+        for (j = 0; j <= NumDeltaPocs[RefRpsIdx]; j++) {
+            used_by_curr_pic_flag[j]                    u(1)
+            use_delta_flag[j] = 1                       # 7.4.8
+            if (!used_by_curr_pic_flag[j])
+                use_delta_flag[j]                       u(1)
+        }
+        # (7-61)
+        i = 0
+        for (j = NumPositivePics[RefRpsIdx] - 1; j >= 0; j--) {
+            dPoc = DeltaPocS1[RefRpsIdx][j] + deltaRps
+            if (dPoc < 0 && use_delta_flag[NumNegativePics[RefRpsIdx] + j]) {
+                DeltaPocS0[stRpsIdx][i] = dPoc
+                UsedByCurrPicS0[stRpsIdx][i] = used_by_curr_pic_flag[NumNegativePics[RefRpsIdx] + j]
+                i++
+            }
+        }
+        if (deltaRps < 0 && use_delta_flag[NumDeltaPocs[RefRpsIdx]]) {
+            DeltaPocS0[stRpsIdx][i] = deltaRps
+            UsedByCurrPicS0[stRpsIdx][i] = used_by_curr_pic_flag[NumDeltaPocs[RefRpsIdx]]
+            i++
+        }
+        for (j = 0; j < NumNegativePics[RefRpsIdx]; j++) {
+            dPoc = DeltaPocS0[RefRpsIdx][j] + deltaRps
+            if (dPoc < 0 && use_delta_flag[j]) {
+                DeltaPocS0[stRpsIdx][i] = dPoc
+                UsedByCurrPicS0[stRpsIdx][i] = used_by_curr_pic_flag[j]
+                i++
+            }
+        }
+        NumNegativePics[stRpsIdx] = i
+        # (7-62)
+        i = 0
+        for (j = NumNegativePics[RefRpsIdx] - 1; j >= 0; j--) {
+            dPoc = DeltaPocS0[RefRpsIdx][j] + deltaRps
+            if (dPoc > 0 && use_delta_flag[j]) {
+                DeltaPocS1[stRpsIdx][i] = dPoc
+                UsedByCurrPicS1[stRpsIdx][i] = used_by_curr_pic_flag[j]
+                i++
+            }
+        }
+        if (deltaRps > 0 && use_delta_flag[NumDeltaPocs[RefRpsIdx]]) {
+            DeltaPocS1[stRpsIdx][i] = deltaRps
+            UsedByCurrPicS1[stRpsIdx][i] = used_by_curr_pic_flag[NumDeltaPocs[RefRpsIdx]]
+            i++
+        }
+        for (j = 0; j < NumPositivePics[RefRpsIdx]; j++) {
+            dPoc = DeltaPocS1[RefRpsIdx][j] + deltaRps
+            if (dPoc > 0 && use_delta_flag[NumNegativePics[RefRpsIdx] + j]) {
+                DeltaPocS1[stRpsIdx][i] = dPoc
+                UsedByCurrPicS1[stRpsIdx][i] = used_by_curr_pic_flag[NumNegativePics[RefRpsIdx] + j]
+                i++
+            }
+        }
+        NumPositivePics[stRpsIdx] = i
+    } else {
+        num_negative_pics                               ue(v) range(0, sps_max_dec_pic_buffering_minus1[sps_max_sub_layers_minus1])
+        num_positive_pics                               ue(v) range(0, sps_max_dec_pic_buffering_minus1[sps_max_sub_layers_minus1] - num_negative_pics)
+        for (i = 0; i < num_negative_pics; i++) {
+            delta_poc_s0_minus1[i]                      ue(v) range(0, 32767)
+            used_by_curr_pic_s0_flag[i]                 u(1)
+            UsedByCurrPicS0[stRpsIdx][i] = used_by_curr_pic_s0_flag[i]                      # (7-65)
+            DeltaPocS0[stRpsIdx][i] = (i == 0 ? 0 : DeltaPocS0[stRpsIdx][i - 1]) - (delta_poc_s0_minus1[i] + 1)   # (7-67), (7-69)
+        }
+        for (i = 0; i < num_positive_pics; i++) {
+            delta_poc_s1_minus1[i]                      ue(v) range(0, 32767)
+            used_by_curr_pic_s1_flag[i]                 u(1)
+            UsedByCurrPicS1[stRpsIdx][i] = used_by_curr_pic_s1_flag[i]                      # (7-66)
+            DeltaPocS1[stRpsIdx][i] = (i == 0 ? 0 : DeltaPocS1[stRpsIdx][i - 1]) + (delta_poc_s1_minus1[i] + 1)   # (7-68), (7-70)
+        }
+        NumNegativePics[stRpsIdx] = num_negative_pics   # (7-63)
+        NumPositivePics[stRpsIdx] = num_positive_pics   # (7-64)
+    }
+    NumDeltaPocs[stRpsIdx] = NumNegativePics[stRpsIdx] + NumPositivePics[stRpsIdx]   # (7-71)
+    # No constraint bounds a predicted candidate RPS (7.4.8): each has at
+    # most one entry more than its source, and an explicit one at most
+    # MaxDpbSize - 1 <= 15 (A.4.2), so the 65 RPSs have at most 15 + 64
+    # entries. The one a picture uses is bounded by 7.4.7.1.
+    # 8.3.1: a POC difference used in decoding is within -2^15 .. 2^15 - 1,
+    # and each entry's is one (8.3.2)
+    for (q = 0; q < NumNegativePics[stRpsIdx]; q++)
+        assert(DeltaPocS0[stRpsIdx][q] >= -32768)
+    for (q = 0; q < NumPositivePics[stRpsIdx]; q++)
+        assert(DeltaPocS1[stRpsIdx][q] <= 32767)
+}
+
+# ---------------------------------------------------------------- E.2.1
+
+vui_parameters() {
+    aspect_ratio_info_present_flag                      u(1)
+    if (aspect_ratio_info_present_flag) {
+        aspect_ratio_idc                                u(8)
+        conf(aspect_ratio_idc <= 16 || aspect_ratio_idc == 255)    # E.3.1
+        if (aspect_ratio_idc == 255) {                  # EXTENDED_SAR
+            sar_width                                   u(16)
+            sar_height                                  u(16)
+        }
+    }
+    overscan_info_present_flag                          u(1)
+    if (overscan_info_present_flag)
+        overscan_appropriate_flag                       u(1)
+    video_signal_type_present_flag                      u(1)
+    if (video_signal_type_present_flag) {
+        video_format                                    u(3)
+        video_full_range_flag                           u(1)
+        colour_description_present_flag                 u(1)
+        if (colour_description_present_flag) {
+            colour_primaries                            u(8)
+            transfer_characteristics                    u(8)
+            matrix_coeffs                               u(8)
+        }
+    } else {
+        video_format = 5                                # E.3.1
+    }
+    if (!colour_description_present_flag) {
+        colour_primaries = 2                            # E.3.1
+        transfer_characteristics = 2
+        matrix_coeffs = 2
+    }
+    chroma_loc_info_present_flag                        u(1)
+    if (chroma_loc_info_present_flag) {
+        chroma_sample_loc_type_top_field                ue(v) range(0, 5)
+        chroma_sample_loc_type_bottom_field             ue(v) range(0, 5)
+    }
+    neutral_chroma_indication_flag                      u(1)
+    field_seq_flag                                      u(1)
+    frame_field_info_present_flag                       u(1)
+    default_display_window_flag                         u(1)
+    if (default_display_window_flag) {
+        def_disp_win_left_offset                        ue(v)
+        def_disp_win_right_offset                       ue(v)
+        def_disp_win_top_offset                         ue(v)
+        def_disp_win_bottom_offset                      ue(v)
+        # E.3.1 (E-78) to (E-81): the window is inside the picture
+        assert(SubWidthC * (conf_win_left_offset + def_disp_win_left_offset + conf_win_right_offset + def_disp_win_right_offset) < pic_width_in_luma_samples)
+        assert(SubHeightC * (conf_win_top_offset + def_disp_win_top_offset + conf_win_bottom_offset + def_disp_win_bottom_offset) < pic_height_in_luma_samples)
+    }
+    vui_timing_info_present_flag                        u(1)
+    if (vui_timing_info_present_flag) {
+        vui_num_units_in_tick                           u(32) conf(vui_num_units_in_tick > 0)
+        vui_time_scale                                  u(32) conf(vui_time_scale > 0)
+        vui_poc_proportional_to_timing_flag             u(1)
+        if (vui_poc_proportional_to_timing_flag)
+            vui_num_ticks_poc_diff_one_minus1           ue(v) range(0, 4294967294)
+        vui_hrd_parameters_present_flag                 u(1)
+        if (vui_hrd_parameters_present_flag)
+            hrd_parameters(1, sps_max_sub_layers_minus1)
+    }
+    bitstream_restriction_flag                          u(1)
+    if (bitstream_restriction_flag) {
+        tiles_fixed_structure_flag                      u(1)
+        motion_vectors_over_pic_boundaries_flag         u(1)
+        restricted_ref_pic_lists_flag                   u(1)
+        min_spatial_segmentation_idc                    ue(v) range(0, 4095)
+        max_bytes_per_pic_denom                         ue(v) range(0, 16)
+        max_bits_per_min_cu_denom                       ue(v) range(0, 16)
+        log2_max_mv_length_horizontal                   ue(v) range(0, 15)
+        log2_max_mv_length_vertical                     ue(v) range(0, 15)
+    }
+}
+
+hrd_parameters(commonInfPresentFlag, maxNumSubLayersMinus1) {
+    if (commonInfPresentFlag) {
+        nal_hrd_parameters_present_flag                 u(1)
+        vcl_hrd_parameters_present_flag                 u(1)
+        sub_pic_hrd_params_present_flag = 0             # E.3.2
+        initial_cpb_removal_delay_length_minus1 = 23
+        au_cpb_removal_delay_length_minus1 = 23
+        dpb_output_delay_length_minus1 = 23
+        if (nal_hrd_parameters_present_flag || vcl_hrd_parameters_present_flag) {
+            sub_pic_hrd_params_present_flag             u(1)
+            if (sub_pic_hrd_params_present_flag) {
+                tick_divisor_minus2                     u(8)
+                du_cpb_removal_delay_increment_length_minus1  u(5)
+                sub_pic_cpb_params_in_pic_timing_sei_flag     u(1)
+                dpb_output_delay_du_length_minus1       u(5)
+            }
+            bit_rate_scale                              u(4)
+            cpb_size_scale                              u(4)
+            if (sub_pic_hrd_params_present_flag)
+                cpb_size_du_scale                       u(4)
+            initial_cpb_removal_delay_length_minus1     u(5)
+            au_cpb_removal_delay_length_minus1          u(5)
+            dpb_output_delay_length_minus1              u(5)
+        }
+    }
+    for (i = 0; i <= maxNumSubLayersMinus1; i++) {
+        fixed_pic_rate_general_flag[i]                  u(1)
+        fixed_pic_rate_within_cvs_flag[i] = 1           # E.3.2: inferred when fixed_pic_rate_general_flag
+        if (!fixed_pic_rate_general_flag[i])
+            fixed_pic_rate_within_cvs_flag[i]           u(1)
+        low_delay_hrd_flag[i] = 0                       # E.3.2
+        if (fixed_pic_rate_within_cvs_flag[i])
+            elemental_duration_in_tc_minus1[i]          ue(v) range(0, 2047)
+        else
+            low_delay_hrd_flag[i]                       u(1)
+        cpb_cnt_minus1[i] = 0                           # E.3.2
+        if (!low_delay_hrd_flag[i])
+            cpb_cnt_minus1[i]                           ue(v) range(0, 31)
+        if (nal_hrd_parameters_present_flag)
+            sub_layer_hrd_parameters(i, 0)
+        if (vcl_hrd_parameters_present_flag)
+            sub_layer_hrd_parameters(i, 1)
+    }
+}
+
+sub_layer_hrd_parameters(subLayerId, k) {
+    CpbCnt = cpb_cnt_minus1[subLayerId] + 1             # E.3.3
+    for (i = 0; i < CpbCnt; i++) {
+        bit_rate_value_minus1[k][subLayerId][i]         ue(v) range(0, 4294967294)
+        conf(i == 0 || bit_rate_value_minus1[k][subLayerId][i] > bit_rate_value_minus1[k][subLayerId][i - 1])
+        cpb_size_value_minus1[k][subLayerId][i]         ue(v) range(0, 4294967294)
+        conf(i == 0 || cpb_size_value_minus1[k][subLayerId][i] <= cpb_size_value_minus1[k][subLayerId][i - 1])
+        if (sub_pic_hrd_params_present_flag) {
+            cpb_size_du_value_minus1[k][subLayerId][i]  ue(v) range(0, 4294967294)
+            bit_rate_du_value_minus1[k][subLayerId][i]  ue(v) range(0, 4294967294)
+        }
+        cbr_flag[k][subLayerId][i]                      u(1)
+    }
+}
+
+# ------------------------------------------------------------ 7.3.2.3.1
+
+pic_parameter_set_ids() {
+    pps_pic_parameter_set_id                            ue(v) range(0, 63)
+    pps_seq_parameter_set_id                            ue(v) range(0, 15)
+}
+
+pic_parameter_set_rbsp() {
+    pps_pic_parameter_set_id                            ue(v) range(0, 63)
+    pps_seq_parameter_set_id                            ue(v) range(0, 15)
+    dependent_slice_segments_enabled_flag               u(1)
+    output_flag_present_flag                            u(1)
+    num_extra_slice_header_bits                         u(3)
+    conf(num_extra_slice_header_bits <= 2)              # 7.4.3.3.1: decoders shall allow any value
+    sign_data_hiding_enabled_flag                       u(1)
+    cabac_init_present_flag                             u(1)
+    num_ref_idx_l0_default_active_minus1                ue(v) range(0, 14)
+    num_ref_idx_l1_default_active_minus1                ue(v) range(0, 14)
+    init_qp_minus26                                     se(v) range(-(26 + QpBdOffsetY), 25)
+    constrained_intra_pred_flag                         u(1)
+    transform_skip_enabled_flag                         u(1)
+    cu_qp_delta_enabled_flag                            u(1)
+    if (cu_qp_delta_enabled_flag)
+        diff_cu_qp_delta_depth                          ue(v) range(0, log2_diff_max_min_luma_coding_block_size)
+    pps_cb_qp_offset                                    se(v) range(-12, 12)
+    pps_cr_qp_offset                                    se(v) range(-12, 12)
+    pps_slice_chroma_qp_offsets_present_flag            u(1)
+    assert(ChromaArrayType != 0 || !pps_slice_chroma_qp_offsets_present_flag)   # 7.4.3.3.1
+    weighted_pred_flag                                  u(1)
+    weighted_bipred_flag                                u(1)
+    transquant_bypass_enabled_flag                      u(1)
+    tiles_enabled_flag                                  u(1)
+    entropy_coding_sync_enabled_flag                    u(1)
+    if (tiles_enabled_flag) {
+        num_tile_columns_minus1                         ue(v) range(0, PicWidthInCtbsY - 1)
+        num_tile_rows_minus1                            ue(v) range(0, PicHeightInCtbsY - 1)
+        assert(num_tile_columns_minus1 < 64 && num_tile_rows_minus1 < 64)   # A.4.1: at most 20 x 22 tiles
+        assert(num_tile_columns_minus1 != 0 || num_tile_rows_minus1 != 0)   # 7.4.3.3.1
+        uniform_spacing_flag                            u(1)
+        if (!uniform_spacing_flag) {
+            colSum = 0
+            for (i = 0; i < num_tile_columns_minus1; i++) {
+                column_width_minus1[i]                  ue(v)
+                colSum += column_width_minus1[i] + 1
+            }
+            rowSum = 0
+            for (i = 0; i < num_tile_rows_minus1; i++) {
+                row_height_minus1[i]                    ue(v)
+                rowSum += row_height_minus1[i] + 1
+            }
+            # 7.4.3.3.1: the last column and row are at least one CTB
+            assert(colSum < PicWidthInCtbsY && rowSum < PicHeightInCtbsY)
+        }
+        loop_filter_across_tiles_enabled_flag           u(1)
+    } else {
+        loop_filter_across_tiles_enabled_flag = 1       # 7.4.3.3.1
+        uniform_spacing_flag = 1
+    }
+    pps_loop_filter_across_slices_enabled_flag          u(1)
+    deblocking_filter_control_present_flag              u(1)
+    if (deblocking_filter_control_present_flag) {
+        deblocking_filter_override_enabled_flag         u(1)
+        pps_deblocking_filter_disabled_flag             u(1)
+        if (!pps_deblocking_filter_disabled_flag) {
+            pps_beta_offset_div2                        se(v) range(-6, 6)
+            pps_tc_offset_div2                          se(v) range(-6, 6)
+        }
+    }
+    pps_scaling_list_data_present_flag                  u(1)
+    assert(scaling_list_enabled_flag || !pps_scaling_list_data_present_flag)   # 7.4.3.3.1
+    if (pps_scaling_list_data_present_flag)
+        scaling_list_data()
+    lists_modification_present_flag                     u(1)
+    log2_parallel_merge_level_minus2                    ue(v) range(0, CtbLog2SizeY - 2)
+    slice_segment_header_extension_present_flag         u(1)
+    pps_extension_present_flag                          u(1)
+    if (pps_extension_present_flag) {
+        pps_range_extension_flag                        u(1)
+        pps_multilayer_extension_flag                   u(1)
+        pps_3d_extension_flag                           u(1)
+        pps_scc_extension_flag                          u(1)
+        pps_extension_4bits                             u(4)  confeq(0)
+    }
+    if (pps_range_extension_flag)
+        pps_range_extension()
+    if (pps_multilayer_extension_flag || pps_3d_extension_flag) {
+        # Annex F and I extensions: kept as bits, with everything after them
+        while (more_rbsp_data())
+            pps_multilayer_extension_bit                u(1)
+    } else {
+        if (pps_scc_extension_flag)
+            pps_scc_extension()
+        if (pps_extension_4bits)
+            while (more_rbsp_data())
+                pps_extension_data_flag                 u(1)
+    }
+}
+
+pps_range_extension() {
+    if (transform_skip_enabled_flag)
+        log2_max_transform_skip_block_size_minus2       ue(v) range(0, MaxTbLog2SizeY - 2)
+    cross_component_prediction_enabled_flag             u(1)
+    assert(ChromaArrayType == 3 || !cross_component_prediction_enabled_flag)     # 7.4.3.3.2
+    chroma_qp_offset_list_enabled_flag                  u(1)
+    assert(ChromaArrayType != 0 || !chroma_qp_offset_list_enabled_flag)
+    if (chroma_qp_offset_list_enabled_flag) {
+        diff_cu_chroma_qp_offset_depth                  ue(v) range(0, log2_diff_max_min_luma_coding_block_size)
+        chroma_qp_offset_list_len_minus1                ue(v) range(0, 5)
+        for (i = 0; i <= chroma_qp_offset_list_len_minus1; i++) {
+            cb_qp_offset_list[i]                        se(v) range(-12, 12)
+            cr_qp_offset_list[i]                        se(v) range(-12, 12)
+        }
+    }
+    log2_sao_offset_scale_luma                          ue(v) range(0, Max(0, BitDepthY - 10))
+    log2_sao_offset_scale_chroma                        ue(v) range(0, Max(0, BitDepthC - 10))
+}
+
+pps_scc_extension() {
+    pps_curr_pic_ref_enabled_flag                       u(1)
+    assert(sps_curr_pic_ref_enabled_flag || !pps_curr_pic_ref_enabled_flag)          # 7.4.3.3.3
+    residual_adaptive_colour_transform_enabled_flag     u(1)
+    assert(ChromaArrayType == 3 || !residual_adaptive_colour_transform_enabled_flag)
+    if (residual_adaptive_colour_transform_enabled_flag) {
+        pps_slice_act_qp_offsets_present_flag           u(1)
+        pps_act_y_qp_offset_plus5                       se(v) range(-7, 17)
+        pps_act_cb_qp_offset_plus5                      se(v) range(-7, 17)
+        pps_act_cr_qp_offset_plus3                      se(v) range(-9, 15)
+    }
+    pps_palette_predictor_initializers_present_flag     u(1)
+    # 7.4.3.3.3, against the SPS's palette parameters (7-35)
+    assert(!pps_palette_predictor_initializers_present_flag || (palette_mode_enabled_flag && palette_max_size != 0))
+    if (pps_palette_predictor_initializers_present_flag) {
+        pps_num_palette_predictor_initializers          ue(v) range(0, palette_max_size + delta_palette_max_predictor_size)
+        if (pps_num_palette_predictor_initializers > 0) {
+            monochrome_palette_flag                     u(1)  eq(chroma_format_idc == 0)
+            luma_bit_depth_entry_minus8                 ue(v) eq(bit_depth_luma_minus8)
+            if (!monochrome_palette_flag)
+                chroma_bit_depth_entry_minus8           ue(v) eq(bit_depth_chroma_minus8)
+            numComps = monochrome_palette_flag ? 1 : 3
+            for (comp = 0; comp < numComps; comp++)
+                for (i = 0; i < pps_num_palette_predictor_initializers; i++)
+                    pps_palette_predictor_initializer[comp][i]  u(comp == 0 ? luma_bit_depth_entry_minus8 + 8 : chroma_bit_depth_entry_minus8 + 8)
+        }
+    }
+}
+
+# --------------------------------------------------------- 7.3.2.4, 7.3.5
+
+sei_rbsp() {
+    do
+        sei_message()
+    while (more_rbsp_data())
+}
+
+sei_message() {
+    payloadType                                         ff
+    payloadSize                                         ff
+    for (i = 0; i < payloadSize; i++)
+        payload_byte                                    u(8)
+}
+
+access_unit_delimiter_rbsp() {
+    pic_type                                            u(3)  range(0, 2)   # Table 7-2
+}
+
+filler_data_rbsp() {
+    while (more_rbsp_data())
+        ff_byte                                         f(8)  eq(255)
+}
+
+# ------------------------------------------------------------ 7.3.6.1
+
+slice_segment_header_ids() {
+    first_slice_segment_in_pic_flag                     u(1)
+    if (nal_unit_type >= 16 && nal_unit_type <= 23)     # BLA_W_LP .. RSV_IRAP_VCL23
+        no_output_of_prior_pics_flag                    u(1)
+    slice_pic_parameter_set_id                          ue(v) range(0, 63)
+}
+
+slice_segment_header() {
+    first_slice_segment_in_pic_flag                     u(1)
+    if (nal_unit_type >= 16 && nal_unit_type <= 23)
+        no_output_of_prior_pics_flag                    u(1)
+    slice_pic_parameter_set_id                          ue(v) range(0, 63)
+    if (!first_slice_segment_in_pic_flag) {
+        if (dependent_slice_segments_enabled_flag)
+            dependent_slice_segment_flag                u(1)
+        slice_segment_address                           u(Ceil(Log2(PicSizeInCtbsY)))  range(0, PicSizeInCtbsY - 1)
+    }
+    CuQpDeltaVal = 0
+    if (!dependent_slice_segment_flag) {
+        for (i = 0; i < num_extra_slice_header_bits; i++)
+            slice_reserved_flag[i]                      u(1)
+        slice_type                                      ue(v) range(0, 2)
+        # 7.4.7.1: without current-picture referencing, an IRAP picture, or
+        # one with no room for reference pictures, has only I slices
+        assert(nal_unit_type < 16 || nal_unit_type > 23 || pps_curr_pic_ref_enabled_flag || slice_type == 2)
+        assert(sps_max_dec_pic_buffering_minus1[TemporalId] != 0 || pps_curr_pic_ref_enabled_flag || slice_type == 2)
+        # 7.4.3.3.3: TwoVersionsOfCurrDecPicFlag is 0 when there is no room for it
+        TwoVersionsOfCurrDecPicFlag = pps_curr_pic_ref_enabled_flag && (sample_adaptive_offset_enabled_flag ||
+            !pps_deblocking_filter_disabled_flag || deblocking_filter_override_enabled_flag)
+        assert(sps_max_dec_pic_buffering_minus1[TemporalId] != 0 || !TwoVersionsOfCurrDecPicFlag)
+        pic_output_flag = 1                             # 7.4.7.1
+        if (output_flag_present_flag)
+            pic_output_flag                             u(1)
+        if (separate_colour_plane_flag == 1)
+            colour_plane_id                             u(2)  range(0, 2)
+        if (nal_unit_type != 19 && nal_unit_type != 20) {   # IDR_W_RADL, IDR_N_LP
+            slice_pic_order_cnt_lsb                     u(log2_max_pic_order_cnt_lsb_minus4 + 4)
+            short_term_ref_pic_set_sps_flag             u(1)
+            assert(short_term_ref_pic_set_sps_flag == 0 || num_short_term_ref_pic_sets > 0)   # 7.4.7.1
+            sps_rps()
+            if (!short_term_ref_pic_set_sps_flag) {
+                st_ref_pic_set(num_short_term_ref_pic_sets)
+            } else if (num_short_term_ref_pic_sets > 1)
+                short_term_ref_pic_set_idx              u(Ceil(Log2(num_short_term_ref_pic_sets)))  range(0, num_short_term_ref_pic_sets - 1)
+            CurrRpsIdx = short_term_ref_pic_set_sps_flag ? short_term_ref_pic_set_idx : num_short_term_ref_pic_sets
+            if (long_term_ref_pics_present_flag) {
+                if (num_long_term_ref_pics_sps > 0)
+                    num_long_term_sps                   ue(v) range(0, num_long_term_ref_pics_sps)
+                num_long_term_pics                      ue(v)
+                # 7.4.7.1
+                assert(num_long_term_pics <= sps_max_dec_pic_buffering_minus1[TemporalId]
+                           - NumNegativePics[CurrRpsIdx] - NumPositivePics[CurrRpsIdx] - num_long_term_sps
+                           - TwoVersionsOfCurrDecPicFlag)
+                for (i = 0; i < num_long_term_sps + num_long_term_pics; i++) {
+                    if (i < num_long_term_sps) {
+                        if (num_long_term_ref_pics_sps > 1)
+                            lt_idx_sps[i]               u(Ceil(Log2(num_long_term_ref_pics_sps)))  range(0, num_long_term_ref_pics_sps - 1)
+                        PocLsbLt[i] = lt_ref_pic_poc_lsb_sps[lt_idx_sps[i]]
+                        UsedByCurrPicLt[i] = used_by_curr_pic_lt_sps_flag[lt_idx_sps[i]]
+                    } else {
+                        poc_lsb_lt[i]                   u(log2_max_pic_order_cnt_lsb_minus4 + 4)
+                        used_by_curr_pic_lt_flag[i]     u(1)
+                        PocLsbLt[i] = poc_lsb_lt[i]
+                        UsedByCurrPicLt[i] = used_by_curr_pic_lt_flag[i]
+                    }
+                    delta_poc_msb_present_flag[i]       u(1)
+                    if (delta_poc_msb_present_flag[i])
+                        delta_poc_msb_cycle_lt[i]       ue(v) range(0, 1 << (32 - log2_max_pic_order_cnt_lsb_minus4 - 4))
+                }
+            }
+            if (sps_temporal_mvp_enabled_flag)
+                slice_temporal_mvp_enabled_flag         u(1)
+        }
+        if (sample_adaptive_offset_enabled_flag) {
+            slice_sao_luma_flag                         u(1)
+            if (ChromaArrayType != 0)
+                slice_sao_chroma_flag                   u(1)
+        }
+        num_ref_idx_l0_active_minus1 = num_ref_idx_l0_default_active_minus1   # 7.4.7.1
+        num_ref_idx_l1_active_minus1 = num_ref_idx_l1_default_active_minus1
+        if (slice_type == 1 || slice_type == 0) {
+            num_ref_idx_active_override_flag            u(1)
+            if (num_ref_idx_active_override_flag) {
+                num_ref_idx_l0_active_minus1            ue(v) range(0, 14)
+                if (slice_type == 0)
+                    num_ref_idx_l1_active_minus1        ue(v) range(0, 14)
+            }
+            num_pic_total_curr()                        # (7-57)
+            if (lists_modification_present_flag && NumPicTotalCurr > 1)
+                ref_pic_lists_modification()
+            if (slice_type == 0)
+                mvd_l1_zero_flag                        u(1)
+            if (cabac_init_present_flag)
+                cabac_init_flag                         u(1)
+            if (slice_temporal_mvp_enabled_flag) {
+                collocated_from_l0_flag = 1             # 7.4.7.1
+                if (slice_type == 0)
+                    collocated_from_l0_flag             u(1)
+                if ((collocated_from_l0_flag && num_ref_idx_l0_active_minus1 > 0) ||
+                    (!collocated_from_l0_flag && num_ref_idx_l1_active_minus1 > 0))
+                    collocated_ref_idx                  ue(v) range(0, collocated_from_l0_flag ? num_ref_idx_l0_active_minus1 : num_ref_idx_l1_active_minus1)
+            }
+            if ((weighted_pred_flag && slice_type == 1) ||
+                (weighted_bipred_flag && slice_type == 0))
+                pred_weight_table()
+            five_minus_max_num_merge_cand               ue(v) range(0, 4)    # MaxNumMergeCand in 1..5
+            use_integer_mv_flag = motion_vector_resolution_control_idc   # 7.4.7.1
+            if (motion_vector_resolution_control_idc == 2)
+                use_integer_mv_flag                     u(1)
+        }
+        slice_qp_delta                                  se(v)
+        SliceQpY = 26 + init_qp_minus26 + slice_qp_delta                      # (7-54)
+        assert(-QpBdOffsetY <= SliceQpY && SliceQpY <= 51)
+        if (pps_slice_chroma_qp_offsets_present_flag) {
+            slice_cb_qp_offset                          se(v) range(-12, 12)
+            assert(-12 <= pps_cb_qp_offset + slice_cb_qp_offset && pps_cb_qp_offset + slice_cb_qp_offset <= 12)
+            slice_cr_qp_offset                          se(v) range(-12, 12)
+            assert(-12 <= pps_cr_qp_offset + slice_cr_qp_offset && pps_cr_qp_offset + slice_cr_qp_offset <= 12)
+        }
+        if (pps_slice_act_qp_offsets_present_flag) {
+            # 7.4.7.1: each, and each added to its PPS offset (7.4.3.3.3,
+            # PpsActQpOffsetCr from pps_act_cr_qp_offset_plus3: the text has
+            # "cb", which cannot be meant)
+            slice_act_y_qp_offset                       se(v) range(-12, 12)
+            assert(-12 <= pps_act_y_qp_offset_plus5 - 5 + slice_act_y_qp_offset && pps_act_y_qp_offset_plus5 - 5 + slice_act_y_qp_offset <= 12)
+            slice_act_cb_qp_offset                      se(v) range(-12, 12)
+            assert(-12 <= pps_act_cb_qp_offset_plus5 - 5 + slice_act_cb_qp_offset && pps_act_cb_qp_offset_plus5 - 5 + slice_act_cb_qp_offset <= 12)
+            slice_act_cr_qp_offset                      se(v) range(-12, 12)
+            assert(-12 <= pps_act_cr_qp_offset_plus3 - 3 + slice_act_cr_qp_offset && pps_act_cr_qp_offset_plus3 - 3 + slice_act_cr_qp_offset <= 12)
+        }
+        if (chroma_qp_offset_list_enabled_flag)
+            cu_chroma_qp_offset_enabled_flag            u(1)
+        if (deblocking_filter_override_enabled_flag)
+            deblocking_filter_override_flag             u(1)
+        slice_deblocking_filter_disabled_flag = pps_deblocking_filter_disabled_flag   # 7.4.7.1
+        slice_beta_offset_div2 = pps_beta_offset_div2
+        slice_tc_offset_div2 = pps_tc_offset_div2
+        if (deblocking_filter_override_flag) {
+            slice_deblocking_filter_disabled_flag       u(1)
+            if (!slice_deblocking_filter_disabled_flag) {
+                slice_beta_offset_div2                  se(v) range(-6, 6)
+                slice_tc_offset_div2                    se(v) range(-6, 6)
+            }
+        }
+        slice_loop_filter_across_slices_enabled_flag = pps_loop_filter_across_slices_enabled_flag   # 7.4.7.1
+        if (pps_loop_filter_across_slices_enabled_flag &&
+            (slice_sao_luma_flag || slice_sao_chroma_flag ||
+             !slice_deblocking_filter_disabled_flag))
+            slice_loop_filter_across_slices_enabled_flag  u(1)
+    }
+    if (tiles_enabled_flag || entropy_coding_sync_enabled_flag) {
+        num_entry_point_offsets                         ue(v)
+        # 7.4.7.1
+        assert(num_entry_point_offsets <= (tiles_enabled_flag ? (num_tile_columns_minus1 + 1) * (entropy_coding_sync_enabled_flag ? PicHeightInCtbsY : num_tile_rows_minus1 + 1) - 1 : PicHeightInCtbsY - 1))
+        if (num_entry_point_offsets > 0) {
+            offset_len_minus1                           ue(v) range(0, 31)
+            for (i = 0; i < num_entry_point_offsets; i++)
+                entry_point_offset_minus1[i]            u(offset_len_minus1 + 1)
+        }
+    }
+    if (slice_segment_header_extension_present_flag) {
+        slice_segment_header_extension_length           ue(v) range(0, 256)
+        for (i = 0; i < slice_segment_header_extension_length; i++)
+            slice_segment_header_extension_data_byte[i] u(8)
+    }
+    byte_alignment()
+}
+
+# The SPS's candidate short-term RPSs, which a slice header's st_ref_pic_set( )
+# may predict from (7.4.8) and CurrRpsIdx may select, brought into the
+# slice's environment.
+sps_rps() {
+    for (r = 0; r < num_short_term_ref_pic_sets; r++) {
+        NumNegativePics[r] = sps.NumNegativePics[r]
+        NumPositivePics[r] = sps.NumPositivePics[r]
+        NumDeltaPocs[r] = sps.NumDeltaPocs[r]
+        # the entries past the counts are never read
+        for (q = 0; q < sps.NumNegativePics[r]; q++) {
+            DeltaPocS0[r][q] = sps.DeltaPocS0[r][q]
+            UsedByCurrPicS0[r][q] = sps.UsedByCurrPicS0[r][q]
+        }
+        for (q = 0; q < sps.NumPositivePics[r]; q++) {
+            DeltaPocS1[r][q] = sps.DeltaPocS1[r][q]
+            UsedByCurrPicS1[r][q] = sps.UsedByCurrPicS1[r][q]
+        }
+    }
+}
+
+# (7-57); the current RPS is the slice's own, or one of the SPS's.
+num_pic_total_curr() {
+    NumPicTotalCurr = 0
+    for (i = 0; i < NumNegativePics[CurrRpsIdx]; i++)
+        if (UsedByCurrPicS0[CurrRpsIdx][i])
+            NumPicTotalCurr++
+    for (i = 0; i < NumPositivePics[CurrRpsIdx]; i++)
+        if (UsedByCurrPicS1[CurrRpsIdx][i])
+            NumPicTotalCurr++
+    for (i = 0; i < num_long_term_sps + num_long_term_pics; i++)
+        if (UsedByCurrPicLt[i])
+            NumPicTotalCurr++
+    if (pps_curr_pic_ref_enabled_flag)
+        NumPicTotalCurr++
+}
+
+ref_pic_lists_modification() {
+    ref_pic_list_modification_flag_l0                   u(1)
+    if (ref_pic_list_modification_flag_l0)
+        for (i = 0; i <= num_ref_idx_l0_active_minus1; i++)
+            list_entry_l0[i]                            u(Ceil(Log2(NumPicTotalCurr)))  range(0, NumPicTotalCurr - 1)
+    if (slice_type == 0) {
+        ref_pic_list_modification_flag_l1               u(1)
+        if (ref_pic_list_modification_flag_l1)
+            for (i = 0; i <= num_ref_idx_l1_active_minus1; i++)
+                list_entry_l1[i]                        u(Ceil(Log2(NumPicTotalCurr)))  range(0, NumPicTotalCurr - 1)
+    }
+}
+
+pred_weight_table() {
+    assert(!pps_curr_pic_ref_enabled_flag)              # see the header of this file
+    luma_log2_weight_denom                              ue(v) range(0, 7)
+    if (ChromaArrayType != 0) {
+        delta_chroma_log2_weight_denom                  se(v)
+        assert(0 <= luma_log2_weight_denom + delta_chroma_log2_weight_denom && luma_log2_weight_denom + delta_chroma_log2_weight_denom <= 7)
+    }
+    for (i = 0; i <= num_ref_idx_l0_active_minus1; i++)
+        luma_weight_l0_flag[i]                          u(1)
+    if (ChromaArrayType != 0)
+        for (i = 0; i <= num_ref_idx_l0_active_minus1; i++)
+            chroma_weight_l0_flag[i]                    u(1)
+    sumWeightFlags = 0                                  # 7.4.7.3
+    for (i = 0; i <= num_ref_idx_l0_active_minus1; i++)
+        sumWeightFlags += luma_weight_l0_flag[i] + 2 * chroma_weight_l0_flag[i]
+    for (i = 0; i <= num_ref_idx_l0_active_minus1; i++) {
+        if (luma_weight_l0_flag[i]) {
+            delta_luma_weight_l0[i]                     se(v) range(-128, 127)
+            luma_offset_l0[i]                           se(v) range(-WpOffsetHalfRangeY, WpOffsetHalfRangeY - 1)
+        }
+        if (chroma_weight_l0_flag[i])
+            for (j = 0; j < 2; j++) {
+                delta_chroma_weight_l0[i][j]            se(v) range(-128, 127)
+                delta_chroma_offset_l0[i][j]            se(v) range(-4 * WpOffsetHalfRangeC, 4 * WpOffsetHalfRangeC - 1)
+            }
+    }
+    if (slice_type == 0) {
+        for (i = 0; i <= num_ref_idx_l1_active_minus1; i++)
+            luma_weight_l1_flag[i]                      u(1)
+        if (ChromaArrayType != 0)
+            for (i = 0; i <= num_ref_idx_l1_active_minus1; i++)
+                chroma_weight_l1_flag[i]                u(1)
+        for (i = 0; i <= num_ref_idx_l1_active_minus1; i++)
+            sumWeightFlags += luma_weight_l1_flag[i] + 2 * chroma_weight_l1_flag[i]
+        for (i = 0; i <= num_ref_idx_l1_active_minus1; i++) {
+            if (luma_weight_l1_flag[i]) {
+                delta_luma_weight_l1[i]                 se(v) range(-128, 127)
+                luma_offset_l1[i]                       se(v) range(-WpOffsetHalfRangeY, WpOffsetHalfRangeY - 1)
+            }
+            if (chroma_weight_l1_flag[i])
+                for (j = 0; j < 2; j++) {
+                    delta_chroma_weight_l1[i][j]        se(v) range(-128, 127)
+                    delta_chroma_offset_l1[i][j]        se(v) range(-4 * WpOffsetHalfRangeC, 4 * WpOffsetHalfRangeC - 1)
+                }
+        }
+    }
+    # 7.4.7.3: sumWeightL0Flags, and for B also sumWeightL1Flags, total at most 24
+    assert(sumWeightFlags <= 24)
+}
+
+# --------------------------------------------------------------- programs
+
+program nal = nal_unit_header()
+program vps = video_parameter_set_rbsp() uses nal
+program sps = seq_parameter_set_rbsp() uses nal
+program pps_ids = pic_parameter_set_ids()
+program pps = pic_parameter_set_rbsp() uses nal, sps
+program sei = sei_rbsp()
+program aud = access_unit_delimiter_rbsp()
+program filler = filler_data_rbsp()
+program slice_ids = slice_segment_header_ids() uses nal
+program slice = slice_segment_header() uses nal, sps, pps

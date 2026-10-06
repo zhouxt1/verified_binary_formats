@@ -1,0 +1,7 @@
+#!/bin/bash
+# Verify one module of vwebp (faster than vv):
+# tools/webp/vf vp8::plane [extra verus args]
+cd "$(dirname "$0")/../.." || exit 1
+m=$1; shift
+touch vwebp/src/lib.rs
+bash -c "cargo clean -p vwebp >/dev/null 2>&1; CARGO_TARGET_DIR=target/verus-partial cargo clean -p vwebp >/dev/null 2>&1; export PATH=$PWD/tools/verus-x86-linux:\$PATH; cargo verus focus -p vwebp -- --verify-module $m --triggers-mode silent $*"

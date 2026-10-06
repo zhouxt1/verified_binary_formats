@@ -1,0 +1,17 @@
+[package]
+name = "deflate-bench"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[workspace]
+
+[dependencies]
+vdeflate = { path = "../../vdeflate" }
+miniz_oxide = "0.8"
+libdeflater = "1"
+flate2 = { version = "1", default-features = false, features = ["zlib"] }
+libz-sys = { version = "1", features = ["static"], default-features = false }
+
+[profile.release]
+opt-level = 3

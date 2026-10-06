@@ -1,0 +1,5 @@
+#!/bin/bash
+# Verify vwebp, from scratch (cargo can keep a stale
+# result otherwise): tools/webp/vv [extra verus args]
+cd "$(dirname "$0")/../.." || exit 1
+bash -c "cargo clean -p vwebp >/dev/null 2>&1; export PATH=$PWD/tools/verus-x86-linux:\$PATH; cargo verus verify -p vwebp -- --triggers-mode silent $*"

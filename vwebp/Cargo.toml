@@ -1,0 +1,26 @@
+[package]
+name = "vwebp"
+description = "Verified WebP decoder (RFC 9649 lossless, RFC 6386 lossy, the container, animation): proved to compute the RFCs' images"
+keywords = ["webp", "vp8l", "image", "verus", "verified"]
+categories = ["multimedia::images", "parser-implementations"]
+readme = "../README.md"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+
+[dependencies]
+vbits.workspace = true
+vdeflate = { path = "../vdeflate", version = "0.1.0" }
+vbrotli = { path = "../vbrotli", version = "0.1.0" }
+vsimd = { path = "../vsimd", version = "0.1.0" }
+vstd.workspace = true
+verus_builtin.workspace = true
+verus_builtin_macros.workspace = true
+
+[package.metadata.verus]
+verify = true
+
+[lints]
+workspace = true

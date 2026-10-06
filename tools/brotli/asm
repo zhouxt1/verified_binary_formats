@@ -1,0 +1,8 @@
+#!/bin/bash
+# Per-instruction instruction counts (callgrind) of the functions matching
+# PATTERN while decoding FILE: tools/brotli/asm PATTERN [MIN] [FILE.br]
+cd "$(dirname "$0")/../.." || exit 1
+pat=$1; min=${2:-100000}; f=${3:-/tmp/d3m.br}
+bash -c "CARGO_PROFILE_RELEASE_DEBUG=true cargo build -q --release -p vbrotli-tool 2>&1 | grep -E '^error' -A5;
+  valgrind --tool=callgrind --dump-instr=yes --callgrind-out-file=target/cgi.out target/release/vbrotli-tool dec $f 2>&1 >/dev/null | grep refs;
+  python3 tools/brotli/cgasm.py target/cgi.out target/release/vbrotli-tool '$pat' $min --all > target/asm.txt"
