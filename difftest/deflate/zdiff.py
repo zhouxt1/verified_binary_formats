@@ -20,6 +20,24 @@ import argparse, os, random, subprocess, sys, tempfile, zlib
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 TOOL = os.path.join(ROOT, "target/release/vdeflate-tool")
+LSPEC = os.path.join(ROOT, "lspec/.lake/build/bin/lspec")
+
+def lspec_wrap(lines):
+    """The Lean spec (lspec/Lspec/Deflate/Wrap.lean) on `vdeflate-tool --batch-wrap`
+    input lines; its output lines, in the same format."""
+    return subprocess.run([LSPEC, "wrap", "--batch"], input="".join(l + "\n" for l in lines),
+                          capture_output=True, text=True, check=True).stdout.splitlines()
+
+def lean_vs_vdeflate(lines, vd):
+    """Compare the Lean spec with vdeflate on the same input: (agreeing, failures)."""
+    same, fails = 0, 0
+    for line, v, l in zip(lines, vd, lspec_wrap(lines)):
+        if l == v:
+            same += 1
+        else:
+            fails += 1
+            print("FAIL lean != vdeflate:", line, "| vdeflate:", v, "| lean:", l)
+    return same, fails
 
 def fnv(b):
     h = 0xcbf29ce484222325
@@ -48,7 +66,7 @@ def corpus_sources(rng):
                     srcs.append(open(p, "rb").read())
             except OSError:
                 pass
-    for d in ("vdeflate/src", "vasn/src", "vh26x/src", "vexi/src"):
+    for d in ("vdeflate/src", "vbrotli/src", "vwebp/src", "vh26x/src"):
         for f in sorted(os.listdir(os.path.join(ROOT, d))):
             p = os.path.join(ROOT, d, f)
             if os.path.isfile(p):

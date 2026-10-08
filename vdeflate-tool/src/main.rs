@@ -115,6 +115,20 @@ fn main() {
             let c = if wrap == "zlib" { vdeflate::wrap::deflate_zlib(&data, lv) }
                 else if wrap == "gzip" { vdeflate::wrap::deflate_gzip(&data, lv) }
                 else if std::env::var("VD_FIXED").is_ok() { vdeflate::enc::deflate_fixed(&data) }
+                else if std::env::var("VD_OPT").is_ok() {
+                    // near-optimal parsing; VD_CHAIN, VD_NICE, VD_PASSES, VD_WIN
+                    let ev = |k: &str, d: usize| std::env::var(k).ok().and_then(|v| v.parse().ok()).unwrap_or(d);
+                    let m = vdeflate::opt::opt_max();
+                    let o = vdeflate::opt::Opt { chain: ev("VD_CHAIN", m.chain), nice: ev("VD_NICE", m.nice),
+                                                 passes: ev("VD_PASSES", m.passes), win: ev("VD_WIN", m.win),
+                                                 seg: ev("VD_SEG", m.seg), hbits: ev("VD_HBITS", m.hbits),
+                                                 reopt: ev("VD_REOPT", m.reopt), steps3: ev("VD_STEPS3", m.steps3),
+                                                 tries: ev("VD_TRIES", m.tries), bt: ev("VD_BT", m.bt as usize) != 0,
+                                                 refine: ev("VD_REFINE", m.refine), rand: ev("VD_RAND", m.rand),
+                                                 amp: ev("VD_AMP", m.amp as usize) as u32,
+                                                 frac: ev("VD_FRAC", m.frac as usize) != 0 };
+                    vdeflate::opt::deflate_opt(&data, o)
+                }
                 else { vdeflate::enc2::deflate_level(&data, lv) }.expect("input fits");
             let dt = t.elapsed().as_secs_f64();
             std::fs::write(format!("{}.vz", path), &c).unwrap();

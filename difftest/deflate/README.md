@@ -11,13 +11,15 @@ any does.
 | script | what | result |
 |---|---|---|
 | `zdiff.py [-n N] [--stream]` | streams zlib writes (every level, strategy, window, memory level, with sync and full flushes) and their bit-flipped, truncated and extended mutants, against zlib; `--stream` also decodes each in random pieces (1 byte, up to 7, 300, 70000) with the bounded-memory `Inflater` and compares with the whole-buffer decode | 120,000 streams (6 seeds of 5,000 and their mutants), 480,000 streamed decodes: 0 failures. Every stream decoded with the zlib flag off is one zlib refuses |
-| `edge.py` | 26 hand-built streams where decoders differ, each with the RFC's verdict and zlib's | all as intended |
+| `edge.py` | 27 hand-built streams where decoders differ, each with the RFC's verdict and zlib's | all as intended |
 | `wrapdiff.py` | zlib and gzip streams (gzip with FEXTRA, FNAME, FCOMMENT, FHCRC) and mutants, against Python's zlib; with `VD_STREAM=N`, through the streaming `ZInflater` in pieces of 1 to N bytes | 6,000: 0 failures; streaming, 1,000 seeds' worth for each N in 1, 7, 300, 70000: 0 failures |
 | `encdiff.py [-n N] [--wrap raw\|zlib\|gzip]` | vdeflate's compressor on zdiff's kinds of data (text, binary, random, runs, empty); zlib must decode its raw, zlib or gzip output to the input with nothing left over | 3,000 inputs in each format: 0 failures |
 | `encall.py [-n N]` | vdeflate's compressor output (level 6, level 1, streamed) decoded by vdeflate, zlib, miniz_oxide and libdeflate | 4,500 files and Silesia at level 6: all four give back the input |
 | `gzmulti.py [-n N]` | gzip files of 1 to 5 members and their mutants, `inflate_gzip_file` against zlib reading member after member | 6,000 files: 0 failures |
 | `zdict.py [-n N]` | zlib streams with a preset dictionary (zlib's `zdict=`), mutants, wrong dictionaries, and plain streams, `inflate_zlib_dict` against zlib | 4,000 streams: 0 failures |
 | `mkvec.py [-n N] [--seed S]` | freezes 386 of these streams (edge.py's, zdiff's and wrapdiff's, small, with mutants) and zlib's verdict, data and end for each into `vdeflate/tests/data/vectors.txt`, keeping a stream only where vdeflate and zlib agree as the suites require; `cargo test -p vdeflate` then checks them, whole and streamed, with no zlib | run again when the spec changes |
+| `lspecdiff.py [-n N] [--leanzip TOOL]` | the Lean spec (`lspec/Lspec/Deflate/Spec.lean`) run against vdeflate (so against the Verus spec), zlib, edge.py's vectors and, with `--leanzip`, lean-zip's spec decoder; see `lspec/README.md` | 12,026 streams (`-n 3000 --seed 7`): 0 failures, Lean == vdeflate on every one |
+| `lspecenc.py [-n N]` | vdeflate's compressors (levels 1, 6, 9, fixed, streaming) against `Bridge.CompressesTo`, the Lean reading of their contract: each output, alone and followed by random bytes, decodes by the Lean spec to the input with the zlib flag, ending in its last byte | 1,000 outputs (`-n 200`): 0 failures |
 | `odiff.py` | vdeflate against zlib, miniz_oxide 0.8 and libdeflate 1.26.1 together, on `edge.py`'s vectors and zdiff-style streams and mutants | below |
 
 ## Where the decoders differ

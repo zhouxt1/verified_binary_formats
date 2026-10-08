@@ -1,0 +1,14 @@
+-Q /home/rocq/vst/msl VST.msl
+-Q /home/rocq/vst/sepcomp VST.sepcomp
+-Q /home/rocq/vst/veric VST.veric
+-Q /home/rocq/vst/zlist VST.zlist
+-Q /home/rocq/vst/floyd VST.floyd
+-Q /home/rocq/cc/coq/lib compcert.lib
+-Q /home/rocq/cc/coq/common compcert.common
+-Q /home/rocq/cc/coq/x86_32 compcert.x86_32
+-Q /home/rocq/cc/coq/x86 compcert.x86
+-Q /home/rocq/cc/coq/cfrontend compcert.cfrontend
+-Q /home/rocq/cc/coq/export compcert.export
+-Q /home/rocq/rli/src LeanImport
+-I /home/rocq/rli/src
+-Q . VPuff

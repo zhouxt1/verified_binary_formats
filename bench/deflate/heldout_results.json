@@ -1,0 +1,3057 @@
+{
+ "canterbury": {
+  "files": {
+   "E.coli": {
+    "bytes": 4638690,
+    "opt": 1230072,
+    "vd9": 1298636,
+    "ld12": 1223530,
+    "zl9": 1299041,
+    "zopfli": 1232787
+   },
+   "alice29.txt": {
+    "bytes": 152089,
+    "opt": 51554,
+    "vd9": 54164,
+    "ld12": 51662,
+    "zl9": 54161,
+    "zopfli": 51455
+   },
+   "asyoulik.txt": {
+    "bytes": 125179,
+    "opt": 46394,
+    "vd9": 48847,
+    "ld12": 46469,
+    "zl9": 48798,
+    "zopfli": 46328
+   },
+   "bible.txt": {
+    "bytes": 4047392,
+    "opt": 1108544,
+    "vd9": 1177837,
+    "ld12": 1107378,
+    "zl9": 1176617,
+    "zopfli": 1108075
+   },
+   "cp.html": {
+    "bytes": 24603,
+    "opt": 7691,
+    "vd9": 7968,
+    "ld12": 7723,
+    "zl9": 7934,
+    "zopfli": 7697
+   },
+   "fields.c": {
+    "bytes": 11150,
+    "opt": 3019,
+    "vd9": 3116,
+    "ld12": 3024,
+    "zl9": 3109,
+    "zopfli": 3002
+   },
+   "grammar.lsp": {
+    "bytes": 3721,
+    "opt": 1185,
+    "vd9": 1217,
+    "ld12": 1186,
+    "zl9": 1216,
+    "zopfli": 1179
+   },
+   "kennedy.xls": {
+    "bytes": 1029744,
+    "opt": 176067,
+    "vd9": 210991,
+    "ld12": 179049,
+    "zl9": 210363,
+    "zopfli": 176105
+   },
+   "lcet10.txt": {
+    "bytes": 426754,
+    "opt": 137351,
+    "vd9": 144271,
+    "ld12": 137921,
+    "zl9": 144400,
+    "zopfli": 137229
+   },
+   "plrabn12.txt": {
+    "bytes": 481861,
+    "opt": 184014,
+    "vd9": 194557,
+    "ld12": 184371,
+    "zl9": 194246,
+    "zopfli": 184475
+   },
+   "ptt5": {
+    "bytes": 513216,
+    "opt": 49339,
+    "vd9": 52776,
+    "ld12": 49194,
+    "zl9": 52200,
+    "zopfli": 48558
+   },
+   "sum": {
+    "bytes": 38240,
+    "opt": 11893,
+    "vd9": 12873,
+    "ld12": 11965,
+    "zl9": 12832,
+    "zopfli": 11587
+   },
+   "world192.txt": {
+    "bytes": 2473400,
+    "opt": 694216,
+    "vd9": 721826,
+    "ld12": 695252,
+    "zl9": 721598,
+    "zopfli": 693493
+   },
+   "xargs.1": {
+    "bytes": 4227,
+    "opt": 1689,
+    "vd9": 1732,
+    "ld12": 1690,
+    "zl9": 1730,
+    "zopfli": 1688
+   }
+  },
+  "secs": {
+   "opt": 19.257551431655884,
+   "vd9": 3.9092211723327637,
+   "zopfli_parallel": 43.99091339111328
+  },
+  "zlib_bad": [],
+  "lean_bad": []
+ },
+ "enwik8": {
+  "files": {
+   "enwik8": {
+    "bytes": 100000000,
+    "opt": 34991876,
+    "vd9": 36475785,
+    "ld12": 35103237,
+    "zl9": 36445757,
+    "zopfli": 34966060
+   }
+  },
+  "secs": {
+   "opt": 104.52199959754944,
+   "vd9": 5.6601128578186035,
+   "zopfli_parallel": 227.03238773345947
+  },
+  "zlib_bad": [],
+  "lean_bad": null
+ },
+ "png": {
+  "files": {
+   "kodim01.idat": {
+    "bytes": 1180160,
+    "opt": 704844,
+    "vd9": 754998,
+    "ld12": 708301,
+    "zl9": 792653,
+    "zopfli": 704671
+   },
+   "kodim02.idat": {
+    "bytes": 1180160,
+    "opt": 606307,
+    "vd9": 627773,
+    "ld12": 607953,
+    "zl9": 628359,
+    "zopfli": 604774
+   },
+   "kodim03.idat": {
+    "bytes": 1180160,
+    "opt": 480538,
+    "vd9": 503123,
+    "ld12": 480556,
+    "zl9": 506258,
+    "zopfli": 480153
+   },
+   "kodim04.idat": {
+    "bytes": 1180416,
+    "opt": 621925,
+    "vd9": 644655,
+    "ld12": 624239,
+    "zl9": 646201,
+    "zopfli": 621228
+   },
+   "kodim05.idat": {
+    "bytes": 1180160,
+    "opt": 764376,
+    "vd9": 797627,
+    "ld12": 766415,
+    "zl9": 805438,
+    "zopfli": 763140
+   },
+   "kodim06.idat": {
+    "bytes": 1180160,
+    "opt": 588902,
+    "vd9": 625595,
+    "ld12": 589139,
+    "zl9": 631403,
+    "zopfli": 587475
+   },
+   "kodim07.idat": {
+    "bytes": 1180160,
+    "opt": 555035,
+    "vd9": 576867,
+    "ld12": 556234,
+    "zl9": 576965,
+    "zopfli": 553690
+   },
+   "kodim08.idat": {
+    "bytes": 1180160,
+    "opt": 743043,
+    "vd9": 765934,
+    "ld12": 744721,
+    "zl9": 771156,
+    "zopfli": 740423
+   },
+   "kodim09.idat": {
+    "bytes": 1180416,
+    "opt": 563468,
+    "vd9": 586451,
+    "ld12": 565266,
+    "zl9": 587271,
+    "zopfli": 561828
+   },
+   "kodim10.idat": {
+    "bytes": 1180416,
+    "opt": 578167,
+    "vd9": 598320,
+    "ld12": 577174,
+    "zl9": 599189,
+    "zopfli": 575242
+   },
+   "kodim11.idat": {
+    "bytes": 1180160,
+    "opt": 595948,
+    "vd9": 625527,
+    "ld12": 597286,
+    "zl9": 630922,
+    "zopfli": 595406
+   },
+   "kodim12.idat": {
+    "bytes": 1180160,
+    "opt": 506210,
+    "vd9": 531427,
+    "ld12": 508397,
+    "zl9": 533789,
+    "zopfli": 506052
+   },
+   "kodim13.idat": {
+    "bytes": 1180160,
+    "opt": 795665,
+    "vd9": 848061,
+    "ld12": 797175,
+    "zl9": 859354,
+    "zopfli": 794482
+   },
+   "kodim14.idat": {
+    "bytes": 1180160,
+    "opt": 664487,
+    "vd9": 697876,
+    "ld12": 668831,
+    "zl9": 702961,
+    "zopfli": 663839
+   },
+   "kodim15.idat": {
+    "bytes": 1180160,
+    "opt": 595890,
+    "vd9": 620376,
+    "ld12": 598721,
+    "zl9": 620415,
+    "zopfli": 594723
+   },
+   "kodim16.idat": {
+    "bytes": 1180160,
+    "opt": 505494,
+    "vd9": 536725,
+    "ld12": 506454,
+    "zl9": 541673,
+    "zopfli": 504924
+   },
+   "kodim17.idat": {
+    "bytes": 1180416,
+    "opt": 573267,
+    "vd9": 605141,
+    "ld12": 578922,
+    "zl9": 610253,
+    "zopfli": 572467
+   },
+   "kodim18.idat": {
+    "bytes": 1180416,
+    "opt": 752093,
+    "vd9": 773239,
+    "ld12": 756903,
+    "zl9": 777833,
+    "zopfli": 753028
+   },
+   "kodim19.idat": {
+    "bytes": 1180416,
+    "opt": 638194,
+    "vd9": 663259,
+    "ld12": 642893,
+    "zl9": 666728,
+    "zopfli": 637193
+   },
+   "kodim20.idat": {
+    "bytes": 1180160,
+    "opt": 470094,
+    "vd9": 495616,
+    "ld12": 471094,
+    "zl9": 497963,
+    "zopfli": 469044
+   },
+   "kodim21.idat": {
+    "bytes": 1180160,
+    "opt": 609635,
+    "vd9": 646660,
+    "ld12": 608786,
+    "zl9": 650881,
+    "zopfli": 608392
+   },
+   "kodim22.idat": {
+    "bytes": 1180160,
+    "opt": 689595,
+    "vd9": 709630,
+    "ld12": 690802,
+    "zl9": 710896,
+    "zopfli": 689824
+   },
+   "kodim23.idat": {
+    "bytes": 1180160,
+    "opt": 550124,
+    "vd9": 574288,
+    "ld12": 549273,
+    "zl9": 573301,
+    "zopfli": 547258
+   },
+   "kodim24.idat": {
+    "bytes": 1180160,
+    "opt": 676629,
+    "vd9": 697730,
+    "ld12": 676914,
+    "zl9": 701328,
+    "zopfli": 677327
+   }
+  },
+  "secs": {
+   "opt": 29.06084156036377,
+   "vd9": 3.600111246109009,
+   "zopfli_parallel": 7.021882772445679
+  },
+  "zlib_bad": [],
+  "lean_bad": []
+ },
+ "source": {
+  "files": {
+   "lua__lua-5.4.6__Makefile": {
+    "bytes": 3150,
+    "opt": 1223,
+    "vd9": 1237,
+    "ld12": 1219,
+    "zl9": 1234,
+    "zopfli": 1216
+   },
+   "lua__lua-5.4.6__README": {
+    "bytes": 151,
+    "opt": 122,
+    "vd9": 122,
+    "ld12": 121,
+    "zl9": 120,
+    "zopfli": 119
+   },
+   "lua__lua-5.4.6__doc__contents.html": {
+    "bytes": 32729,
+    "opt": 5151,
+    "vd9": 5483,
+    "ld12": 5141,
+    "zl9": 5459,
+    "zopfli": 5095
+   },
+   "lua__lua-5.4.6__doc__index.css": {
+    "bytes": 240,
+    "opt": 150,
+    "vd9": 147,
+    "ld12": 148,
+    "zl9": 145,
+    "zopfli": 148
+   },
+   "lua__lua-5.4.6__doc__logo.gif": {
+    "bytes": 9893,
+    "opt": 9730,
+    "vd9": 9754,
+    "ld12": 9732,
+    "zl9": 9755,
+    "zopfli": 9727
+   },
+   "lua__lua-5.4.6__doc__lua.1": {
+    "bytes": 3101,
+    "opt": 1368,
+    "vd9": 1392,
+    "ld12": 1366,
+    "zl9": 1391,
+    "zopfli": 1367
+   },
+   "lua__lua-5.4.6__doc__lua.css": {
+    "bytes": 2225,
+    "opt": 780,
+    "vd9": 795,
+    "ld12": 779,
+    "zl9": 792,
+    "zopfli": 770
+   },
+   "lua__lua-5.4.6__doc__luac.1": {
+    "bytes": 3071,
+    "opt": 1378,
+    "vd9": 1403,
+    "ld12": 1377,
+    "zl9": 1401,
+    "zopfli": 1376
+   },
+   "lua__lua-5.4.6__doc__manual.css": {
+    "bytes": 256,
+    "opt": 143,
+    "vd9": 144,
+    "ld12": 140,
+    "zl9": 142,
+    "zopfli": 139
+   },
+   "lua__lua-5.4.6__doc__manual.html": {
+    "bytes": 361572,
+    "opt": 85380,
+    "vd9": 89848,
+    "ld12": 85576,
+    "zl9": 89753,
+    "zopfli": 85341
+   },
+   "lua__lua-5.4.6__doc__osi-certified-72x60.png": {
+    "bytes": 3774,
+    "opt": 3779,
+    "vd9": 3779,
+    "ld12": 3779,
+    "zl9": 3779,
+    "zopfli": 3779
+   },
+   "lua__lua-5.4.6__doc__readme.html": {
+    "bytes": 10991,
+    "opt": 4540,
+    "vd9": 4668,
+    "ld12": 4539,
+    "zl9": 4654,
+    "zopfli": 4490
+   },
+   "lua__lua-5.4.6__src__Makefile": {
+    "bytes": 7685,
+    "opt": 2081,
+    "vd9": 2169,
+    "ld12": 2105,
+    "zl9": 2164,
+    "zopfli": 2072
+   },
+   "lua__lua-5.4.6__src__lapi.c": {
+    "bytes": 36164,
+    "opt": 8711,
+    "vd9": 9074,
+    "ld12": 8704,
+    "zl9": 9041,
+    "zopfli": 8680
+   },
+   "lua__lua-5.4.6__src__lapi.h": {
+    "bytes": 1427,
+    "opt": 705,
+    "vd9": 716,
+    "ld12": 702,
+    "zl9": 714,
+    "zopfli": 702
+   },
+   "lua__lua-5.4.6__src__lauxlib.c": {
+    "bytes": 33109,
+    "opt": 9163,
+    "vd9": 9586,
+    "ld12": 9175,
+    "zl9": 9563,
+    "zopfli": 9145
+   },
+   "lua__lua-5.4.6__src__lauxlib.h": {
+    "bytes": 9314,
+    "opt": 2436,
+    "vd9": 2509,
+    "ld12": 2436,
+    "zl9": 2504,
+    "zopfli": 2432
+   },
+   "lua__lua-5.4.6__src__lbaselib.c": {
+    "bytes": 15478,
+    "opt": 4379,
+    "vd9": 4542,
+    "ld12": 4383,
+    "zl9": 4528,
+    "zopfli": 4377
+   },
+   "lua__lua-5.4.6__src__lcode.c": {
+    "bytes": 52986,
+    "opt": 13622,
+    "vd9": 14275,
+    "ld12": 13715,
+    "zl9": 14256,
+    "zopfli": 13602
+   },
+   "lua__lua-5.4.6__src__lcode.h": {
+    "bytes": 3801,
+    "opt": 1139,
+    "vd9": 1166,
+    "ld12": 1139,
+    "zl9": 1165,
+    "zopfli": 1134
+   },
+   "lua__lua-5.4.6__src__lcorolib.c": {
+    "bytes": 4856,
+    "opt": 1545,
+    "vd9": 1589,
+    "ld12": 1544,
+    "zl9": 1588,
+    "zopfli": 1543
+   },
+   "lua__lua-5.4.6__src__lctype.c": {
+    "bytes": 2461,
+    "opt": 475,
+    "vd9": 478,
+    "ld12": 474,
+    "zl9": 477,
+    "zopfli": 462
+   },
+   "lua__lua-5.4.6__src__lctype.h": {
+    "bytes": 2115,
+    "opt": 908,
+    "vd9": 924,
+    "ld12": 908,
+    "zl9": 921,
+    "zopfli": 897
+   },
+   "lua__lua-5.4.6__src__ldblib.c": {
+    "bytes": 13356,
+    "opt": 3741,
+    "vd9": 3857,
+    "ld12": 3746,
+    "zl9": 3853,
+    "zopfli": 3729
+   },
+   "lua__lua-5.4.6__src__ldebug.c": {
+    "bytes": 28007,
+    "opt": 8252,
+    "vd9": 8627,
+    "ld12": 8276,
+    "zl9": 8597,
+    "zopfli": 8263
+   },
+   "lua__lua-5.4.6__src__ldebug.h": {
+    "bytes": 2170,
+    "opt": 693,
+    "vd9": 700,
+    "ld12": 693,
+    "zl9": 698,
+    "zopfli": 687
+   },
+   "lua__lua-5.4.6__src__ldo.c": {
+    "bytes": 34732,
+    "opt": 9900,
+    "vd9": 10372,
+    "ld12": 9891,
+    "zl9": 10346,
+    "zopfli": 9884
+   },
+   "lua__lua-5.4.6__src__ldo.h": {
+    "bytes": 3262,
+    "opt": 1047,
+    "vd9": 1064,
+    "ld12": 1046,
+    "zl9": 1064,
+    "zopfli": 1043
+   },
+   "lua__lua-5.4.6__src__ldump.c": {
+    "bytes": 4879,
+    "opt": 1569,
+    "vd9": 1608,
+    "ld12": 1570,
+    "zl9": 1606,
+    "zopfli": 1567
+   },
+   "lua__lua-5.4.6__src__lfunc.c": {
+    "bytes": 8423,
+    "opt": 2851,
+    "vd9": 2926,
+    "ld12": 2851,
+    "zl9": 2923,
+    "zopfli": 2846
+   },
+   "lua__lua-5.4.6__src__lfunc.h": {
+    "bytes": 1708,
+    "opt": 676,
+    "vd9": 684,
+    "ld12": 674,
+    "zl9": 682,
+    "zopfli": 670
+   },
+   "lua__lua-5.4.6__src__lgc.c": {
+    "bytes": 56577,
+    "opt": 14950,
+    "vd9": 15717,
+    "ld12": 14970,
+    "zl9": 15707,
+    "zopfli": 14937
+   },
+   "lua__lua-5.4.6__src__lgc.h": {
+    "bytes": 6431,
+    "opt": 2389,
+    "vd9": 2443,
+    "ld12": 2387,
+    "zl9": 2438,
+    "zopfli": 2384
+   },
+   "lua__lua-5.4.6__src__linit.c": {
+    "bytes": 1621,
+    "opt": 770,
+    "vd9": 775,
+    "ld12": 770,
+    "zl9": 774,
+    "zopfli": 768
+   },
+   "lua__lua-5.4.6__src__liolib.c": {
+    "bytes": 22058,
+    "opt": 6320,
+    "vd9": 6536,
+    "ld12": 6318,
+    "zl9": 6518,
+    "zopfli": 6305
+   },
+   "lua__lua-5.4.6__src__ljumptab.h": {
+    "bytes": 1663,
+    "opt": 611,
+    "vd9": 620,
+    "ld12": 608,
+    "zl9": 617,
+    "zopfli": 577
+   },
+   "lua__lua-5.4.6__src__llex.c": {
+    "bytes": 17100,
+    "opt": 4945,
+    "vd9": 5111,
+    "ld12": 4933,
+    "zl9": 5104,
+    "zopfli": 4921
+   },
+   "lua__lua-5.4.6__src__llex.h": {
+    "bytes": 2402,
+    "opt": 1068,
+    "vd9": 1083,
+    "ld12": 1066,
+    "zl9": 1082,
+    "zopfli": 1064
+   },
+   "lua__lua-5.4.6__src__llimits.h": {
+    "bytes": 9294,
+    "opt": 3366,
+    "vd9": 3456,
+    "ld12": 3365,
+    "zl9": 3449,
+    "zopfli": 3366
+   },
+   "lua__lua-5.4.6__src__lmathlib.c": {
+    "bytes": 18914,
+    "opt": 5120,
+    "vd9": 5280,
+    "ld12": 5137,
+    "zl9": 5263,
+    "zopfli": 5112
+   },
+   "lua__lua-5.4.6__src__lmem.c": {
+    "bytes": 6174,
+    "opt": 2033,
+    "vd9": 2073,
+    "ld12": 2031,
+    "zl9": 2071,
+    "zopfli": 2029
+   },
+   "lua__lua-5.4.6__src__lmem.h": {
+    "bytes": 3368,
+    "opt": 1192,
+    "vd9": 1212,
+    "ld12": 1192,
+    "zl9": 1212,
+    "zopfli": 1188
+   },
+   "lua__lua-5.4.6__src__loadlib.c": {
+    "bytes": 23050,
+    "opt": 6293,
+    "vd9": 6545,
+    "ld12": 6307,
+    "zl9": 6536,
+    "zopfli": 6286
+   },
+   "lua__lua-5.4.6__src__lobject.c": {
+    "bytes": 19495,
+    "opt": 5858,
+    "vd9": 6045,
+    "ld12": 5864,
+    "zl9": 6029,
+    "zopfli": 5841
+   },
+   "lua__lua-5.4.6__src__lobject.h": {
+    "bytes": 22720,
+    "opt": 6242,
+    "vd9": 6473,
+    "ld12": 6254,
+    "zl9": 6442,
+    "zopfli": 6235
+   },
+   "lua__lua-5.4.6__src__lopcodes.c": {
+    "bytes": 4126,
+    "opt": 614,
+    "vd9": 628,
+    "ld12": 612,
+    "zl9": 626,
+    "zopfli": 590
+   },
+   "lua__lua-5.4.6__src__lopcodes.h": {
+    "bytes": 13348,
+    "opt": 4103,
+    "vd9": 4210,
+    "ld12": 4102,
+    "zl9": 4192,
+    "zopfli": 4097
+   },
+   "lua__lua-5.4.6__src__lopnames.h": {
+    "bytes": 1143,
+    "opt": 439,
+    "vd9": 450,
+    "ld12": 437,
+    "zl9": 449,
+    "zopfli": 418
+   },
+   "lua__lua-5.4.6__src__loslib.c": {
+    "bytes": 11799,
+    "opt": 3726,
+    "vd9": 3819,
+    "ld12": 3727,
+    "zl9": 3815,
+    "zopfli": 3718
+   },
+   "lua__lua-5.4.6__src__lparser.c": {
+    "bytes": 56363,
+    "opt": 14634,
+    "vd9": 15366,
+    "ld12": 14636,
+    "zl9": 15342,
+    "zopfli": 14604
+   },
+   "lua__lua-5.4.6__src__lparser.h": {
+    "bytes": 5927,
+    "opt": 2028,
+    "vd9": 2084,
+    "ld12": 2027,
+    "zl9": 2081,
+    "zopfli": 2024
+   },
+   "lua__lua-5.4.6__src__lprefix.h": {
+    "bytes": 828,
+    "opt": 421,
+    "vd9": 424,
+    "ld12": 418,
+    "zl9": 422,
+    "zopfli": 416
+   },
+   "lua__lua-5.4.6__src__lstate.c": {
+    "bytes": 11381,
+    "opt": 3867,
+    "vd9": 3976,
+    "ld12": 3866,
+    "zl9": 3966,
+    "zopfli": 3870
+   },
+   "lua__lua-5.4.6__src__lstate.h": {
+    "bytes": 15305,
+    "opt": 5314,
+    "vd9": 5475,
+    "ld12": 5312,
+    "zl9": 5465,
+    "zopfli": 5301
+   },
+   "lua__lua-5.4.6__src__lstring.c": {
+    "bytes": 7499,
+    "opt": 2665,
+    "vd9": 2733,
+    "ld12": 2663,
+    "zl9": 2728,
+    "zopfli": 2658
+   },
+   "lua__lua-5.4.6__src__lstring.h": {
+    "bytes": 1603,
+    "opt": 687,
+    "vd9": 694,
+    "ld12": 684,
+    "zl9": 692,
+    "zopfli": 681
+   },
+   "lua__lua-5.4.6__src__lstrlib.c": {
+    "bytes": 56541,
+    "opt": 14526,
+    "vd9": 15180,
+    "ld12": 14523,
+    "zl9": 15150,
+    "zopfli": 14486
+   },
+   "lua__lua-5.4.6__src__ltable.c": {
+    "bytes": 31724,
+    "opt": 9283,
+    "vd9": 9746,
+    "ld12": 9277,
+    "zl9": 9727,
+    "zopfli": 9259
+   },
+   "lua__lua-5.4.6__src__ltable.h": {
+    "bytes": 2191,
+    "opt": 715,
+    "vd9": 729,
+    "ld12": 715,
+    "zl9": 727,
+    "zopfli": 712
+   },
+   "lua__lua-5.4.6__src__ltablib.c": {
+    "bytes": 13227,
+    "opt": 4308,
+    "vd9": 4447,
+    "ld12": 4318,
+    "zl9": 4439,
+    "zopfli": 4304
+   },
+   "lua__lua-5.4.6__src__ltm.c": {
+    "bytes": 8268,
+    "opt": 2764,
+    "vd9": 2835,
+    "ld12": 2764,
+    "zl9": 2831,
+    "zopfli": 2759
+   },
+   "lua__lua-5.4.6__src__ltm.h": {
+    "bytes": 2913,
+    "opt": 1026,
+    "vd9": 1041,
+    "ld12": 1024,
+    "zl9": 1039,
+    "zopfli": 1021
+   },
+   "lua__lua-5.4.6__src__lua.c": {
+    "bytes": 20146,
+    "opt": 6261,
+    "vd9": 6500,
+    "ld12": 6267,
+    "zl9": 6481,
+    "zopfli": 6243
+   },
+   "lua__lua-5.4.6__src__lua.h": {
+    "bytes": 15949,
+    "opt": 4277,
+    "vd9": 4419,
+    "ld12": 4294,
+    "zl9": 4401,
+    "zopfli": 4267
+   },
+   "lua__lua-5.4.6__src__lua.hpp": {
+    "bytes": 191,
+    "opt": 129,
+    "vd9": 130,
+    "ld12": 128,
+    "zl9": 128,
+    "zopfli": 128
+   },
+   "lua__lua-5.4.6__src__luac.c": {
+    "bytes": 15145,
+    "opt": 3793,
+    "vd9": 3867,
+    "ld12": 3793,
+    "zl9": 3857,
+    "zopfli": 3783
+   },
+   "lua__lua-5.4.6__src__luaconf.h": {
+    "bytes": 21494,
+    "opt": 6222,
+    "vd9": 6450,
+    "ld12": 6245,
+    "zl9": 6423,
+    "zopfli": 6215
+   },
+   "lua__lua-5.4.6__src__lualib.h": {
+    "bytes": 1116,
+    "opt": 385,
+    "vd9": 390,
+    "ld12": 383,
+    "zl9": 388,
+    "zopfli": 386
+   },
+   "lua__lua-5.4.6__src__lundump.c": {
+    "bytes": 7974,
+    "opt": 2491,
+    "vd9": 2556,
+    "ld12": 2494,
+    "zl9": 2553,
+    "zopfli": 2488
+   },
+   "lua__lua-5.4.6__src__lundump.h": {
+    "bytes": 863,
+    "opt": 490,
+    "vd9": 493,
+    "ld12": 487,
+    "zl9": 490,
+    "zopfli": 479
+   },
+   "lua__lua-5.4.6__src__lutf8lib.c": {
+    "bytes": 8148,
+    "opt": 2670,
+    "vd9": 2745,
+    "ld12": 2673,
+    "zl9": 2743,
+    "zopfli": 2670
+   },
+   "lua__lua-5.4.6__src__lvm.c": {
+    "bytes": 58992,
+    "opt": 13703,
+    "vd9": 14301,
+    "ld12": 13736,
+    "zl9": 14279,
+    "zopfli": 13673
+   },
+   "lua__lua-5.4.6__src__lvm.h": {
+    "bytes": 4552,
+    "opt": 1432,
+    "vd9": 1458,
+    "ld12": 1431,
+    "zl9": 1457,
+    "zopfli": 1431
+   },
+   "lua__lua-5.4.6__src__lzio.c": {
+    "bytes": 1322,
+    "opt": 613,
+    "vd9": 620,
+    "ld12": 610,
+    "zl9": 618,
+    "zopfli": 610
+   },
+   "lua__lua-5.4.6__src__lzio.h": {
+    "bytes": 1438,
+    "opt": 590,
+    "vd9": 599,
+    "ld12": 588,
+    "zl9": 597,
+    "zopfli": 585
+   },
+   "zlib__zlib-1.3.1__CMakeLists.txt": {
+    "bytes": 7649,
+    "opt": 2361,
+    "vd9": 2404,
+    "ld12": 2360,
+    "zl9": 2404,
+    "zopfli": 2353
+   },
+   "zlib__zlib-1.3.1__ChangeLog": {
+    "bytes": 83837,
+    "opt": 28280,
+    "vd9": 29634,
+    "ld12": 28328,
+    "zl9": 29641,
+    "zopfli": 28216
+   },
+   "zlib__zlib-1.3.1__FAQ": {
+    "bytes": 16482,
+    "opt": 6336,
+    "vd9": 6579,
+    "ld12": 6355,
+    "zl9": 6567,
+    "zopfli": 6316
+   },
+   "zlib__zlib-1.3.1__INDEX": {
+    "bytes": 1988,
+    "opt": 833,
+    "vd9": 852,
+    "ld12": 831,
+    "zl9": 849,
+    "zopfli": 829
+   },
+   "zlib__zlib-1.3.1__LICENSE": {
+    "bytes": 1002,
+    "opt": 524,
+    "vd9": 530,
+    "ld12": 523,
+    "zl9": 528,
+    "zopfli": 520
+   },
+   "zlib__zlib-1.3.1__Makefile": {
+    "bytes": 100,
+    "opt": 90,
+    "vd9": 90,
+    "ld12": 90,
+    "zl9": 89,
+    "zopfli": 90
+   },
+   "zlib__zlib-1.3.1__Makefile.in": {
+    "bytes": 13811,
+    "opt": 3072,
+    "vd9": 3170,
+    "ld12": 3073,
+    "zl9": 3160,
+    "zopfli": 3064
+   },
+   "zlib__zlib-1.3.1__README": {
+    "bytes": 5317,
+    "opt": 2454,
+    "vd9": 2512,
+    "ld12": 2456,
+    "zl9": 2509,
+    "zopfli": 2452
+   },
+   "zlib__zlib-1.3.1__adler32.c": {
+    "bytes": 4964,
+    "opt": 1523,
+    "vd9": 1561,
+    "ld12": 1521,
+    "zl9": 1559,
+    "zopfli": 1514
+   },
+   "zlib__zlib-1.3.1__amiga__Makefile.pup": {
+    "bytes": 1981,
+    "opt": 784,
+    "vd9": 797,
+    "ld12": 784,
+    "zl9": 795,
+    "zopfli": 784
+   },
+   "zlib__zlib-1.3.1__amiga__Makefile.sas": {
+    "bytes": 1847,
+    "opt": 752,
+    "vd9": 764,
+    "ld12": 751,
+    "zl9": 762,
+    "zopfli": 750
+   },
+   "zlib__zlib-1.3.1__compress.c": {
+    "bytes": 2613,
+    "opt": 981,
+    "vd9": 997,
+    "ld12": 981,
+    "zl9": 995,
+    "zopfli": 973
+   },
+   "zlib__zlib-1.3.1__configure": {
+    "bytes": 28199,
+    "opt": 6544,
+    "vd9": 6736,
+    "ld12": 6549,
+    "zl9": 6713,
+    "zopfli": 6516
+   },
+   "zlib__zlib-1.3.1__contrib__README.contrib": {
+    "bytes": 2240,
+    "opt": 1034,
+    "vd9": 1054,
+    "ld12": 1032,
+    "zl9": 1052,
+    "zopfli": 1029
+   },
+   "zlib__zlib-1.3.1__contrib__ada__buffer_demo.adb": {
+    "bytes": 3717,
+    "opt": 1293,
+    "vd9": 1324,
+    "ld12": 1292,
+    "zl9": 1323,
+    "zopfli": 1293
+   },
+   "zlib__zlib-1.3.1__contrib__ada__mtest.adb": {
+    "bytes": 4467,
+    "opt": 1262,
+    "vd9": 1299,
+    "ld12": 1261,
+    "zl9": 1299,
+    "zopfli": 1256
+   },
+   "zlib__zlib-1.3.1__contrib__ada__read.adb": {
+    "bytes": 4248,
+    "opt": 1330,
+    "vd9": 1365,
+    "ld12": 1329,
+    "zl9": 1364,
+    "zopfli": 1322
+   },
+   "zlib__zlib-1.3.1__contrib__ada__readme.txt": {
+    "bytes": 2177,
+    "opt": 1033,
+    "vd9": 1051,
+    "ld12": 1031,
+    "zl9": 1049,
+    "zopfli": 1025
+   },
+   "zlib__zlib-1.3.1__contrib__ada__test.adb": {
+    "bytes": 13178,
+    "opt": 2901,
+    "vd9": 2989,
+    "ld12": 2907,
+    "zl9": 2984,
+    "zopfli": 2888
+   },
+   "zlib__zlib-1.3.1__contrib__ada__zlib-streams.adb": {
+    "bytes": 5996,
+    "opt": 1307,
+    "vd9": 1352,
+    "ld12": 1307,
+    "zl9": 1351,
+    "zopfli": 1301
+   },
+   "zlib__zlib-1.3.1__contrib__ada__zlib-streams.ads": {
+    "bytes": 4330,
+    "opt": 1141,
+    "vd9": 1176,
+    "ld12": 1142,
+    "zl9": 1174,
+    "zopfli": 1138
+   },
+   "zlib__zlib-1.3.1__contrib__ada__zlib-thin.adb": {
+    "bytes": 3329,
+    "opt": 843,
+    "vd9": 868,
+    "ld12": 844,
+    "zl9": 870,
+    "zopfli": 845
+   },
+   "zlib__zlib-1.3.1__contrib__ada__zlib-thin.ads": {
+    "bytes": 15819,
+    "opt": 3270,
+    "vd9": 3407,
+    "ld12": 3273,
+    "zl9": 3391,
+    "zopfli": 3253
+   },
+   "zlib__zlib-1.3.1__contrib__ada__zlib.adb": {
+    "bytes": 20401,
+    "opt": 3978,
+    "vd9": 4141,
+    "ld12": 3985,
+    "zl9": 4134,
+    "zopfli": 3966
+   },
+   "zlib__zlib-1.3.1__contrib__ada__zlib.ads": {
+    "bytes": 13595,
+    "opt": 3513,
+    "vd9": 3647,
+    "ld12": 3519,
+    "zl9": 3646,
+    "zopfli": 3506
+   },
+   "zlib__zlib-1.3.1__contrib__ada__zlib.gpr": {
+    "bytes": 511,
+    "opt": 232,
+    "vd9": 235,
+    "ld12": 230,
+    "zl9": 233,
+    "zopfli": 227
+   },
+   "zlib__zlib-1.3.1__contrib__blast__Makefile": {
+    "bytes": 127,
+    "opt": 82,
+    "vd9": 82,
+    "ld12": 83,
+    "zl9": 83,
+    "zopfli": 82
+   },
+   "zlib__zlib-1.3.1__contrib__blast__README": {
+    "bytes": 74,
+    "opt": 72,
+    "vd9": 72,
+    "ld12": 70,
+    "zl9": 71,
+    "zopfli": 71
+   },
+   "zlib__zlib-1.3.1__contrib__blast__blast.c": {
+    "bytes": 18162,
+    "opt": 5603,
+    "vd9": 5860,
+    "ld12": 5587,
+    "zl9": 5841,
+    "zopfli": 5579
+   },
+   "zlib__zlib-1.3.1__contrib__blast__blast.h": {
+    "bytes": 3864,
+    "opt": 1641,
+    "vd9": 1692,
+    "ld12": 1641,
+    "zl9": 1688,
+    "zopfli": 1633
+   },
+   "zlib__zlib-1.3.1__contrib__blast__test.pk": {
+    "bytes": 8,
+    "opt": 10,
+    "vd9": 10,
+    "ld12": 10,
+    "zl9": 10,
+    "zopfli": 10
+   },
+   "zlib__zlib-1.3.1__contrib__blast__test.txt": {
+    "bytes": 13,
+    "opt": 5,
+    "vd9": 5,
+    "ld12": 6,
+    "zl9": 6,
+    "zopfli": 5
+   },
+   "zlib__zlib-1.3.1__contrib__delphi__ZLib.pas": {
+    "bytes": 16412,
+    "opt": 3859,
+    "vd9": 4000,
+    "ld12": 3880,
+    "zl9": 3994,
+    "zopfli": 3845
+   },
+   "zlib__zlib-1.3.1__contrib__delphi__ZLibConst.pas": {
+    "bytes": 186,
+    "opt": 139,
+    "vd9": 139,
+    "ld12": 137,
+    "zl9": 137,
+    "zopfli": 137
+   },
+   "zlib__zlib-1.3.1__contrib__delphi__readme.txt": {
+    "bytes": 2500,
+    "opt": 1186,
+    "vd9": 1211,
+    "ld12": 1182,
+    "zl9": 1208,
+    "zopfli": 1176
+   },
+   "zlib__zlib-1.3.1__contrib__delphi__zlibd32.mak": {
+    "bytes": 2360,
+    "opt": 826,
+    "vd9": 842,
+    "ld12": 826,
+    "zl9": 841,
+    "zopfli": 828
+   },
+   "zlib__zlib-1.3.1__contrib__dotzlib__DotZLib.build": {
+    "bytes": 1175,
+    "opt": 493,
+    "vd9": 502,
+    "ld12": 491,
+    "zl9": 500,
+    "zopfli": 488
+   },
+   "zlib__zlib-1.3.1__contrib__dotzlib__DotZLib.chm": {
+    "bytes": 72726,
+    "opt": 58415,
+    "vd9": 58732,
+    "ld12": 58408,
+    "zl9": 58698,
+    "zopfli": 58292
+   },
+   "zlib__zlib-1.3.1__contrib__dotzlib__DotZLib.sln": {
+    "bytes": 907,
+    "opt": 343,
+    "vd9": 344,
+    "ld12": 341,
+    "zl9": 343,
+    "zopfli": 337
+   },
+   "zlib__zlib-1.3.1__contrib__dotzlib__DotZLib__AssemblyInfo.cs": {
+    "bytes": 2500,
+    "opt": 984,
+    "vd9": 1008,
+    "ld12": 983,
+    "zl9": 1004,
+    "zopfli": 978
+   },
+   "zlib__zlib-1.3.1__contrib__dotzlib__DotZLib__ChecksumImpl.cs": {
+    "bytes": 8041,
+    "opt": 1474,
+    "vd9": 1508,
+    "ld12": 1471,
+    "zl9": 1501,
+    "zopfli": 1470
+   },
+   "zlib__zlib-1.3.1__contrib__dotzlib__DotZLib__CircularBuffer.cs": {
+    "bytes": 2246,
+    "opt": 706,
+    "vd9": 716,
+    "ld12": 707,
+    "zl9": 714,
+    "zopfli": 702
+   },
+   "zlib__zlib-1.3.1__contrib__dotzlib__DotZLib__CodecBase.cs": {
+    "bytes": 6334,
+    "opt": 1673,
+    "vd9": 1723,
+    "ld12": 1673,
+    "zl9": 1717,
+    "zopfli": 1671
+   },
+   "zlib__zlib-1.3.1__contrib__dotzlib__DotZLib__Deflater.cs": {
+    "bytes": 3992,
+    "opt": 1284,
+    "vd9": 1320,
+    "ld12": 1285,
+    "zl9": 1315,
+    "zopfli": 1283
+   },
+   "zlib__zlib-1.3.1__contrib__dotzlib__DotZLib__DotZLib.cs": {
+    "bytes": 9927,
+    "opt": 2453,
+    "vd9": 2542,
+    "ld12": 2454,
+    "zl9": 2531,
+    "zopfli": 2452
+   },
+   "zlib__zlib-1.3.1__contrib__dotzlib__DotZLib__DotZLib.csproj": {
+    "bytes": 5396,
+    "opt": 972,
+    "vd9": 990,
+    "ld12": 970,
+    "zl9": 989,
+    "zopfli": 969
+   },
+   "zlib__zlib-1.3.1__contrib__dotzlib__DotZLib__GZipStream.cs": {
+    "bytes": 11159,
+    "opt": 2092,
+    "vd9": 2162,
+    "ld12": 2092,
+    "zl9": 2152,
+    "zopfli": 2090
+   },
+   "zlib__zlib-1.3.1__contrib__dotzlib__DotZLib__Inflater.cs": {
+    "bytes": 3740,
+    "opt": 1224,
+    "vd9": 1249,
+    "ld12": 1223,
+    "zl9": 1246,
+    "zopfli": 1221
+   },
+   "zlib__zlib-1.3.1__contrib__dotzlib__DotZLib__UnitTests.cs": {
+    "bytes": 7684,
+    "opt": 1669,
+    "vd9": 1700,
+    "ld12": 1667,
+    "zl9": 1696,
+    "zopfli": 1666
+   },
+   "zlib__zlib-1.3.1__contrib__dotzlib__LICENSE_1_0.txt": {
+    "bytes": 1359,
+    "opt": 749,
+    "vd9": 769,
+    "ld12": 762,
+    "zl9": 766,
+    "zopfli": 724
+   },
+   "zlib__zlib-1.3.1__contrib__dotzlib__readme.txt": {
+    "bytes": 2358,
+    "opt": 950,
+    "vd9": 968,
+    "ld12": 949,
+    "zl9": 967,
+    "zopfli": 945
+   },
+   "zlib__zlib-1.3.1__contrib__gcc_gvmat64__gvmat64.S": {
+    "bytes": 16413,
+    "opt": 5138,
+    "vd9": 5331,
+    "ld12": 5139,
+    "zl9": 5306,
+    "zopfli": 5137
+   },
+   "zlib__zlib-1.3.1__contrib__infback9__README": {
+    "bytes": 51,
+    "opt": 50,
+    "vd9": 50,
+    "ld12": 50,
+    "zl9": 50,
+    "zopfli": 50
+   },
+   "zlib__zlib-1.3.1__contrib__infback9__infback9.c": {
+    "bytes": 21608,
+    "opt": 4987,
+    "vd9": 5163,
+    "ld12": 4995,
+    "zl9": 5155,
+    "zopfli": 4962
+   },
+   "zlib__zlib-1.3.1__contrib__infback9__infback9.h": {
+    "bytes": 1564,
+    "opt": 703,
+    "vd9": 711,
+    "ld12": 699,
+    "zl9": 710,
+    "zopfli": 696
+   },
+   "zlib__zlib-1.3.1__contrib__infback9__inffix9.h": {
+    "bytes": 6599,
+    "opt": 1431,
+    "vd9": 1529,
+    "ld12": 1456,
+    "zl9": 1525,
+    "zopfli": 1355
+   },
+   "zlib__zlib-1.3.1__contrib__infback9__inflate9.h": {
+    "bytes": 1991,
+    "opt": 832,
+    "vd9": 851,
+    "ld12": 830,
+    "zl9": 849,
+    "zopfli": 828
+   },
+   "zlib__zlib-1.3.1__contrib__infback9__inftree9.c": {
+    "bytes": 13405,
+    "opt": 4088,
+    "vd9": 4276,
+    "ld12": 4126,
+    "zl9": 4269,
+    "zopfli": 4076
+   },
+   "zlib__zlib-1.3.1__contrib__infback9__inftree9.h": {
+    "bytes": 2881,
+    "opt": 1183,
+    "vd9": 1217,
+    "ld12": 1180,
+    "zl9": 1216,
+    "zopfli": 1177
+   },
+   "zlib__zlib-1.3.1__contrib__iostream2__zstream.h": {
+    "bytes": 9283,
+    "opt": 2471,
+    "vd9": 2534,
+    "ld12": 2471,
+    "zl9": 2531,
+    "zopfli": 2457
+   },
+   "zlib__zlib-1.3.1__contrib__iostream2__zstream_test.cpp": {
+    "bytes": 711,
+    "opt": 342,
+    "vd9": 344,
+    "ld12": 341,
+    "zl9": 342,
+    "zopfli": 337
+   },
+   "zlib__zlib-1.3.1__contrib__iostream3__README": {
+    "bytes": 1490,
+    "opt": 794,
+    "vd9": 807,
+    "ld12": 795,
+    "zl9": 805,
+    "zopfli": 786
+   },
+   "zlib__zlib-1.3.1__contrib__iostream3__TODO": {
+    "bytes": 491,
+    "opt": 307,
+    "vd9": 306,
+    "ld12": 304,
+    "zl9": 304,
+    "zopfli": 301
+   },
+   "zlib__zlib-1.3.1__contrib__iostream3__test.cc": {
+    "bytes": 1490,
+    "opt": 558,
+    "vd9": 567,
+    "ld12": 555,
+    "zl9": 565,
+    "zopfli": 550
+   },
+   "zlib__zlib-1.3.1__contrib__iostream3__zfstream.cc": {
+    "bytes": 13447,
+    "opt": 3386,
+    "vd9": 3506,
+    "ld12": 3385,
+    "zl9": 3493,
+    "zopfli": 3378
+   },
+   "zlib__zlib-1.3.1__contrib__iostream3__zfstream.h": {
+    "bytes": 12240,
+    "opt": 2890,
+    "vd9": 2990,
+    "ld12": 2888,
+    "zl9": 2980,
+    "zopfli": 2885
+   },
+   "zlib__zlib-1.3.1__contrib__iostream__test.cpp": {
+    "bytes": 526,
+    "opt": 310,
+    "vd9": 312,
+    "ld12": 308,
+    "zl9": 310,
+    "zopfli": 303
+   },
+   "zlib__zlib-1.3.1__contrib__iostream__zfstream.cpp": {
+    "bytes": 5112,
+    "opt": 1178,
+    "vd9": 1202,
+    "ld12": 1177,
+    "zl9": 1200,
+    "zopfli": 1173
+   },
+   "zlib__zlib-1.3.1__contrib__iostream__zfstream.h": {
+    "bytes": 2467,
+    "opt": 689,
+    "vd9": 703,
+    "ld12": 690,
+    "zl9": 702,
+    "zopfli": 687
+   },
+   "zlib__zlib-1.3.1__contrib__minizip__Makefile": {
+    "bytes": 563,
+    "opt": 247,
+    "vd9": 251,
+    "ld12": 245,
+    "zl9": 249,
+    "zopfli": 239
+   },
+   "zlib__zlib-1.3.1__contrib__minizip__Makefile.am": {
+    "bytes": 818,
+    "opt": 354,
+    "vd9": 360,
+    "ld12": 354,
+    "zl9": 359,
+    "zopfli": 351
+   },
+   "zlib__zlib-1.3.1__contrib__minizip__MiniZip64_Changes.txt": {
+    "bytes": 108,
+    "opt": 98,
+    "vd9": 98,
+    "ld12": 98,
+    "zl9": 98,
+    "zopfli": 98
+   },
+   "zlib__zlib-1.3.1__contrib__minizip__MiniZip64_info.txt": {
+    "bytes": 3048,
+    "opt": 1279,
+    "vd9": 1309,
+    "ld12": 1278,
+    "zl9": 1306,
+    "zopfli": 1273
+   },
+   "zlib__zlib-1.3.1__contrib__minizip__configure.ac": {
+    "bytes": 786,
+    "opt": 450,
+    "vd9": 451,
+    "ld12": 447,
+    "zl9": 448,
+    "zopfli": 445
+   },
+   "zlib__zlib-1.3.1__contrib__minizip__crypt.h": {
+    "bytes": 4801,
+    "opt": 1829,
+    "vd9": 1867,
+    "ld12": 1824,
+    "zl9": 1864,
+    "zopfli": 1822
+   },
+   "zlib__zlib-1.3.1__contrib__minizip__ioapi.c": {
+    "bytes": 7740,
+    "opt": 1551,
+    "vd9": 1589,
+    "ld12": 1551,
+    "zl9": 1585,
+    "zopfli": 1547
+   },
+   "zlib__zlib-1.3.1__contrib__minizip__ioapi.h": {
+    "bytes": 7100,
+    "opt": 1968,
+    "vd9": 2005,
+    "ld12": 1968,
+    "zl9": 2000,
+    "zopfli": 1966
+   },
+   "zlib__zlib-1.3.1__contrib__minizip__iowin32.c": {
+    "bytes": 13749,
+    "opt": 2193,
+    "vd9": 2254,
+    "ld12": 2187,
+    "zl9": 2241,
+    "zopfli": 2187
+   },
+   "zlib__zlib-1.3.1__contrib__minizip__iowin32.h": {
+    "bytes": 831,
+    "opt": 378,
+    "vd9": 382,
+    "ld12": 376,
+    "zl9": 380,
+    "zopfli": 363
+   },
+   "zlib__zlib-1.3.1__contrib__minizip__make_vms.com": {
+    "bytes": 901,
+    "opt": 352,
+    "vd9": 355,
+    "ld12": 350,
+    "zl9": 354,
+    "zopfli": 348
+   },
+   "zlib__zlib-1.3.1__contrib__minizip__miniunz.c": {
+    "bytes": 18126,
+    "opt": 4700,
+    "vd9": 4863,
+    "ld12": 4700,
+    "zl9": 4855,
+    "zopfli": 4682
+   },
+   "zlib__zlib-1.3.1__contrib__minizip__miniunzip.1": {
+    "bytes": 1861,
+    "opt": 931,
+    "vd9": 947,
+    "ld12": 930,
+    "zl9": 944,
+    "zopfli": 927
+   },
+   "zlib__zlib-1.3.1__contrib__minizip__minizip.1": {
+    "bytes": 1462,
+    "opt": 745,
+    "vd9": 752,
+    "ld12": 743,
+    "zl9": 751,
+    "zopfli": 738
+   },
+   "zlib__zlib-1.3.1__contrib__minizip__minizip.c": {
+    "bytes": 15088,
+    "opt": 3962,
+    "vd9": 4068,
+    "ld12": 3956,
+    "zl9": 4059,
+    "zopfli": 3946
+   },
+   "zlib__zlib-1.3.1__contrib__minizip__minizip.pc.in": {
+    "bytes": 263,
+    "opt": 176,
+    "vd9": 177,
+    "ld12": 176,
+    "zl9": 177,
+    "zopfli": 174
+   },
+   "zlib__zlib-1.3.1__contrib__minizip__mztools.c": {
+    "bytes": 8091,
+    "opt": 1802,
+    "vd9": 1857,
+    "ld12": 1806,
+    "zl9": 1854,
+    "zopfli": 1795
+   },
+   "zlib__zlib-1.3.1__contrib__minizip__mztools.h": {
+    "bytes": 708,
+    "opt": 341,
+    "vd9": 345,
+    "ld12": 338,
+    "zl9": 342,
+    "zopfli": 335
+   },
+   "zlib__zlib-1.3.1__contrib__minizip__unzip.c": {
+    "bytes": 67640,
+    "opt": 11778,
+    "vd9": 12321,
+    "ld12": 11781,
+    "zl9": 12287,
+    "zopfli": 11747
+   },
+   "zlib__zlib-1.3.1__contrib__minizip__unzip.h": {
+    "bytes": 16448,
+    "opt": 3955,
+    "vd9": 4092,
+    "ld12": 3957,
+    "zl9": 4077,
+    "zopfli": 3950
+   },
+   "zlib__zlib-1.3.1__contrib__minizip__zip.c": {
+    "bytes": 65418,
+    "opt": 11122,
+    "vd9": 11631,
+    "ld12": 11160,
+    "zl9": 11607,
+    "zopfli": 11105
+   },
+   "zlib__zlib-1.3.1__contrib__minizip__zip.h": {
+    "bytes": 15517,
+    "opt": 3156,
+    "vd9": 3263,
+    "ld12": 3151,
+    "zl9": 3251,
+    "zopfli": 3159
+   },
+   "zlib__zlib-1.3.1__contrib__nuget__nuget.csproj": {
+    "bytes": 3674,
+    "opt": 824,
+    "vd9": 840,
+    "ld12": 822,
+    "zl9": 840,
+    "zopfli": 819
+   },
+   "zlib__zlib-1.3.1__contrib__nuget__nuget.sln": {
+    "bytes": 963,
+    "opt": 364,
+    "vd9": 366,
+    "ld12": 362,
+    "zl9": 364,
+    "zopfli": 359
+   },
+   "zlib__zlib-1.3.1__contrib__pascal__example.pas": {
+    "bytes": 15687,
+    "opt": 2961,
+    "vd9": 3063,
+    "ld12": 2967,
+    "zl9": 3047,
+    "zopfli": 2952
+   },
+   "zlib__zlib-1.3.1__contrib__pascal__readme.txt": {
+    "bytes": 3004,
+    "opt": 1401,
+    "vd9": 1435,
+    "ld12": 1399,
+    "zl9": 1432,
+    "zopfli": 1397
+   },
+   "zlib__zlib-1.3.1__contrib__pascal__zlibd32.mak": {
+    "bytes": 2360,
+    "opt": 826,
+    "vd9": 842,
+    "ld12": 826,
+    "zl9": 841,
+    "zopfli": 828
+   },
+   "zlib__zlib-1.3.1__contrib__pascal__zlibpas.pas": {
+    "bytes": 10126,
+    "opt": 2346,
+    "vd9": 2420,
+    "ld12": 2343,
+    "zl9": 2412,
+    "zopfli": 2310
+   },
+   "zlib__zlib-1.3.1__contrib__puff__Makefile": {
+    "bytes": 1899,
+    "opt": 430,
+    "vd9": 436,
+    "ld12": 430,
+    "zl9": 438,
+    "zopfli": 417
+   },
+   "zlib__zlib-1.3.1__contrib__puff__README": {
+    "bytes": 3077,
+    "opt": 1306,
+    "vd9": 1342,
+    "ld12": 1308,
+    "zl9": 1339,
+    "zopfli": 1298
+   },
+   "zlib__zlib-1.3.1__contrib__puff__puff.c": {
+    "bytes": 37882,
+    "opt": 10518,
+    "vd9": 11150,
+    "ld12": 10515,
+    "zl9": 11135,
+    "zopfli": 10492
+   },
+   "zlib__zlib-1.3.1__contrib__puff__puff.h": {
+    "bytes": 1415,
+    "opt": 688,
+    "vd9": 699,
+    "ld12": 686,
+    "zl9": 697,
+    "zopfli": 684
+   },
+   "zlib__zlib-1.3.1__contrib__puff__pufftest.c": {
+    "bytes": 4918,
+    "opt": 1825,
+    "vd9": 1866,
+    "ld12": 1825,
+    "zl9": 1863,
+    "zopfli": 1813
+   },
+   "zlib__zlib-1.3.1__contrib__puff__zeros.raw": {
+    "bytes": 2517,
+    "opt": 98,
+    "vd9": 97,
+    "ld12": 92,
+    "zl9": 92,
+    "zopfli": 92
+   },
+   "zlib__zlib-1.3.1__contrib__testzlib__testzlib.c": {
+    "bytes": 7644,
+    "opt": 1934,
+    "vd9": 1972,
+    "ld12": 1937,
+    "zl9": 1970,
+    "zopfli": 1930
+   },
+   "zlib__zlib-1.3.1__contrib__testzlib__testzlib.txt": {
+    "bytes": 205,
+    "opt": 140,
+    "vd9": 140,
+    "ld12": 138,
+    "zl9": 138,
+    "zopfli": 136
+   },
+   "zlib__zlib-1.3.1__contrib__untgz__Makefile": {
+    "bytes": 234,
+    "opt": 143,
+    "vd9": 143,
+    "ld12": 143,
+    "zl9": 143,
+    "zopfli": 140
+   },
+   "zlib__zlib-1.3.1__contrib__untgz__Makefile.msc": {
+    "bytes": 281,
+    "opt": 155,
+    "vd9": 155,
+    "ld12": 155,
+    "zl9": 155,
+    "zopfli": 154
+   },
+   "zlib__zlib-1.3.1__contrib__untgz__untgz.c": {
+    "bytes": 16736,
+    "opt": 4955,
+    "vd9": 5152,
+    "ld12": 4951,
+    "zl9": 5130,
+    "zopfli": 4934
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__readme.txt": {
+    "bytes": 3136,
+    "opt": 948,
+    "vd9": 965,
+    "ld12": 947,
+    "zl9": 964,
+    "zopfli": 942
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc10__miniunz.vcxproj": {
+    "bytes": 18969,
+    "opt": 1892,
+    "vd9": 1950,
+    "ld12": 1879,
+    "zl9": 1934,
+    "zopfli": 1877
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc10__miniunz.vcxproj.filters": {
+    "bytes": 917,
+    "opt": 431,
+    "vd9": 432,
+    "ld12": 429,
+    "zl9": 431,
+    "zopfli": 416
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc10__minizip.vcxproj": {
+    "bytes": 18549,
+    "opt": 1880,
+    "vd9": 1935,
+    "ld12": 1868,
+    "zl9": 1924,
+    "zopfli": 1865
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc10__minizip.vcxproj.filters": {
+    "bytes": 917,
+    "opt": 429,
+    "vd9": 430,
+    "ld12": 427,
+    "zl9": 429,
+    "zopfli": 417
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc10__testzlib.vcxproj": {
+    "bytes": 26288,
+    "opt": 2085,
+    "vd9": 2157,
+    "ld12": 2068,
+    "zl9": 2129,
+    "zopfli": 2064
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc10__testzlib.vcxproj.filters": {
+    "bytes": 2026,
+    "opt": 495,
+    "vd9": 498,
+    "ld12": 494,
+    "zl9": 497,
+    "zopfli": 486
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc10__testzlibdll.vcxproj": {
+    "bytes": 19022,
+    "opt": 1895,
+    "vd9": 1952,
+    "ld12": 1885,
+    "zl9": 1936,
+    "zopfli": 1878
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc10__testzlibdll.vcxproj.filters": {
+    "bytes": 919,
+    "opt": 430,
+    "vd9": 431,
+    "ld12": 429,
+    "zl9": 430,
+    "zopfli": 417
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc10__zlib.rc": {
+    "bytes": 954,
+    "opt": 536,
+    "vd9": 537,
+    "ld12": 533,
+    "zl9": 535,
+    "zopfli": 529
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc10__zlibstat.vcxproj": {
+    "bytes": 26585,
+    "opt": 1915,
+    "vd9": 1970,
+    "ld12": 1896,
+    "zl9": 1940,
+    "zopfli": 1882
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc10__zlibstat.vcxproj.filters": {
+    "bytes": 2405,
+    "opt": 403,
+    "vd9": 404,
+    "ld12": 402,
+    "zl9": 404,
+    "zopfli": 393
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc10__zlibvc.def": {
+    "bytes": 7333,
+    "opt": 1179,
+    "vd9": 1228,
+    "ld12": 1175,
+    "zl9": 1226,
+    "zopfli": 1176
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc10__zlibvc.sln": {
+    "bytes": 10153,
+    "opt": 972,
+    "vd9": 1042,
+    "ld12": 990,
+    "zl9": 1040,
+    "zopfli": 937
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc10__zlibvc.vcxproj": {
+    "bytes": 38693,
+    "opt": 2544,
+    "vd9": 2627,
+    "ld12": 2508,
+    "zl9": 2585,
+    "zopfli": 2503
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc10__zlibvc.vcxproj.filters": {
+    "bytes": 3930,
+    "opt": 637,
+    "vd9": 645,
+    "ld12": 637,
+    "zl9": 645,
+    "zopfli": 628
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc11__miniunz.vcxproj": {
+    "bytes": 19150,
+    "opt": 1909,
+    "vd9": 1969,
+    "ld12": 1895,
+    "zl9": 1950,
+    "zopfli": 1890
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc11__minizip.vcxproj": {
+    "bytes": 18730,
+    "opt": 1894,
+    "vd9": 1955,
+    "ld12": 1883,
+    "zl9": 1937,
+    "zopfli": 1879
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc11__testzlib.vcxproj": {
+    "bytes": 26559,
+    "opt": 2096,
+    "vd9": 2168,
+    "ld12": 2076,
+    "zl9": 2136,
+    "zopfli": 2072
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc11__testzlibdll.vcxproj": {
+    "bytes": 19203,
+    "opt": 1912,
+    "vd9": 1971,
+    "ld12": 1897,
+    "zl9": 1952,
+    "zopfli": 1894
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc11__zlib.rc": {
+    "bytes": 954,
+    "opt": 536,
+    "vd9": 537,
+    "ld12": 533,
+    "zl9": 535,
+    "zopfli": 529
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc11__zlibstat.vcxproj": {
+    "bytes": 26909,
+    "opt": 1951,
+    "vd9": 2009,
+    "ld12": 1929,
+    "zl9": 1979,
+    "zopfli": 1923
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc11__zlibvc.def": {
+    "bytes": 7333,
+    "opt": 1179,
+    "vd9": 1228,
+    "ld12": 1175,
+    "zl9": 1226,
+    "zopfli": 1176
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc11__zlibvc.sln": {
+    "bytes": 8539,
+    "opt": 900,
+    "vd9": 946,
+    "ld12": 906,
+    "zl9": 943,
+    "zopfli": 860
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc11__zlibvc.vcxproj": {
+    "bytes": 40458,
+    "opt": 2599,
+    "vd9": 2691,
+    "ld12": 2558,
+    "zl9": 2641,
+    "zopfli": 2552
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc12__miniunz.vcxproj": {
+    "bytes": 18926,
+    "opt": 1900,
+    "vd9": 1959,
+    "ld12": 1889,
+    "zl9": 1945,
+    "zopfli": 1878
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc12__minizip.vcxproj": {
+    "bytes": 18509,
+    "opt": 1887,
+    "vd9": 1947,
+    "ld12": 1876,
+    "zl9": 1932,
+    "zopfli": 1871
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc12__testzlib.vcxproj": {
+    "bytes": 26350,
+    "opt": 2121,
+    "vd9": 2191,
+    "ld12": 2103,
+    "zl9": 2159,
+    "zopfli": 2095
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc12__testzlibdll.vcxproj": {
+    "bytes": 18979,
+    "opt": 1904,
+    "vd9": 1967,
+    "ld12": 1892,
+    "zl9": 1946,
+    "zopfli": 1887
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc12__zlib.rc": {
+    "bytes": 922,
+    "opt": 525,
+    "vd9": 526,
+    "ld12": 525,
+    "zl9": 525,
+    "zopfli": 521
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc12__zlibstat.vcxproj": {
+    "bytes": 26587,
+    "opt": 1936,
+    "vd9": 1997,
+    "ld12": 1919,
+    "zl9": 1970,
+    "zopfli": 1904
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc12__zlibvc.def": {
+    "bytes": 7333,
+    "opt": 1179,
+    "vd9": 1228,
+    "ld12": 1175,
+    "zl9": 1226,
+    "zopfli": 1176
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc12__zlibvc.sln": {
+    "bytes": 8499,
+    "opt": 910,
+    "vd9": 967,
+    "ld12": 929,
+    "zl9": 966,
+    "zopfli": 877
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc12__zlibvc.vcxproj": {
+    "bytes": 40003,
+    "opt": 2586,
+    "vd9": 2680,
+    "ld12": 2546,
+    "zl9": 2651,
+    "zopfli": 2543
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc14__miniunz.vcxproj": {
+    "bytes": 18926,
+    "opt": 1900,
+    "vd9": 1959,
+    "ld12": 1889,
+    "zl9": 1945,
+    "zopfli": 1878
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc14__minizip.vcxproj": {
+    "bytes": 18509,
+    "opt": 1889,
+    "vd9": 1947,
+    "ld12": 1876,
+    "zl9": 1931,
+    "zopfli": 1871
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc14__testzlib.vcxproj": {
+    "bytes": 26350,
+    "opt": 2121,
+    "vd9": 2191,
+    "ld12": 2103,
+    "zl9": 2159,
+    "zopfli": 2095
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc14__testzlibdll.vcxproj": {
+    "bytes": 18979,
+    "opt": 1904,
+    "vd9": 1965,
+    "ld12": 1892,
+    "zl9": 1946,
+    "zopfli": 1887
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc14__zlib.rc": {
+    "bytes": 922,
+    "opt": 525,
+    "vd9": 526,
+    "ld12": 525,
+    "zl9": 525,
+    "zopfli": 521
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc14__zlibstat.vcxproj": {
+    "bytes": 26587,
+    "opt": 1935,
+    "vd9": 1997,
+    "ld12": 1919,
+    "zl9": 1970,
+    "zopfli": 1904
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc14__zlibvc.def": {
+    "bytes": 7333,
+    "opt": 1179,
+    "vd9": 1228,
+    "ld12": 1175,
+    "zl9": 1226,
+    "zopfli": 1176
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc14__zlibvc.sln": {
+    "bytes": 8497,
+    "opt": 912,
+    "vd9": 967,
+    "ld12": 928,
+    "zl9": 965,
+    "zopfli": 876
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc14__zlibvc.vcxproj": {
+    "bytes": 40003,
+    "opt": 2586,
+    "vd9": 2681,
+    "ld12": 2546,
+    "zl9": 2651,
+    "zopfli": 2543
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc17__miniunz.vcxproj": {
+    "bytes": 24294,
+    "opt": 2027,
+    "vd9": 2088,
+    "ld12": 2009,
+    "zl9": 2064,
+    "zopfli": 2004
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc17__minizip.vcxproj": {
+    "bytes": 23802,
+    "opt": 2012,
+    "vd9": 2072,
+    "ld12": 1992,
+    "zl9": 2048,
+    "zopfli": 1983
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc17__testzlib.vcxproj": {
+    "bytes": 30120,
+    "opt": 2196,
+    "vd9": 2253,
+    "ld12": 2190,
+    "zl9": 2216,
+    "zopfli": 2152
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc17__testzlibdll.vcxproj": {
+    "bytes": 24364,
+    "opt": 2031,
+    "vd9": 2094,
+    "ld12": 2011,
+    "zl9": 2066,
+    "zopfli": 2010
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc17__zlib.rc": {
+    "bytes": 922,
+    "opt": 525,
+    "vd9": 526,
+    "ld12": 525,
+    "zl9": 525,
+    "zopfli": 521
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc17__zlibstat.vcxproj": {
+    "bytes": 34454,
+    "opt": 2110,
+    "vd9": 2168,
+    "ld12": 2080,
+    "zl9": 2126,
+    "zopfli": 2068
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc17__zlibvc.def": {
+    "bytes": 7175,
+    "opt": 1171,
+    "vd9": 1217,
+    "ld12": 1168,
+    "zl9": 1215,
+    "zopfli": 1167
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc17__zlibvc.sln": {
+    "bytes": 13040,
+    "opt": 1186,
+    "vd9": 1290,
+    "ld12": 1209,
+    "zl9": 1287,
+    "zopfli": 1161
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc17__zlibvc.vcxproj": {
+    "bytes": 52148,
+    "opt": 2864,
+    "vd9": 2957,
+    "ld12": 2826,
+    "zl9": 2886,
+    "zopfli": 2796
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc9__miniunz.vcproj": {
+    "bytes": 12935,
+    "opt": 1452,
+    "vd9": 1470,
+    "ld12": 1441,
+    "zl9": 1455,
+    "zopfli": 1434
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc9__minizip.vcproj": {
+    "bytes": 12749,
+    "opt": 1437,
+    "vd9": 1459,
+    "ld12": 1428,
+    "zl9": 1447,
+    "zopfli": 1422
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc9__testzlib.vcproj": {
+    "bytes": 17457,
+    "opt": 1551,
+    "vd9": 1576,
+    "ld12": 1532,
+    "zl9": 1553,
+    "zopfli": 1530
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc9__testzlibdll.vcproj": {
+    "bytes": 12974,
+    "opt": 1453,
+    "vd9": 1469,
+    "ld12": 1443,
+    "zl9": 1455,
+    "zopfli": 1432
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc9__zlib.rc": {
+    "bytes": 954,
+    "opt": 536,
+    "vd9": 537,
+    "ld12": 533,
+    "zl9": 535,
+    "zopfli": 529
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc9__zlibstat.vcproj": {
+    "bytes": 18106,
+    "opt": 1409,
+    "vd9": 1433,
+    "ld12": 1385,
+    "zl9": 1405,
+    "zopfli": 1379
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc9__zlibvc.def": {
+    "bytes": 7333,
+    "opt": 1179,
+    "vd9": 1228,
+    "ld12": 1175,
+    "zl9": 1226,
+    "zopfli": 1176
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc9__zlibvc.sln": {
+    "bytes": 10612,
+    "opt": 1019,
+    "vd9": 1094,
+    "ld12": 1038,
+    "zl9": 1093,
+    "zopfli": 984
+   },
+   "zlib__zlib-1.3.1__contrib__vstudio__vc9__zlibvc.vcproj": {
+    "bytes": 26409,
+    "opt": 1932,
+    "vd9": 1968,
+    "ld12": 1898,
+    "zl9": 1925,
+    "zopfli": 1873
+   },
+   "zlib__zlib-1.3.1__crc32.c": {
+    "bytes": 31605,
+    "opt": 7466,
+    "vd9": 7788,
+    "ld12": 7485,
+    "zl9": 7759,
+    "zopfli": 7434
+   },
+   "zlib__zlib-1.3.1__crc32.h": {
+    "bytes": 591749,
+    "opt": 199233,
+    "vd9": 231052,
+    "ld12": 204306,
+    "zl9": 224982,
+    "zopfli": 200083
+   },
+   "zlib__zlib-1.3.1__deflate.c": {
+    "bytes": 81731,
+    "opt": 18614,
+    "vd9": 19574,
+    "ld12": 18649,
+    "zl9": 19551,
+    "zopfli": 18567
+   },
+   "zlib__zlib-1.3.1__deflate.h": {
+    "bytes": 14041,
+    "opt": 4684,
+    "vd9": 4836,
+    "ld12": 4691,
+    "zl9": 4833,
+    "zopfli": 4682
+   },
+   "zlib__zlib-1.3.1__doc__algorithm.txt": {
+    "bytes": 9334,
+    "opt": 3740,
+    "vd9": 3869,
+    "ld12": 3736,
+    "zl9": 3860,
+    "zopfli": 3733
+   },
+   "zlib__zlib-1.3.1__doc__crc-doc.1.0.pdf": {
+    "bytes": 776142,
+    "opt": 719312,
+    "vd9": 721992,
+    "ld12": 719831,
+    "zl9": 721663,
+    "zopfli": 718843
+   },
+   "zlib__zlib-1.3.1__doc__rfc1950.txt": {
+    "bytes": 20502,
+    "opt": 6252,
+    "vd9": 6482,
+    "ld12": 6254,
+    "zl9": 6472,
+    "zopfli": 6223
+   },
+   "zlib__zlib-1.3.1__doc__rfc1951.txt": {
+    "bytes": 36944,
+    "opt": 10587,
+    "vd9": 11129,
+    "ld12": 10628,
+    "zl9": 11105,
+    "zopfli": 10533
+   },
+   "zlib__zlib-1.3.1__doc__rfc1952.txt": {
+    "bytes": 25037,
+    "opt": 7761,
+    "vd9": 8042,
+    "ld12": 7772,
+    "zl9": 8024,
+    "zopfli": 7742
+   },
+   "zlib__zlib-1.3.1__doc__txtvsbin.txt": {
+    "bytes": 5193,
+    "opt": 2295,
+    "vd9": 2363,
+    "ld12": 2294,
+    "zl9": 2357,
+    "zopfli": 2290
+   },
+   "zlib__zlib-1.3.1__examples__README.examples": {
+    "bytes": 1970,
+    "opt": 844,
+    "vd9": 863,
+    "ld12": 841,
+    "zl9": 862,
+    "zopfli": 835
+   },
+   "zlib__zlib-1.3.1__examples__enough.c": {
+    "bytes": 24856,
+    "opt": 7451,
+    "vd9": 7854,
+    "ld12": 7464,
+    "zl9": 7841,
+    "zopfli": 7418
+   },
+   "zlib__zlib-1.3.1__examples__fitblk.c": {
+    "bytes": 8596,
+    "opt": 2723,
+    "vd9": 2812,
+    "ld12": 2725,
+    "zl9": 2809,
+    "zopfli": 2714
+   },
+   "zlib__zlib-1.3.1__examples__gun.c": {
+    "bytes": 25942,
+    "opt": 7285,
+    "vd9": 7613,
+    "ld12": 7289,
+    "zl9": 7596,
+    "zopfli": 7265
+   },
+   "zlib__zlib-1.3.1__examples__gzappend.c": {
+    "bytes": 16978,
+    "opt": 5326,
+    "vd9": 5559,
+    "ld12": 5369,
+    "zl9": 5549,
+    "zopfli": 5298
+   },
+   "zlib__zlib-1.3.1__examples__gzjoin.c": {
+    "bytes": 14132,
+    "opt": 4454,
+    "vd9": 4644,
+    "ld12": 4483,
+    "zl9": 4635,
+    "zopfli": 4432
+   },
+   "zlib__zlib-1.3.1__examples__gzlog.c": {
+    "bytes": 41537,
+    "opt": 11227,
+    "vd9": 11820,
+    "ld12": 11258,
+    "zl9": 11810,
+    "zopfli": 11200
+   },
+   "zlib__zlib-1.3.1__examples__gzlog.h": {
+    "bytes": 4558,
+    "opt": 1917,
+    "vd9": 1976,
+    "ld12": 1921,
+    "zl9": 1971,
+    "zopfli": 1906
+   },
+   "zlib__zlib-1.3.1__examples__gznorm.c": {
+    "bytes": 22182,
+    "opt": 5747,
+    "vd9": 6026,
+    "ld12": 5741,
+    "zl9": 6011,
+    "zopfli": 5739
+   },
+   "zlib__zlib-1.3.1__examples__zlib_how.html": {
+    "bytes": 29827,
+    "opt": 8890,
+    "vd9": 9366,
+    "ld12": 8892,
+    "zl9": 9347,
+    "zopfli": 8884
+   },
+   "zlib__zlib-1.3.1__examples__zpipe.c": {
+    "bytes": 6323,
+    "opt": 1835,
+    "vd9": 1892,
+    "ld12": 1839,
+    "zl9": 1888,
+    "zopfli": 1832
+   },
+   "zlib__zlib-1.3.1__examples__zran.c": {
+    "bytes": 21412,
+    "opt": 6467,
+    "vd9": 6738,
+    "ld12": 6490,
+    "zl9": 6736,
+    "zopfli": 6450
+   },
+   "zlib__zlib-1.3.1__examples__zran.h": {
+    "bytes": 2722,
+    "opt": 1150,
+    "vd9": 1173,
+    "ld12": 1148,
+    "zl9": 1171,
+    "zopfli": 1142
+   },
+   "zlib__zlib-1.3.1__gzclose.c": {
+    "bytes": 668,
+    "opt": 399,
+    "vd9": 404,
+    "ld12": 396,
+    "zl9": 402,
+    "zopfli": 394
+   },
+   "zlib__zlib-1.3.1__gzguts.h": {
+    "bytes": 6676,
+    "opt": 2454,
+    "vd9": 2511,
+    "ld12": 2448,
+    "zl9": 2508,
+    "zopfli": 2450
+   },
+   "zlib__zlib-1.3.1__gzlib.c": {
+    "bytes": 16270,
+    "opt": 4291,
+    "vd9": 4429,
+    "ld12": 4286,
+    "zl9": 4421,
+    "zopfli": 4272
+   },
+   "zlib__zlib-1.3.1__gzread.c": {
+    "bytes": 19918,
+    "opt": 4976,
+    "vd9": 5190,
+    "ld12": 4985,
+    "zl9": 5174,
+    "zopfli": 4955
+   },
+   "zlib__zlib-1.3.1__gzwrite.c": {
+    "bytes": 19237,
+    "opt": 3943,
+    "vd9": 4097,
+    "ld12": 3949,
+    "zl9": 4088,
+    "zopfli": 3921
+   },
+   "zlib__zlib-1.3.1__infback.c": {
+    "bytes": 22669,
+    "opt": 5180,
+    "vd9": 5374,
+    "ld12": 5182,
+    "zl9": 5366,
+    "zopfli": 5153
+   },
+   "zlib__zlib-1.3.1__inffast.c": {
+    "bytes": 12924,
+    "opt": 3068,
+    "vd9": 3189,
+    "ld12": 3071,
+    "zl9": 3178,
+    "zopfli": 3043
+   },
+   "zlib__zlib-1.3.1__inffast.h": {
+    "bytes": 422,
+    "opt": 286,
+    "vd9": 288,
+    "ld12": 286,
+    "zl9": 286,
+    "zopfli": 285
+   },
+   "zlib__zlib-1.3.1__inffixed.h": {
+    "bytes": 6332,
+    "opt": 1406,
+    "vd9": 1504,
+    "ld12": 1430,
+    "zl9": 1501,
+    "zopfli": 1338
+   },
+   "zlib__zlib-1.3.1__inflate.c": {
+    "bytes": 55519,
+    "opt": 11893,
+    "vd9": 12467,
+    "ld12": 11956,
+    "zl9": 12464,
+    "zopfli": 11874
+   },
+   "zlib__zlib-1.3.1__inflate.h": {
+    "bytes": 6683,
+    "opt": 2146,
+    "vd9": 2227,
+    "ld12": 2149,
+    "zl9": 2218,
+    "zopfli": 2142
+   },
+   "zlib__zlib-1.3.1__inftrees.c": {
+    "bytes": 13024,
+    "opt": 4073,
+    "vd9": 4268,
+    "ld12": 4107,
+    "zl9": 4255,
+    "zopfli": 4061
+   },
+   "zlib__zlib-1.3.1__inftrees.h": {
+    "bytes": 2920,
+    "opt": 1199,
+    "vd9": 1234,
+    "ld12": 1197,
+    "zl9": 1232,
+    "zopfli": 1195
+   },
+   "zlib__zlib-1.3.1__make_vms.com": {
+    "bytes": 26404,
+    "opt": 7142,
+    "vd9": 7406,
+    "ld12": 7134,
+    "zl9": 7394,
+    "zopfli": 7116
+   },
+   "zlib__zlib-1.3.1__msdos__Makefile.bor": {
+    "bytes": 3098,
+    "opt": 1204,
+    "vd9": 1226,
+    "ld12": 1201,
+    "zl9": 1224,
+    "zopfli": 1201
+   },
+   "zlib__zlib-1.3.1__msdos__Makefile.dj2": {
+    "bytes": 2620,
+    "opt": 1268,
+    "vd9": 1283,
+    "ld12": 1264,
+    "zl9": 1281,
+    "zopfli": 1260
+   },
+   "zlib__zlib-1.3.1__msdos__Makefile.emx": {
+    "bytes": 1447,
+    "opt": 824,
+    "vd9": 831,
+    "ld12": 821,
+    "zl9": 829,
+    "zopfli": 819
+   },
+   "zlib__zlib-1.3.1__msdos__Makefile.msc": {
+    "bytes": 2924,
+    "opt": 1168,
+    "vd9": 1190,
+    "ld12": 1167,
+    "zl9": 1189,
+    "zopfli": 1165
+   },
+   "zlib__zlib-1.3.1__msdos__Makefile.tc": {
+    "bytes": 2657,
+    "opt": 945,
+    "vd9": 962,
+    "ld12": 941,
+    "zl9": 960,
+    "zopfli": 939
+   },
+   "zlib__zlib-1.3.1__nintendods__Makefile": {
+    "bytes": 4741,
+    "opt": 1151,
+    "vd9": 1164,
+    "ld12": 1152,
+    "zl9": 1164,
+    "zopfli": 1146
+   },
+   "zlib__zlib-1.3.1__nintendods__README": {
+    "bytes": 209,
+    "opt": 168,
+    "vd9": 166,
+    "ld12": 163,
+    "zl9": 164,
+    "zopfli": 161
+   },
+   "zlib__zlib-1.3.1__old__Makefile.emx": {
+    "bytes": 1456,
+    "opt": 831,
+    "vd9": 840,
+    "ld12": 828,
+    "zl9": 838,
+    "zopfli": 825
+   },
+   "zlib__zlib-1.3.1__old__Makefile.riscos": {
+    "bytes": 3767,
+    "opt": 1078,
+    "vd9": 1114,
+    "ld12": 1079,
+    "zl9": 1113,
+    "zopfli": 1045
+   },
+   "zlib__zlib-1.3.1__old__README": {
+    "bytes": 133,
+    "opt": 108,
+    "vd9": 111,
+    "ld12": 106,
+    "zl9": 109,
+    "zopfli": 107
+   },
+   "zlib__zlib-1.3.1__old__descrip.mms": {
+    "bytes": 1545,
+    "opt": 538,
+    "vd9": 548,
+    "ld12": 535,
+    "zl9": 545,
+    "zopfli": 531
+   },
+   "zlib__zlib-1.3.1__old__os2__Makefile.os2": {
+    "bytes": 4109,
+    "opt": 1656,
+    "vd9": 1687,
+    "ld12": 1657,
+    "zl9": 1684,
+    "zopfli": 1653
+   },
+   "zlib__zlib-1.3.1__old__os2__zlib.def": {
+    "bytes": 778,
+    "opt": 356,
+    "vd9": 357,
+    "ld12": 354,
+    "zl9": 354,
+    "zopfli": 355
+   },
+   "zlib__zlib-1.3.1__old__visual-basic.txt": {
+    "bytes": 6056,
+    "opt": 1868,
+    "vd9": 1927,
+    "ld12": 1867,
+    "zl9": 1923,
+    "zopfli": 1863
+   },
+   "zlib__zlib-1.3.1__os400__README400": {
+    "bytes": 1870,
+    "opt": 884,
+    "vd9": 908,
+    "ld12": 883,
+    "zl9": 906,
+    "zopfli": 882
+   },
+   "zlib__zlib-1.3.1__os400__bndsrc": {
+    "bytes": 4313,
+    "opt": 620,
+    "vd9": 642,
+    "ld12": 620,
+    "zl9": 641,
+    "zopfli": 620
+   },
+   "zlib__zlib-1.3.1__os400__make.sh": {
+    "bytes": 10727,
+    "opt": 2951,
+    "vd9": 3001,
+    "ld12": 2948,
+    "zl9": 2998,
+    "zopfli": 2948
+   },
+   "zlib__zlib-1.3.1__os400__zlib.inc": {
+    "bytes": 32792,
+    "opt": 3225,
+    "vd9": 3390,
+    "ld12": 3216,
+    "zl9": 3367,
+    "zopfli": 3206
+   },
+   "zlib__zlib-1.3.1__qnx__package.qpg": {
+    "bytes": 6427,
+    "opt": 1429,
+    "vd9": 1488,
+    "ld12": 1430,
+    "zl9": 1485,
+    "zopfli": 1422
+   },
+   "zlib__zlib-1.3.1__test__example.c": {
+    "bytes": 15547,
+    "opt": 2979,
+    "vd9": 3056,
+    "ld12": 2977,
+    "zl9": 3044,
+    "zopfli": 2972
+   },
+   "zlib__zlib-1.3.1__test__infcover.c": {
+    "bytes": 24724,
+    "opt": 6469,
+    "vd9": 6721,
+    "ld12": 6481,
+    "zl9": 6701,
+    "zopfli": 6444
+   },
+   "zlib__zlib-1.3.1__test__minigzip.c": {
+    "bytes": 14874,
+    "opt": 4266,
+    "vd9": 4393,
+    "ld12": 4278,
+    "zl9": 4382,
+    "zopfli": 4238
+   },
+   "zlib__zlib-1.3.1__treebuild.xml": {
+    "bytes": 3140,
+    "opt": 624,
+    "vd9": 634,
+    "ld12": 626,
+    "zl9": 633,
+    "zopfli": 618
+   },
+   "zlib__zlib-1.3.1__trees.c": {
+    "bytes": 40937,
+    "opt": 10687,
+    "vd9": 11171,
+    "ld12": 10695,
+    "zl9": 11145,
+    "zopfli": 10669
+   },
+   "zlib__zlib-1.3.1__trees.h": {
+    "bytes": 8472,
+    "opt": 1358,
+    "vd9": 1436,
+    "ld12": 1356,
+    "zl9": 1426,
+    "zopfli": 1302
+   },
+   "zlib__zlib-1.3.1__uncompr.c": {
+    "bytes": 2911,
+    "opt": 1097,
+    "vd9": 1119,
+    "ld12": 1099,
+    "zl9": 1117,
+    "zopfli": 1091
+   },
+   "zlib__zlib-1.3.1__watcom__watcom_f.mak": {
+    "bytes": 1439,
+    "opt": 553,
+    "vd9": 567,
+    "ld12": 552,
+    "zl9": 564,
+    "zopfli": 543
+   },
+   "zlib__zlib-1.3.1__watcom__watcom_l.mak": {
+    "bytes": 1407,
+    "opt": 537,
+    "vd9": 549,
+    "ld12": 535,
+    "zl9": 547,
+    "zopfli": 526
+   },
+   "zlib__zlib-1.3.1__win32__DLL_FAQ.txt": {
+    "bytes": 17313,
+    "opt": 6231,
+    "vd9": 6495,
+    "ld12": 6233,
+    "zl9": 6484,
+    "zopfli": 6221
+   },
+   "zlib__zlib-1.3.1__win32__Makefile.bor": {
+    "bytes": 2507,
+    "opt": 876,
+    "vd9": 894,
+    "ld12": 873,
+    "zl9": 892,
+    "zopfli": 873
+   },
+   "zlib__zlib-1.3.1__win32__Makefile.gcc": {
+    "bytes": 4983,
+    "opt": 1647,
+    "vd9": 1683,
+    "ld12": 1647,
+    "zl9": 1681,
+    "zopfli": 1643
+   },
+   "zlib__zlib-1.3.1__win32__Makefile.msc": {
+    "bytes": 4657,
+    "opt": 1239,
+    "vd9": 1266,
+    "ld12": 1241,
+    "zl9": 1263,
+    "zopfli": 1235
+   },
+   "zlib__zlib-1.3.1__win32__README-WIN32.txt": {
+    "bytes": 4864,
+    "opt": 2016,
+    "vd9": 2064,
+    "ld12": 2013,
+    "zl9": 2063,
+    "zopfli": 2005
+   },
+   "zlib__zlib-1.3.1__win32__VisualC.txt": {
+    "bytes": 124,
+    "opt": 107,
+    "vd9": 107,
+    "ld12": 104,
+    "zl9": 105,
+    "zopfli": 103
+   },
+   "zlib__zlib-1.3.1__win32__zlib.def": {
+    "bytes": 1688,
+    "opt": 513,
+    "vd9": 535,
+    "ld12": 513,
+    "zl9": 533,
+    "zopfli": 508
+   },
+   "zlib__zlib-1.3.1__win32__zlib1.rc": {
+    "bytes": 1138,
+    "opt": 567,
+    "vd9": 567,
+    "ld12": 567,
+    "zl9": 566,
+    "zopfli": 562
+   },
+   "zlib__zlib-1.3.1__zconf.h": {
+    "bytes": 16500,
+    "opt": 4285,
+    "vd9": 4465,
+    "ld12": 4302,
+    "zl9": 4445,
+    "zopfli": 4246
+   },
+   "zlib__zlib-1.3.1__zconf.h.cmakein": {
+    "bytes": 16551,
+    "opt": 4293,
+    "vd9": 4474,
+    "ld12": 4312,
+    "zl9": 4457,
+    "zopfli": 4249
+   },
+   "zlib__zlib-1.3.1__zconf.h.in": {
+    "bytes": 16500,
+    "opt": 4285,
+    "vd9": 4465,
+    "ld12": 4302,
+    "zl9": 4445,
+    "zopfli": 4246
+   },
+   "zlib__zlib-1.3.1__zlib.3": {
+    "bytes": 4476,
+    "opt": 2031,
+    "vd9": 2077,
+    "ld12": 2028,
+    "zl9": 2073,
+    "zopfli": 2024
+   },
+   "zlib__zlib-1.3.1__zlib.3.pdf": {
+    "bytes": 25523,
+    "opt": 21345,
+    "vd9": 21504,
+    "ld12": 21507,
+    "zl9": 21501,
+    "zopfli": 21108
+   },
+   "zlib__zlib-1.3.1__zlib.h": {
+    "bytes": 96829,
+    "opt": 24596,
+    "vd9": 26105,
+    "ld12": 24722,
+    "zl9": 26087,
+    "zopfli": 24598
+   },
+   "zlib__zlib-1.3.1__zlib.map": {
+    "bytes": 1453,
+    "opt": 474,
+    "vd9": 480,
+    "ld12": 471,
+    "zl9": 480,
+    "zopfli": 465
+   },
+   "zlib__zlib-1.3.1__zlib.pc.cmakein": {
+    "bytes": 294,
+    "opt": 178,
+    "vd9": 180,
+    "ld12": 179,
+    "zl9": 179,
+    "zopfli": 175
+   },
+   "zlib__zlib-1.3.1__zlib.pc.in": {
+    "bytes": 254,
+    "opt": 158,
+    "vd9": 159,
+    "ld12": 158,
+    "zl9": 158,
+    "zopfli": 154
+   },
+   "zlib__zlib-1.3.1__zutil.c": {
+    "bytes": 7179,
+    "opt": 2460,
+    "vd9": 2509,
+    "ld12": 2459,
+    "zl9": 2502,
+    "zopfli": 2459
+   },
+   "zlib__zlib-1.3.1__zutil.h": {
+    "bytes": 6677,
+    "opt": 2458,
+    "vd9": 2510,
+    "ld12": 2460,
+    "zl9": 2507,
+    "zopfli": 2458
+   }
+  },
+  "secs": {
+   "opt": 10.464778900146484,
+   "vd9": 0.5228514671325684,
+   "zopfli_parallel": 3.130934715270996
+  },
+  "zlib_bad": [],
+  "lean_bad": []
+ },
+ "web": {
+  "files": {
+   "bootstrap_5.3.3_css_bootstrap.min.css": {
+    "bytes": 232803,
+    "opt": 28537,
+    "vd9": 30967,
+    "ld12": 28742,
+    "zl9": 30921,
+    "zopfli": 28129
+   },
+   "bootstrap_5.3.3_js_bootstrap.bundle.min.js": {
+    "bytes": 80721,
+    "opt": 22994,
+    "vd9": 23808,
+    "ld12": 23093,
+    "zl9": 23713,
+    "zopfli": 23001
+   },
+   "d3_7.9.0_d3.min.js": {
+    "bytes": 279706,
+    "opt": 88237,
+    "vd9": 92950,
+    "ld12": 88306,
+    "zl9": 92645,
+    "zopfli": 87884
+   },
+   "jquery_3.7.1_jquery.js": {
+    "bytes": 285314,
+    "opt": 79695,
+    "vd9": 83648,
+    "ld12": 79705,
+    "zl9": 83574,
+    "zopfli": 79513
+   },
+   "jquery_3.7.1_jquery.min.js": {
+    "bytes": 87533,
+    "opt": 29273,
+    "vd9": 30388,
+    "ld12": 29272,
+    "zl9": 30270,
+    "zopfli": 29250
+   },
+   "lodash.js_4.17.21_lodash.min.js": {
+    "bytes": 73015,
+    "opt": 24873,
+    "vd9": 25936,
+    "ld12": 24983,
+    "zl9": 25830,
+    "zopfli": 24819
+   },
+   "react-dom_18.3.1_umd_react-dom.production.min.js": {
+    "bytes": 131835,
+    "opt": 41500,
+    "vd9": 43026,
+    "ld12": 41472,
+    "zl9": 42859,
+    "zopfli": 41374
+   },
+   "three.js_r128_three.min.js": {
+    "bytes": 603445,
+    "opt": 143304,
+    "vd9": 149301,
+    "ld12": 143711,
+    "zl9": 148799,
+    "zopfli": 143109
+   }
+  },
+  "secs": {
+   "opt": 1.9315950870513916,
+   "vd9": 0.09723901748657227,
+   "zopfli_parallel": 1.708402156829834
+  },
+  "zlib_bad": [],
+  "lean_bad": []
+ }
+}

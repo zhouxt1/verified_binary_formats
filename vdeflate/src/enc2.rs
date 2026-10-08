@@ -6,8 +6,11 @@
 //! look at: the lengths are checked before they are used (at most 15, not
 //! over-subscribed, a code for every symbol the block uses), and a block
 //! whose lengths fail, or that is smaller that way, is written with the fixed
-//! codes. The dynamic header sends the lengths as zlib does (runs as 16, 17,
-//! 18) with a code length code in which all 19 symbols have codes.
+//! codes. The dynamic header sends the lengths as a plan of code length ops
+//! (`Op`), the cheapest of zopfli's eight run-length codings (runs as 16, 17,
+//! 18 or not), each op checked to stand for the lengths (`ops_ok`); the code
+//! length code has codes for the ops' symbols only, and HCLEN stops at its
+//! last nonzero length.
 use vstd::prelude::*;
 #[cfg(verus_keep_ghost)] // spec-only: erased from a plain build
 use vbits::bitspec::p2;
@@ -75,7 +78,7 @@ pub proof fn lemma_toks_len(data: Seq<u8>, toks: Seq<Tok>, pos: Seq<int>, k: int
 }
 
 #[inline(always)]
-fn hash3(data: &[u8], i: usize) -> (h: usize)
+pub fn hash3(data: &[u8], i: usize) -> (h: usize)
     requires i + 3 <= data.len(),
     ensures h < 32768,
 {
@@ -152,7 +155,7 @@ pub fn level(n: u32) -> (lv: Level)
 
 /// A hash of the four bytes at `i` (three at the end).
 #[inline(always)]
-fn hash4(data: &[u8], i: usize) -> (h: usize)
+pub fn hash4(data: &[u8], i: usize) -> (h: usize)
     requires i + 3 <= data.len(),
     ensures h < 32768,
 {
@@ -168,7 +171,7 @@ fn hash4(data: &[u8], i: usize) -> (h: usize)
 
 /// The chains' hash at `i`: four bytes or three.
 #[inline(always)]
-fn hkey(data: &[u8], i: usize, h4: bool) -> (h: usize)
+pub fn hkey(data: &[u8], i: usize, h4: bool) -> (h: usize)
     requires i + 3 <= data.len(),
     ensures h < 32768,
 {
@@ -490,16 +493,18 @@ pub open spec fn cl_acc(cl: Seq<u8>, i: nat) -> Seq<u8> {
     Seq::new(19, |k: int| if cl_inv(k as nat) < i { cl[k] } else { 0u8 })
 }
 
-/// The code length code lengths, written 3 bits each in `cl_order`, read back.
-proof fn lemma_read_cl_written(b: Seq<bool>, p0: int, cl: Seq<u8>, i: nat)
+/// The code length code lengths, written 3 bits each in `cl_order`, the
+/// first `hc` of them (the rest are 0), read back.
+proof fn lemma_read_cl_written(b: Seq<bool>, p0: int, cl: Seq<u8>, hc: nat, i: nat)
     requires
-        cl.len() == 19, i <= 19, 0 <= p0,
-        forall|j: nat| i <= j < 19 ==> #[trigger] getbits(b, p0 + 3 * j, 3) == Some(cl[cl_order(j) as int] as nat),
+        cl.len() == 19, i <= hc <= 19, 0 <= p0,
+        forall|j: nat| i <= j < hc ==> #[trigger] getbits(b, p0 + 3 * j, 3) == Some(cl[cl_order(j) as int] as nat),
+        forall|j: nat| hc <= j < 19 ==> #[trigger] cl[cl_order(j) as int] == 0,
         forall|k: int| 0 <= k < 19 ==> #[trigger] cl[k] < 8,
-    ensures read_cl(b, p0 + 3 * i, 19, i, cl_acc(cl, i)) == Some((cl, p0 + 57)),
-    decreases 19 - i,
+    ensures read_cl(b, p0 + 3 * i, hc, i, cl_acc(cl, i)) == Some((cl, p0 + 3 * hc)),
+    decreases hc - i,
 {
-    if i < 19 {
+    if i < hc {
         lemma_cl_inv2(i);
         let k = cl_order(i);
         let v = cl[k as int];
@@ -513,10 +518,15 @@ proof fn lemma_read_cl_written(b: Seq<bool>, p0: int, cl: Seq<u8>, i: nat)
             }
         }
         assert(p0 + 3 * i + 3 == p0 + 3 * (i + 1));
-        lemma_read_cl_written(b, p0, cl, i + 1);
+        lemma_read_cl_written(b, p0, cl, hc, i + 1);
     } else {
-        assert(cl_acc(cl, 19) =~= cl) by {
-            assert forall|m: int| 0 <= m < 19 implies #[trigger] cl_acc(cl, 19)[m] == cl[m] by { lemma_cl_inv(m as nat); }
+        assert(cl_acc(cl, hc) =~= cl) by {
+            assert forall|m: int| 0 <= m < 19 implies #[trigger] cl_acc(cl, hc)[m] == cl[m] by {
+                lemma_cl_inv(m as nat);
+                if cl_inv(m as nat) >= hc {
+                    assert(cl[cl_order(cl_inv(m as nat)) as int] == 0);
+                }
+            }
         }
     }
 }
@@ -538,6 +548,199 @@ pub open spec fn op_ok(lens: Seq<u8>, j: int, s: u8, ex: u8, rep: int) -> bool {
 }
 
 pub open spec fn op_nb(s: u8) -> nat { if s == 16 { 2 } else if s == 17 { 3 } else if s == 18 { 7 } else { 0 } }
+
+/// A code length op: its symbol, extra bits, and the lengths it stands for.
+#[derive(Clone, Copy)]
+pub struct Op {
+    pub s: u8,
+    pub ex: u8,
+    pub rep: u16,
+}
+
+/// `ops`, from `pos[0] == 0`, write `lens` in full.
+pub open spec fn ops_ok(lens: Seq<u8>, ops: Seq<Op>, pos: Seq<int>) -> bool {
+    &&& pos.len() == ops.len() + 1 && pos[0] == 0 && pos[ops.len() as int] == lens.len()
+    &&& forall|k: int| 0 <= k < ops.len() ==>
+        op_ok(lens, pos[k], #[trigger] ops[k].s, ops[k].ex, ops[k].rep as int) && pos[k + 1] == pos[k] + ops[k].rep
+}
+
+/// The ops' symbols have codes in `cl`.
+pub open spec fn ops_coded(cl: Seq<u8>, ops: Seq<Op>) -> bool {
+    forall|k: int| 0 <= k < ops.len() ==> 1 <= cl[#[trigger] ops[k].s as int]
+}
+
+/// A code length code: 19 lengths of at most 7, not over-subscribed.
+pub open spec fn cl_ok(cl: Seq<u8>) -> bool {
+    cl.len() == 19 && not_oversub(cl) && forall|k: int| 0 <= k < 19 ==> #[trigger] cl[k] <= 7
+}
+
+/// The next op at `j`, with runs as 16 (bit 0 of `f`), 17 (bit 1) and 18
+/// (bit 2) where allowed: zopfli's eight ways to run-length code.
+pub fn next_op_f(all: &Vec<u8>, j: usize, f: u8) -> (r: (u8, u8, usize))
+    requires j < all@.len(), all@.len() <= 320, lens_ok(all@),
+    ensures op_ok(all@, j as int, r.0, r.1, r.2 as int),
+{
+    let n = all.len();
+    let v = all[j];
+    let mut r: usize = 1;
+    while j + r < n && r < 138 && all[j + r] == v
+        invariant 1 <= r <= 138, j + r <= n, n == all@.len(), v == all@[j as int],
+            forall|k: int| 0 <= k < r ==> #[trigger] all@[j + k] == v,
+        decreases 138 - r,
+    {
+        r = r + 1;
+    }
+    proof { assert(all@[j as int] <= 15); }
+    let f16 = f & 1 != 0;
+    let f17 = f & 2 != 0;
+    let f18 = f & 4 != 0;
+    if v == 0 && r >= 11 && f18 {
+        (18, (r - 11) as u8, r)
+    } else if v == 0 && r >= 3 && f17 {
+        let rep = if r > 10 { 10 } else { r };
+        (17, (rep - 3) as u8, rep)
+    } else if j > 0 && all[j - 1] == v && r >= 3 && f16 {
+        let rep = if r > 6 { 6 } else { r };
+        (16, (rep - 3) as u8, rep)
+    } else {
+        (v, 0, 1)
+    }
+}
+
+/// The ops for `all`, by `next_op_f`.
+pub fn plan_ops(all: &Vec<u8>, f: u8) -> (r: (Vec<Op>, Ghost<Seq<int>>))
+    requires all@.len() <= 320, lens_ok(all@),
+    ensures ops_ok(all@, r.0@, r.1@), r.0@.len() <= all@.len(),
+{
+    let n = all.len();
+    let mut ops: Vec<Op> = Vec::new();
+    let ghost mut pos: Seq<int> = seq![0int];
+    let mut j: usize = 0;
+    while j < n
+        invariant j <= n, n == all@.len(), n <= 320, lens_ok(all@), ops@.len() <= j,
+            pos.len() == ops@.len() + 1, pos[0] == 0, pos[ops@.len() as int] == j,
+            forall|k: int| 0 <= k < ops@.len() ==>
+                op_ok(all@, pos[k], #[trigger] ops@[k].s, ops@[k].ex, ops@[k].rep as int) && pos[k + 1] == pos[k] + ops@[k].rep,
+        decreases n - j,
+    {
+        let (sy, ex, rep) = next_op_f(all, j, f);
+        let ghost pos0 = pos;
+        let ghost ops0 = ops@;
+        ops.push(Op { s: sy, ex, rep: rep as u16 });
+        proof {
+            pos = pos0.push((j + rep) as int);
+            assert forall|k: int| 0 <= k < ops@.len() implies
+                op_ok(all@, pos[k], #[trigger] ops@[k].s, ops@[k].ex, ops@[k].rep as int) && pos[k + 1] == pos[k] + ops@[k].rep by {
+                if k < ops0.len() { assert(ops@[k] == ops0[k]); }
+            }
+        }
+        j = j + rep;
+    }
+    (ops, Ghost(pos))
+}
+
+/// A code length code for `ops` (codes only for the symbols they use, and at
+/// least two), and the header's bits with it.
+pub fn cl_for(ops: &Vec<Op>) -> (r: (Vec<u8>, u64))
+    requires ops@.len() <= 320,
+    ensures r.0@.len() == 19, lens_ok(r.0@), forall|k: int| 0 <= k < 19 ==> #[trigger] r.0@[k] <= 7, r.1 <= 50000,
+{
+    let mut f: Vec<u32> = vec![0u32; 19];
+    let mut k: usize = 0;
+    while k < ops.len()
+        invariant k <= ops@.len(), ops@.len() <= 320, f@.len() == 19, forall|t: int| 0 <= t < 19 ==> #[trigger] f@[t] <= k,
+        decreases ops@.len() - k,
+    {
+        let x = ops[k].s as usize;
+        if x < 19 {
+            f.set(x, f[x] + 1);
+        }
+        k = k + 1;
+    }
+    let mut used: usize = 0;
+    let mut t: usize = 0;
+    while t < 19
+        invariant t <= 19, used <= t, f@.len() == 19,
+        decreases 19 - t,
+    {
+        if f[t] != 0 { used = used + 1; }
+        t = t + 1;
+    }
+    // zlib wants a complete code: two symbols at least
+    if used < 2 {
+        if f[0] == 0 { f.set(0, 1); } else { f.set(18, 1); }
+    }
+    let clv = heur_lens(&f, 7);
+    let mut hc: usize = 19;
+    while hc > 4 && clv[cl_order_x((hc - 1) as u64)] == 0
+        invariant 4 <= hc <= 19, clv@.len() == 19,
+        decreases hc,
+    {
+        hc = hc - 1;
+    }
+    let mut hb: u64 = 14 + 3 * hc as u64;
+    let mut k: usize = 0;
+    while k < ops.len()
+        invariant k <= ops@.len(), ops@.len() <= 320, clv@.len() == 19, hb <= 71 + 14 * k,
+            forall|t: int| 0 <= t < 19 ==> #[trigger] clv@[t] <= 7,
+        decreases ops@.len() - k,
+    {
+        let x = ops[k].s as usize;
+        let l: u64 = if x < 19 { clv[x] as u64 } else { 7 };
+        let nb: u64 = if x == 16 { 2 } else if x == 17 { 3 } else if x == 18 { 7 } else { 0 };
+        hb = hb + l + nb;
+        k = k + 1;
+    }
+    (clv, hb)
+}
+
+/// Whether every op's symbol has a code.
+fn ops_coded_x(clv: &Vec<u8>, ops: &Vec<Op>) -> (ok: bool)
+    requires clv@.len() == 19,
+    ensures ok ==> ops_coded(clv@, ops@),
+{
+    let mut k: usize = 0;
+    while k < ops.len()
+        invariant k <= ops@.len(), clv@.len() == 19,
+            forall|j: int| 0 <= j < k ==> 1 <= clv@[#[trigger] ops@[j].s as int],
+        decreases ops@.len() - k,
+    {
+        let x = ops[k].s as usize;
+        if x >= 19 || clv[x] == 0 {
+            return false;
+        }
+        k = k + 1;
+    }
+    true
+}
+
+/// The cheapest of the eight run-length codings of `all`: its ops, their
+/// positions, its code length code, and the header's bits.
+pub fn plan_hdr(all: &Vec<u8>) -> (r: (Vec<Op>, Ghost<Seq<int>>, Vec<u8>, u64))
+    requires all@.len() <= 320, lens_ok(all@),
+    ensures ops_ok(all@, r.0@, r.1@), r.0@.len() <= all@.len(), r.2@.len() == 19, lens_ok(r.2@),
+        forall|k: int| 0 <= k < 19 ==> #[trigger] r.2@[k] <= 7, r.3 <= 50000,
+{
+    let (mut bo, Ghost(mut bp)) = plan_ops(all, 7);
+    let (mut bc, mut bh) = cl_for(&bo);
+    let mut f: u8 = 0;
+    while f < 7
+        invariant f <= 7, all@.len() <= 320, lens_ok(all@), ops_ok(all@, bo@, bp), bo@.len() <= all@.len(),
+            bc@.len() == 19, lens_ok(bc@), forall|k: int| 0 <= k < 19 ==> #[trigger] bc@[k] <= 7, bh <= 50000,
+        decreases 7 - f,
+    {
+        let (o, Ghost(p)) = plan_ops(all, f);
+        let (c, h) = cl_for(&o);
+        if h < bh {
+            bo = o;
+            proof { bp = p; }
+            bc = c;
+            bh = h;
+        }
+        f = f + 1;
+    }
+    (bo, Ghost(bp), bc, bh)
+}
 
 /// The next code length op at `j`, zlib's way: runs of zeros as 17 or 18,
 /// a length repeated 3 or more times after itself as 16.
@@ -580,8 +783,8 @@ fn emit_op(w: &mut BitW, clc: &EncCode, Ghost(cl): Ghost<Seq<u8>>, Ghost(lens): 
            j: usize, s: u8, ex: u8, rep: usize)
     requires
         old(w).wf(), old(w).buf@.len() + 16 < 0x1000_0000_0000_0000 - 64,
-        enc_ok(clc, cl), cl.len() == 19, forall|k: int| 0 <= k < 19 ==> 1 <= #[trigger] cl[k] <= 7,
-        op_ok(lens, j as int, s, ex, rep as int), hdr_inv(old(w).bits(), cl, q0, lens, j as int),
+        enc_ok(clc, cl), cl.len() == 19, forall|k: int| 0 <= k < 19 ==> #[trigger] cl[k] <= 7,
+        op_ok(lens, j as int, s, ex, rep as int), 1 <= cl[s as int], hdr_inv(old(w).bits(), cl, q0, lens, j as int),
     ensures
         final(w).pre == old(w).pre,
         final(w).wf(), final(w).buf@.len() <= old(w).buf@.len() + 10,
@@ -641,19 +844,15 @@ pub open spec fn hdr_lens_ok(lit: Seq<u8>, dist: Seq<u8>) -> bool {
     &&& lit[256] != 0 && not_oversub(lit) && not_oversub(dist)
 }
 
-/// What the code length code must be: a length of 1 to 7 for all 19
-/// symbols, not over-subscribed.
-pub open spec fn cl_good(cl: Seq<u8>) -> bool {
-    cl.len() == 19 && not_oversub(cl) && forall|k: int| 0 <= k < 19 ==> 1 <= #[trigger] cl[k] <= 7
-}
-
 /// Write a dynamic block's header (after its 3 header bits): every stream
 /// that starts with the bits written has it. `all` is the lengths, lit/length
 /// then distance.
-pub fn write_hdr(w: &mut BitW, clv: &Vec<u8>, clc: &EncCode, lit: &Vec<u8>, dist: &Vec<u8>, all: &Vec<u8>)
+pub fn write_hdr(w: &mut BitW, clv: &Vec<u8>, clc: &EncCode, lit: &Vec<u8>, dist: &Vec<u8>, all: &Vec<u8>,
+                 ops: &Vec<Op>, Ghost(opos): Ghost<Seq<int>>)
     requires
         old(w).wf(), old(w).buf@.len() + 4000 < 0x1000_0000_0000_0000 - 64,
-        cl_good(clv@), enc_ok(clc, clv@), hdr_lens_ok(lit@, dist@), all@ == lit@ + dist@,
+        cl_ok(clv@), enc_ok(clc, clv@), hdr_lens_ok(lit@, dist@), all@ == lit@ + dist@,
+        ops_ok(all@, ops@, opos), ops_coded(clv@, ops@), ops@.len() <= 316,
     ensures
         final(w).pre == old(w).pre,
         final(w).wf(), final(w).buf@.len() <= old(w).buf@.len() + 3300,
@@ -669,20 +868,30 @@ pub fn write_hdr(w: &mut BitW, clv: &Vec<u8>, clc: &EncCode, lit: &Vec<u8>, dist
     let ghost w1 = w.bits();
     put(w, 29, 5);
     let ghost w2 = w.bits();
-    put(w, 15, 4);
-    let ghost w3 = w.bits();
     let ghost clq = clv@;
+    // as many code length code lengths as are not 0 at the end
+    let mut hc: usize = 19;
+    while hc > 4 && clv[cl_order_x((hc - 1) as u64)] == 0
+        invariant 4 <= hc <= 19, clv@ == clq, clq.len() == 19,
+            forall|j: nat| hc <= j < 19 ==> #[trigger] clq[cl_order(j) as int] == 0,
+        decreases hc,
+    {
+        hc = hc - 1;
+    }
+    put(w, (hc - 4) as u64, 4);
+    let ghost w3 = w.bits();
     // the code length code lengths, in their order
     let mut i: usize = 0;
-    while i < 19
+    while i < hc
         invariant
-            i <= 19, w.wf(), w.pre == old(w).pre, clv@ == clq, cl_good(clq), w3.len() == p0 + 14,
+            i <= hc, 4 <= hc <= 19, w.wf(), w.pre == old(w).pre, clv@ == clq, cl_ok(clq), w3.len() == p0 + 14,
+            forall|jj: nat| hc <= jj < 19 ==> #[trigger] clq[cl_order(jj) as int] == 0,
             w.buf@.len() <= old(w).buf@.len() + 15 + 5 * i,
             old(w).buf@.len() + 4000 < 0x1000_0000_0000_0000 - 64,
             w.bits().len() == w3.len() + 3 * i, is_prefix(w3, w.bits()),
             forall|b: Seq<bool>| #[trigger] is_prefix(w.bits(), b) ==>
                 forall|j: nat| j < i ==> #[trigger] getbits(b, w3.len() as int + 3 * j, 3) == Some(clq[cl_order(j) as int] as nat),
-        decreases 19 - i,
+        decreases hc - i,
     {
         let k = cl_order_x(i as u64);
         let v = clv[k] as u64;
@@ -712,25 +921,30 @@ pub fn write_hdr(w: &mut BitW, clv: &Vec<u8>, clc: &EncCode, lit: &Vec<u8>, dist
             }
         }
     }
-    while j < 316
+    let mut k: usize = 0;
+    while k < ops.len()
         invariant
             j <= 316, w.wf(), w.pre == old(w).pre, lens == lit@ + dist@, all@ == lens, lens.len() == 316, lens_ok(lens),
-            clv@ == clq, cl_good(clq), enc_ok(clc, clq),
-            w.buf@.len() <= old(w).buf@.len() + 110 + 10 * j,
+            clv@ == clq, cl_ok(clq), enc_ok(clc, clq), ops_ok(lens, ops@, opos), ops_coded(clq, ops@),
+            ops@.len() <= 316, k <= ops@.len(), j == opos[k as int], 4 <= hc <= 19, w3.len() == p0 + 14,
+            forall|jj: nat| hc <= jj < 19 ==> #[trigger] clq[cl_order(jj) as int] == 0,
+            w.buf@.len() <= old(w).buf@.len() + 110 + 10 * k,
             old(w).buf@.len() + 4000 < 0x1000_0000_0000_0000 - 64,
             is_prefix(w4, w.bits()), hdr_inv(w.bits(), clq, q4, lens, j as int),
-        decreases 316 - j,
+        decreases ops@.len() - k,
     {
-        let (s, ex, rep) = next_op(all, j);
+        let o = ops[k];
+        proof { assert(op_ok(lens, opos[k as int], ops@[k as int].s, ops@[k as int].ex, ops@[k as int].rep as int)); }
         let ghost wb = w.bits();
-        emit_op(w, clc, Ghost(clq), Ghost(lens), Ghost(q4), j, s, ex, rep);
+        emit_op(w, clc, Ghost(clq), Ghost(lens), Ghost(q4), j, o.s, o.ex, o.rep as usize);
         proof { lemma_prefix_trans_b(w4, wb, w.bits()); }
-        j = j + rep;
+        j = j + o.rep as usize;
+        k = k + 1;
     }
     proof {
         let wf = w.bits();
         lemma_prefix_trans_b(w3, w4, wf);
-        lemma_prefix_of_append(w2, wbits(15, 4), w3);
+        lemma_prefix_of_append(w2, wbits((hc - 4) as u64, 4), w3);
         lemma_prefix_of_append(w1, wbits(29, 5), w2);
         lemma_prefix_of_append(w0, wbits(29, 5), w1);
         lemma_prefix_trans_b(w0, w1, w2);
@@ -743,20 +957,20 @@ pub fn write_hdr(w: &mut BitW, clv: &Vec<u8>, clc: &EncCode, lit: &Vec<u8>, dist
             lemma_prefix_trans_b(w4, wf, b);
             lemma_prefix_trans_b(w3, w4, b);
             lemma_prefix_trans_b(w3, wf, b);
-            lemma_prefix_of_append(w2, wbits(15, 4), b);
+            lemma_prefix_of_append(w2, wbits((hc - 4) as u64, 4), b);
             lemma_prefix_of_append(w1, wbits(29, 5), b);
             lemma_prefix_of_append(w0, wbits(29, 5), b);
             lemma_written_bits(29, 5, w0, b);
             lemma_written_bits(29, 5, w1, b);
-            lemma_written_bits(15, 4, w2, b);
-            assert(forall|jj: nat| jj < 19 ==> #[trigger] getbits(b, w3.len() as int + 3 * jj, 3) == Some(clq[cl_order(jj) as int] as nat));
+            lemma_written_bits((hc - 4) as u64, 4, w2, b);
+            assert(forall|jj: nat| jj < hc ==> #[trigger] getbits(b, w3.len() as int + 3 * jj, 3) == Some(clq[cl_order(jj) as int] as nat));
             assert forall|k: int| 0 <= k < 19 implies #[trigger] clq[k] < 8 by {}
             assert(Seq::new(19, |_i: int| 0u8) =~= cl_acc(clq, 0));
-            lemma_read_cl_written(b, w3.len() as int, clq, 0);
+            lemma_read_cl_written(b, w3.len() as int, clq, hc as nat, 0);
             assert(read_lens(clq, b, wf.len() as int, 316, lens) == Some((lens, wf.len() as int)));
             assert(lens.subrange(0, 286) =~= lit@);
             assert(lens.subrange(286, 316) =~= dist@);
-            assert(w4.len() == w3.len() + 57);
+            assert(w4.len() == w3.len() + 3 * hc);
         }
     }
 }
@@ -852,11 +1066,13 @@ fn write_syms(w: &mut BitW, lc: &EncCode, dc: &EncCode, Ghost(ll): Ghost<Seq<u8>
 /// A dynamic block: its header bits, header, tokens and end.
 #[verifier::spinoff_prover]
 fn write_block_dyn(w: &mut BitW, clv: &Vec<u8>, clc: &EncCode, lc: &EncCode, dc: &EncCode, lit: &Vec<u8>, dist: &Vec<u8>,
-                   all: &Vec<u8>, Ghost(data): Ghost<Seq<u8>>, toks: &Vec<Tok>, Ghost(pos): Ghost<Seq<int>>, Ghost(i0): Ghost<int>, last: bool,
+                   all: &Vec<u8>, ops: &Vec<Op>, Ghost(opos): Ghost<Seq<int>>,
+                   Ghost(data): Ghost<Seq<u8>>, toks: &Vec<Tok>, Ghost(pos): Ghost<Seq<int>>, Ghost(i0): Ghost<int>, last: bool,
                    Ghost(st): Ghost<bool>) -> (st2: Ghost<bool>)
     requires
         old(w).wf(), old(w).buf@.len() + 20 * toks@.len() + 4500 < 0x1000_0000_0000_0000 - 64,
-        cl_good(clv@), enc_ok(clc, clv@), all@ == lit@ + dist@,
+        cl_ok(clv@), enc_ok(clc, clv@), all@ == lit@ + dist@,
+        ops_ok(all@, ops@, opos), ops_coded(clv@, ops@), ops@.len() <= 316,
         hdr_lens_ok(lit@, dist@), enc_ok(lc, lit@), enc_ok(dc, dist@),
         toks_ok(data, toks@, pos), pos[0] == i0, i0 <= data.len(),
         forall|k: int| 0 <= k < toks@.len() ==> tok_coded(lit@, dist@, #[trigger] toks@[k]),
@@ -875,7 +1091,7 @@ fn write_block_dyn(w: &mut BitW, clv: &Vec<u8>, clc: &EncCode, lc: &EncCode, dc:
     let ghost w1 = w.bits();
     put(w, 2, 2);
     let ghost w2 = w.bits();
-    write_hdr(w, clv, clc, lit, dist, all);
+    write_hdr(w, clv, clc, lit, dist, all, ops, Ghost(opos));
     let ghost w3 = w.bits();
     write_syms(w, lc, dc, Ghost(lit@), Ghost(dist@), Ghost(data), toks, Ghost(pos), Ghost(i0));
     let ghost st2 = st && hdr_strict(clv@, lit@, dist@);
@@ -1477,68 +1693,17 @@ fn concat_lens(lit: &Vec<u8>, dist: &Vec<u8>) -> (v: Vec<u8>)
     v
 }
 
-/// The code length code for writing `all` (from the ops' counts, every
-/// symbol given at least a count of 1, lengths up to 7), and the header's
-/// size in bits with it.
-fn cl_plan(all: &Vec<u8>) -> (r: (Vec<u8>, u64))
-    requires all@.len() <= 320, lens_ok(all@),
-    ensures r.0@.len() == 19, lens_ok(r.0@), forall|k: int| 0 <= k < 19 ==> #[trigger] r.0@[k] <= 7, r.1 <= 50000,
-{
-    let n = all.len();
-    let mut f: Vec<u32> = vec![0u32; 19];
-    let mut xb: u64 = 0;
-    let mut j: usize = 0;
-    while j < n
-        invariant j <= n, n == all@.len(), n <= 320, lens_ok(all@), f@.len() == 19, xb <= 7 * j,
-            forall|k: int| 0 <= k < 19 ==> #[trigger] f@[k] <= j,
-        decreases n - j,
-    {
-        let (s, _ex, rep) = next_op(all, j);
-        let x = s as usize;
-        f.set(x, f[x] + 1);
-        xb = xb + if s == 16 { 2 } else if s == 17 { 3 } else if s == 18 { 7 } else { 0 };
-        j = j + rep;
-    }
-    let mut g: Vec<u32> = f.clone();
-    let mut k: usize = 0;
-    while k < 19
-        invariant k <= 19, g@.len() == 19,
-        decreases 19 - k,
-    {
-        if g[k] == 0 { g.set(k, 1); }
-        k = k + 1;
-    }
-    let clv = heur_lens(&g, 7);
-    let mut hb: u64 = 14 + 57 + xb;
-    let mut k: usize = 0;
-    assert(hb <= 71 + 2240);
-    while k < 19
-        invariant k <= 19, clv@.len() == 19, f@.len() == 19, hb <= 2311 + 2240 * k,
-            forall|t: int| 0 <= t < 19 ==> #[trigger] clv@[t] <= 7,
-            forall|t: int| 0 <= t < 19 ==> #[trigger] f@[t] <= 320,
-        decreases 19 - k,
-    {
-        let a = f[k] as u64;
-        let b = clv[k] as u64;
-        assert(a * b <= 320 * 7) by (nonlinear_arith) requires a <= 320, b <= 7;
-        hb = hb + a * b;
-        k = k + 1;
-    }
-    assert(hb <= 2311 + 2240 * 19);
-    (clv, hb)
-}
-
-/// `cl_good`, checked.
-fn cl_good_x(clv: &Vec<u8>) -> (ok: bool)
+/// Whether `clv` is a code length code (`cl_ok`), checked.
+fn cl_ok_x(clv: &Vec<u8>) -> (ok: bool)
     requires clv@.len() == 19, lens_ok(clv@),
-    ensures ok ==> cl_good(clv@),
+    ensures ok ==> cl_ok(clv@),
 {
     let mut k: usize = 0;
     while k < 19
-        invariant k <= 19, clv@.len() == 19, forall|t: int| 0 <= t < k ==> 1 <= #[trigger] clv@[t] <= 7,
+        invariant k <= 19, clv@.len() == 19, forall|t: int| 0 <= t < k ==> #[trigger] clv@[t] <= 7,
         decreases 19 - k,
     {
-        if clv[k] < 1 || clv[k] > 7 { return false; }
+        if clv[k] > 7 { return false; }
         k = k + 1;
     }
     proof { reveal_with_fuel(p2, 16); }
@@ -1683,9 +1848,9 @@ pub fn put_block(w: &mut BitW, fl: &EncCode, fd: &EncCode, toks: &Vec<Tok>, Ghos
         let usable = lens_usable(&lit, &dist, &toks, Ghost(data), Ghost(pos));
         let mut wrote = false;
         let all = concat_lens(&lit, &dist);
-        let (clv, hbits) = cl_plan(&all);
+        let (ops, Ghost(opos), clv, hbits) = plan_hdr(&all);
         let (db, fb) = block_bits(&lf, &df, &lit, &dist, hbits);
-        let dyn_ok = usable && cl_good_x(&clv) && zlib_ok_x(&lit, false) && zlib_ok_x(&dist, false) && zlib_ok_x(&clv, true);
+        let dyn_ok = usable && cl_ok_x(&clv) && ops_coded_x(&clv, &ops) && zlib_ok_x(&lit, false) && zlib_ok_x(&dist, false) && zlib_ok_x(&clv, true);
         let huff = (if dyn_ok && db < fb { db } else { fb }) + ext;
         let sb = 42 + 8 * src.len() as u64;
         if src.len() <= 65535 && sb < huff {
@@ -1701,7 +1866,7 @@ pub fn put_block(w: &mut BitW, fl: &EncCode, fd: &EncCode, toks: &Vec<Tok>, Ghos
             let clc = enc_code(clv.clone());
             match (lc, dc, clc) {
                 (Some(lc), Some(dc), Some(clc)) => {
-                    let g = write_block_dyn(w, &clv, &clc, &lc, &dc, &lit, &dist, &all, Ghost(data), &toks, Ghost(pos), Ghost(i0), last, Ghost(st));
+                    let g = write_block_dyn(w, &clv, &clc, &lc, &dc, &lit, &dist, &all, &ops, Ghost(opos), Ghost(data), &toks, Ghost(pos), Ghost(i0), last, Ghost(st));
                     proof { st2 = g@; }
                     wrote = true;
                 }

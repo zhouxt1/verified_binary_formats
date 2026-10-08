@@ -31,6 +31,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("-n", type=int, default=2000)
     ap.add_argument("--seed", type=int, default=1)
+    ap.add_argument("--lspec", action="store_true", help="also the Lean spec, which must print what vdeflate prints")
     a = ap.parse_args()
     rng = random.Random(a.seed)
     srcs = zdiff.corpus_sources(rng)
@@ -75,6 +76,11 @@ def main():
             fails += 1
             print("FAIL", p, line, None if rr is None else (len(rr[0]), rr[1]))
     print("streams %d: both decode %d, both refuse %d" % (len(cases), both_ok, both_bad))
+    if a.lspec:
+        lines = ["zlibdict %s %s.dict" % (p, p) for p, _, _ in cases]
+        same, lf = zdiff.lean_vs_vdeflate(lines, out)
+        print("lean == vdeflate %d of %d" % (same, len(lines)))
+        fails += lf
     print("failures:", fails)
     sys.exit(1 if fails else 0)
 

@@ -10,6 +10,8 @@ windowBits 15 or 31), with the same data and the same end.
     difftest/deflate/wrapdiff.py [-n N] [--seed S]
 """
 import argparse, os, random, struct, subprocess, sys, tempfile, zlib
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import zdiff
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 TOOL = os.path.join(ROOT, "target/release/vdeflate-tool")
@@ -69,6 +71,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("-n", type=int, default=1000)
     ap.add_argument("--seed", type=int, default=1)
+    ap.add_argument("--lspec", action="store_true", help="also the Lean spec, which must print what vdeflate prints")
     a = ap.parse_args()
     rng = random.Random(a.seed)
     srcs = [open(os.path.join(ROOT, "vdeflate/src", f), "rb").read() for f in sorted(os.listdir(os.path.join(ROOT, "vdeflate/src")))]
@@ -110,6 +113,10 @@ def main():
             key = "both refuse" if r is None else "FAIL ours refuses, zlib accepts"
         stats[(fmt, key)] = stats.get((fmt, key), 0) + 1
         fails += key.startswith("FAIL")
+    if a.lspec:
+        same, lf = zdiff.lean_vs_vdeflate(lines, res)
+        print("lean == vdeflate %d of %d" % (same, len(lines)))
+        fails += lf
     for (fmt, key), n in sorted(stats.items()):
         print("%-4s %-36s %d" % (fmt, key, n))
     print("failures:", fails)

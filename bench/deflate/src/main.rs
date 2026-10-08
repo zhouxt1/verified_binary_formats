@@ -57,6 +57,20 @@ fn main() {
         }
         return;
     }
+    if std::env::args().nth(1).as_deref() == Some("--ld-compress") {
+        // `--ld-compress LEVEL FILE...`: libdeflate's raw DEFLATE size and seconds per file
+        let lv: i32 = std::env::args().nth(2).unwrap().parse().unwrap();
+        for f in std::env::args().skip(3) {
+            let src = std::fs::read(&f).unwrap();
+            let mut c = libdeflater::Compressor::new(libdeflater::CompressionLvl::new(lv).unwrap());
+            let mut out = vec![0u8; c.deflate_compress_bound(src.len())];
+            let t = std::time::Instant::now();
+            let n = c.deflate_compress(&src, &mut out).unwrap();
+            println!("{} {} {:.3}", f, n, t.elapsed().as_secs_f64());
+            if std::env::var("VD_LDOUT").is_ok() { std::fs::write(format!("{}.ld", f), &out[..n]).unwrap(); }
+        }
+        return;
+    }
     if std::env::args().nth(1).as_deref() == Some("--verdicts") {
         verdicts();
         return;

@@ -1,0 +1,14 @@
+name = "lspec"
+version = "0.1.0"
+defaultTargets = ["Lspec", "lspec"]
+
+[[lean_lib]]
+name = "Lspec"
+
+[[lean_exe]]
+name = "lspec"
+root = "Main"
+
+[[lean_exe]]
+name = "virsubset"
+root = "VirSubset"

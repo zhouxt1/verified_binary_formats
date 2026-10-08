@@ -17,3 +17,7 @@ __pycache__/
 # standards fetched by docs/spec/get.sh (not ours to redistribute)
 docs/spec/*.pdf
 docs/spec/*.txt
+
+# Lean build outputs; the VIR the Lean bridge reads is committed
+.lake/
+!lspec/Lspec/Bridge/vdeflate.vir

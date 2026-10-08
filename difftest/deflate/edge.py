@@ -260,6 +260,17 @@ def _(w):
     for c in b"abc":
         w.put(c, 8)
 
+FIXED_LIT = [8] * 144 + [9] * 112 + [7] * 24 + [8] * 8
+
+@vec("length 258 as symbol 284 + extra 31 (the table says 227-257)", "ok", "ok")
+def _(w):
+    w.put(1, 1); w.put(1, 2)
+    lc = canon(FIXED_LIT)
+    sym(w, lc, 97)
+    sym(w, lc, 284); w.put(31, 5)           # 227 + 31 = 258
+    w.code(0, 5)                             # distance 1
+    sym(w, lc, 256)
+
 @vec("stored block, NLEN wrong", "bad", "bad")
 def _(w):
     w.put(1, 1); w.put(0, 2); w.align(); w.put(3, 16); w.put(3, 16)

@@ -13,6 +13,8 @@
 //! * `wrap`: zlib and gzip, Adler-32 and CRC-32, both ways.
 //! * `enc`: the bit writer, canonical codes, the fixed-code compressor.
 //! * `enc2`: the compressor (zlib's levels 1 to 9), proved to round-trip.
+//! * `opt`: near-optimal parsing, the most thorough compressor, proved to
+//!   round-trip the same way.
 //! * `deflater`: the streaming compressor, raw, zlib and gzip, in bounded
 //!   memory.
 //!
@@ -36,3 +38,4 @@ pub mod enc2;
 pub mod deflater;
 pub mod agree;
 pub mod zstream;
+pub mod opt;

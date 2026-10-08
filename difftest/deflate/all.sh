@@ -24,4 +24,11 @@ run encdiff-level9   env VD_LEVEL=9 python3 $d/encdiff.py -n 200
 run encdiff-gzip     python3 $d/encdiff.py -n 300 --wrap gzip
 run encdiff-stream   env VD_STREAM=300 python3 $d/encdiff.py -n 300 --wrap zlib
 run encall           python3 $d/encall.py -n 300
+if [ -x lspec/.lake/build/bin/lspec ]; then
+    run lspecdiff    python3 $d/lspecdiff.py -n 300
+    run lspecenc     python3 $d/lspecenc.py -n 100
+    run lspecwrap    python3 $d/wrapdiff.py -n 300 --lspec
+    run lspecgzmulti python3 $d/gzmulti.py -n 200 --lspec
+    run lspeczdict   python3 $d/zdict.py -n 200 --lspec
+fi
 exit $fail

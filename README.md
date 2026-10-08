@@ -10,13 +10,37 @@ by clause, and tested against the reference implementations.
 
 | crate | format | proved | obligations |
 |---|---|---|---|
-| [vdeflate](vdeflate/README.md) | DEFLATE, zlib, gzip (RFC 1951, 1950, 1952): decoding and compressing, whole or streamed in bounded memory | the decoder computes the RFCs' output; what the compressor writes decodes to its input | 665 |
+| [vdeflate](vdeflate/README.md) | DEFLATE, zlib, gzip (RFC 1951, 1950, 1952): decoding and compressing, whole or streamed in bounded memory | the decoder computes the RFCs' output; what the compressor writes decodes to its input | 812 |
 | [vbrotli](vbrotli/README.md) | Brotli (RFC 7932), whole or streamed | the decoder computes the RFC's output | 395 |
 | [vwebp](vwebp/README.md) | WebP: lossless (VP8L, RFC 9649), lossy (VP8 key frames, RFC 6386) with alpha, the container, animation | the decoders compute RFC 9649's image and RFC 6386's reference decoder's | 1016 |
 | [vh26x](vh26x/README.md) | H.264 and H.265 headers: NAL units, parameter sets, slice headers | decoder and encoder inverse to each other and to the standards' syntax tables | 76 |
 | [vsyn](vsyn/README.md) | syntax tables as data, the interpreter vh26x runs | decoding and encoding inverse, for every table | 225 |
 | [vsimd](vsimd/README.md) | SSE2 intrinsics for Verus, lane by lane | idioms (masks, saturating arithmetic, transposes) proved over the intrinsics, which are trusted and validated against the CPU | 182 |
 | [vbits](vbits/README.md) | bit fields over byte buffers, the layer they all share | reads and writes against a bit view | 145 |
+
+## One DEFLATE spec, three verifiers
+
+A Verus spec is read through Verus and its SMT encoding. For DEFLATE, zlib
+and gzip there is now also a spec in Lean ([lspec](lspec/README.md)),
+written from RFCs 1951, 1950 and 1952 clause by clause, with the places
+where the text is silent or ambiguous listed as open points. It is small,
+executable and first-order, so that any verifier can state it. Theorems
+about the format are proved in Lean. Three implementations, in three
+verifiers, are proved against it:
+
+| implementation | verifier | how it reaches the Lean spec |
+|---|---|---|
+| vdeflate (Rust) | Verus | Lean reads the VIR that Verus elaborates from `vdeflate/src/spec.rs` and `wrap.rs`, gives it a semantics, and proves that the decoders' contracts (DEFLATE, zlib, zlib with a dictionary, gzip, whole gzip files) and the compressors' contract (`deflate_ok`) mean the Lean spec's definitions (`lspec/Lspec/Bridge`) |
+| [vpuff](vpuff/README.md): zlib's `puff.c` (C) | Rocq + VST | the Lean definitions come into Rocq through Lean's kernel export and rocq-lean-import; `puff()` is proved against them (`vpuff/rocq/Puff.v`) |
+| [lean-zip](https://github.com/kim-em/lean-zip) (Lean) | Lean | its spec decoder is proved equal to this one, except that it refuses HDIST 30 and 31, as zlib does; its compressor's output decodes by this spec to its input (`lspec/leanzip`). This is lean-zip with our fix for [kim-em/lean-zip#2586](https://github.com/kim-em/lean-zip/issues/2586) (dynamic headers with more than 286 literal/length or 30 distance codes accepted), from [our fork](https://github.com/zhouxt1/lean-zip/tree/feat/2586-symbol-counts) |
+
+The Lean side uses no `sorry` and only Lean's three standard axioms, except
+for the lean-zip compressor theorem, which inherits lean-zip's
+`bv_decide` proofs. The Verus link adds about 800 trusted lines of Lean:
+the VIR reader and its semantics. The Lean spec is also run against zlib,
+vdeflate and lean-zip on the differential test corpora
+(`difftest/deflate/lspecdiff.py`, `lspecenc.py`, and `--lspec` on the
+zlib/gzip suites).
 
 ## Why
 
@@ -32,7 +56,12 @@ decoder about what a file means.
 The proofs do not make the decoders slow:
 
 * vdeflate decodes at 0.75 to 0.83 of libdeflate's speed and 1.3 to 2.4
-  times zlib's, and compresses to within 0.25% of zlib's sizes at every level;
+  times zlib's, and compresses to within 0.25% of zlib's sizes at every level.
+  Its near-optimal mode (`deflate_opt`), on a held-out set never used for
+  tuning, is 0.07% to 0.29% larger than zopfli per set (0.02% smaller on
+  one), and smaller than libdeflate -12 on four sets of five, with the
+  same proof as the other levels. It does worse on files under 4 KB
+  ([bench/deflate/HELDOUT.md](bench/deflate/HELDOUT.md));
 * vbrotli decodes at 0.84 to 1.07 of Google's C decoder at quality 11;
 * vwebp's lossy decoder, built with LTO, is at parity with libwebp (SSE2).
 
@@ -45,6 +74,12 @@ is tested, not proved, against the standard (below); and in `vsimd`, the
 lane-by-lane specs of the SSE2 intrinsics, each checked against the CPU
 through a proved model (`vsimd/tests/validate.rs`). Each crate's README
 lists what else it trusts, if anything. There is no `assume` anywhere.
+
+For DEFLATE, zlib and gzip, the Lean spec can stand in for the Verus spec
+as the thing to read. The link then also trusts Lean's kernel and the VIR
+reader and semantics in `lspec/Lspec/VIR` (see
+[lspec/README.md](lspec/README.md)). vpuff trusts Rocq, VST, CompCert's C
+semantics and rocq-lean-import (see [vpuff/README.md](vpuff/README.md)).
 
 ## Testing the specs
 
@@ -79,7 +114,7 @@ release (about 1.6 GB unpacked), which includes `cargo verus`:
 ```bash
 tools/get-verus.sh
 export PATH=$PWD/tools/verus-x86-linux:$PATH
-cargo verus verify --release     # 2,704 obligations, 0 errors, about a minute
+cargo verus verify --release     # 2,851 obligations, 0 errors, a few minutes
 ```
 
 The crates depend on Verus's `vstd` at the version that release pins
@@ -87,6 +122,19 @@ The crates depend on Verus's `vstd` at the version that release pins
 erased. The SIMD paths are for x86-64; elsewhere portable code, proved the
 same way but not yet tested on other CPUs, runs instead. 64-bit targets
 only.
+
+The Lean spec and its bridges need Lean 4.34.0 ([elan](https://github.com/leanprover/elan)
+picks it from `lspec/lean-toolchain`); the lean-zip package needs 4.35.0-rc2,
+lean-zip's version:
+
+```bash
+(cd lspec && lake build)          # the spec, its theorems, the Verus bridge
+(cd lspec/leanzip && lake build LeanZipEq LeanZipEnc)
+lspec/Lspec/Bridge/gen-vdeflate.sh --check   # Verus's VIR is what is committed
+```
+
+vpuff builds in a Docker image with Rocq 9.3, CompCert, VST and
+rocq-lean-import (`vpuff/docker`, then `vpuff/rocq/build.sh`).
 
 `docs/spec/get.sh` fetches the standards the specs are written from.
 
@@ -99,4 +147,6 @@ ETSI ITS) on the same bit layer.
 
 MIT; see [LICENSE](LICENSE). `vbrotli/data/dictionary.bin` and the Brotli
 test vectors in `vbrotli/tests/data` are Google's, under the MIT license
-(see the READMEs next to them).
+(see the READMEs next to them). `vpuff/c/puff.c` and `puff.h` are Mark
+Adler's, under the zlib license (in `puff.h`), altered as marked at the top
+of `puff.c`.

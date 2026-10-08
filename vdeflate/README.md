@@ -156,8 +156,8 @@ written only when its three codes pass zlib's rule (`zlib_ok_x`: complete,
 or empty, or a single code of length 1), with 30 distance codes at most;
 otherwise the block goes out fixed or stored.
 
-`cargo verus verify -p vdeflate` checks 665 obligations with 0 errors, in
-about 15 s. There is no `assume`, `admit`, `external_body` or raised rlimit
+`cargo verus verify -p vdeflate` checks 812 obligations with 0 errors, in
+about 30 s. There is no `assume`, `admit`, `external_body` or raised rlimit
 in the crate (the primitives it takes from vsimd are trusted there; see
 "What is trusted").
 
@@ -393,6 +393,101 @@ again). 3 MB of dickens as zlib (level 6), in instructions: whole-buffer
 `inflate_zlib` 141.3M to 108.4M;
 `ZInflater` in pieces of up to 64 KB 205.7M to 117.1M. `difftest/deflate/
 all.sh`: 0 failures.
+
+### Near-optimal parsing (`opt::deflate_opt`)
+
+The most thorough compressor (2026-10-07), in the style of zopfli and
+libdeflate's level 12. For each window of 128K:
+
+* every position's matches are listed through binary trees of four-byte
+  hashes sorted by what follows (libdeflate's `bt_matchfinder`, 128 deep),
+  and three-byte hash chains walked a few steps for the nearest true
+  three-byte match (hash chains are an option, `VD_BT=0`);
+* the cheapest parse under a bit-cost model is found by a shortest-path
+  search, re-estimated from the previous parse's codes for 3 passes;
+* the parse is split into blocks by a dynamic program over 512-token
+  segments on an entropy estimate (the least of dynamic, fixed and stored),
+  then each block end is moved to where the two blocks around it cost
+  least, exactly (Huffman's cost, our header, dynamic/fixed/stored);
+* each block is parsed once more by its own statistics;
+* all of that is done from several starting models (the previous window's,
+  the fixed codes', and two random perturbations of the best so far, as
+  zopfli escapes local optima), and the plan whose blocks code smallest is
+  kept.
+
+None of this needs a proof. Each chosen match is checked byte by byte when
+its token is made, and the blocks go to `put_block`, so `deflate_opt` has
+`deflate_level`'s theorem (`deflate_ok`) with only bounds proved (137
+obligations, no `assume`). `VD_OPT=1 vdeflate-tool --compress`; the settings
+are `VD_CHAIN`, `VD_PASSES`, `VD_SEG`, `VD_RAND`, `VD_FRAC` (zopfli's
+entropy costs instead of code lengths), and so on (see `Opt`).
+
+Every level's blocks also got cheaper headers (all of `put_block`): the code
+lengths are sent as a plan of ops (`Op`, each checked by `ops_ok`), the
+cheapest of zopfli's eight run-length codings, with a code length code for
+the ops' symbols only and HCLEN cut after the last nonzero length (before,
+all 19 had codes, which kept the proof simple). On a mozilla sample the
+headers are then what an optimal coder of the same lengths gives. It is
+worth little at zlib's levels (Silesia: level 6 68,192,698, level 9
+67,796,321, 0.004% less than before), whose blocks are few and large.
+
+Every setting above was chosen on Silesia, the development set. These are
+its numbers, so they are optimistic; the held-out numbers follow. Silesia,
+raw DEFLATE bytes (libdeflate through the `libdeflater` crate,
+`deflate-bench --ld-compress 12`; zopfli as `pigz -11`, minus the gzip
+wrapper's 18 bytes; pigz cuts its input at 128K, which costs zopfli a
+little):
+
+| file | `deflate_opt` | level 9 (before) | libdeflate -12 | zopfli |
+|---|---|---|---|---|
+| dickens | 3,673,407 | 3,854,245 | 3,679,105 | 3,677,319 |
+| mozilla | 18,196,461 | 19,140,399 | 18,241,312 | 18,105,453 |
+| mr | 3,444,506 | 3,685,182 | 3,447,985 | 3,441,899 |
+| nci | 2,754,631 | 3,004,742 | 2,748,273 | 2,745,450 |
+| ooffice | 2,991,476 | 3,090,599 | 2,994,086 | 2,989,486 |
+| osdb | 3,615,816 | 3,663,789 | 3,608,138 | 3,611,411 |
+| reymont | 1,694,740 | 1,827,285 | 1,696,488 | 1,694,625 |
+| samba | 5,109,220 | 5,419,930 | 5,118,130 | 5,101,622 |
+| sao | 5,237,418 | 5,320,679 | 5,250,745 | 5,241,421 |
+| webster | 11,530,867 | 12,100,696 | 11,520,871 | 11,531,659 |
+| x-ray | 5,745,801 | 6,024,184 | 5,747,146 | 5,746,012 |
+| xml | 631,035 | 667,326 | 629,349 | 627,487 |
+| total | 64,625,378 | 67,799,056 | 64,681,628 | 64,513,844 |
+
+4.68% smaller than level 9 was, 0.09% smaller than libdeflate -12, 0.17%
+larger than zopfli (smaller on dickens, sao, webster, x-ray), at about
+1 MB/s. What each step bought, on 3 MB of each file (vs libdeflate -12): the
+parse alone +0.59%; block split +0.41%; each block re-parsed +0.36%;
+three-byte chains +0.12%; two starting models +0.03%; binary trees +0.00%;
+headers, exact split refinement, two random restarts with whole plans scored
+-0.05%. Tried and not kept: deeper search (chains 4096, trees 512), more
+passes, 64K or 256K windows, entropy costs (a wash: -0.005% on the sample,
++0.003% on Silesia). zlib decodes all twelve; `difftest/deflate/
+lspecenc.py`, `encdiff.py` and `encall.py` pass with `VD_OPT`.
+
+**Held out.** The claim is made on five sets that were fixed and committed
+before any compressor ran on them, and never used for tuning: Canterbury
+and Large Canterbury, enwik8, the source files of zlib 1.3.1 and Lua 5.4.6,
+eight web libraries, and Kodak's 24 images as PNG filtered rows; 375 files,
+150 MB. Baselines are the real zopfli 1.0.3 (15 iterations), libdeflate
+-12 and zlib -9. See [bench/deflate/HELDOUT.md](../bench/deflate/HELDOUT.md)
+for the sets, their hashes, the run, and every file's result.
+
+| set | files | vs libdeflate -12: total, won/lost, median | vs zopfli: total, won/lost, median |
+|---|---|---|---|
+| canterbury | 14 | +0.071%, 11/3, 0.9984 | -0.017%, 4/10, 1.0010 |
+| enwik8 | 1 | -0.317%, 1/0 | +0.074%, 0/1 |
+| png | 24 | -0.286%, 21/3, 0.9978 | +0.158%, 3/21, 1.0015 |
+| source | 328 | -0.314%, 104/181, 1.0007 | +0.210%, 9/306, 1.0048 |
+| web | 8 | -0.190%, 6/2, 0.9982 | +0.292%, 1/7, 1.0022 |
+
+Against zlib -9 it is 3.1% to 5.7% smaller per set and smaller on 336 of
+375 files. Every output decodes by zlib, and by the Lean spec's
+`CompressesTo` on all but enwik8 (not run, for time). The Silesia result
+holds for large inputs: above 64 KB it beats libdeflate -12 on 41 of 50
+files and is 0.1% larger than zopfli. It is optimistic for small ones:
+below 4 KB it loses to libdeflate -12 on 87 of 130 files (median +0.19%)
+and is 0.85% larger than zopfli.
 
 ## Size
 
